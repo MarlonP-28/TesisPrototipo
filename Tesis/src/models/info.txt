@@ -1,0 +1,1 @@
+define las notas que contiene un usuario
