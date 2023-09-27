@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/notes.db.app',{
-    useCreateIndex: true,
+mongoose.connect('mongodb://127.0.0.1:27017/notes-db-app',{
     useNewUrlParser: true,
-    useFindAndModify: false
+    useUnifiedTopology: true,
 })
     .then(db => console.log('DB is connected'))
     .catch(err => console.error(err));
+    
