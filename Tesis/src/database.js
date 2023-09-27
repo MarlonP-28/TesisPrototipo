@@ -1,9 +1,13 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
-mongoose.connect('mongodb://127.0.0.1:27017/notes-db-app',{
-    useNewUrlParser: true,
+const {NOTES_APP_MONGODB_HOST, NOTES_APP_MONGODB_DATABASE} = process.env
+const MONGODB_URI = 'mongodb//$(NOTES_APP_MONGODB_HOSTNOTES_APP_MONGODB_DATABAS)';
+
+mongoose.connect(MONGODB_URI,{
     useUnifiedTopology: true,
+    useNewUrlParser: true,
+    
 })
     .then(db => console.log('DB is connected'))
     .catch(err => console.error(err));
-    
+
