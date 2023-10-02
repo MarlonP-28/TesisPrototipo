@@ -1,6 +1,6 @@
 const {Schema, model} = require("mongoose");
 
-const NotSchema = new  Schema({
+const NoteSchema = new  Schema({
     title: {
         type: String,
         required: true

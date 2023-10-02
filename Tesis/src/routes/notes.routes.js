@@ -7,7 +7,7 @@ const {
     createNewNotes, 
     renderNotes, 
     renderEditFrom, 
-    updateFrom, 
+    updateNote, 
     deleteNote
 
 } = require('../controllers/notes.controller')
@@ -23,7 +23,7 @@ router.get('/notes', renderNotes);
 //Edit notes
 router.get('/notes/edit/:id', renderEditFrom);
 
-router.put('/notes/edit/:id', updateFrom);//actualiza los datos
+router.put('/notes/edit-notes/:id', updateNote);//actualiza los datos
 
 //Delete notes
 
