@@ -15,7 +15,7 @@ const {
 //New note
 router.get('/notes/add', renderNoteFrom);
 
-router.post('/notes/add', createNewNotes);
+router.post('/notes/new-notes', createNewNotes);
 
 //Get all notes
 router.get('/notes', renderNotes);
