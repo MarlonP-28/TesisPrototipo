@@ -15,7 +15,7 @@ const mongoose = require('mongoose');
 const mongodbHost = process.env.notes_app_mongodb_host || '127.0.0.1:27017'; // Provide a default value
 const connectionString = `mongodb://${mongodbHost}/note-app`;
 
-mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: true, })
   .then(() => {
     console.log('Connected to MongoDB');
   })
