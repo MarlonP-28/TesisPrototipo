@@ -1,1 +1,0 @@
-crear funciones para poder reutilizar en cualquier momento

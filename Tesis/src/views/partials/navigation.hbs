@@ -19,7 +19,6 @@
         </li>
       </ul>
       <ul class="navbar-nav ms-auto">
-        {{#if user}}
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
@@ -31,21 +30,21 @@
             >
               Notes
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="/notes">All Notes</a>
               <a class="dropdown-item" href="/notes/add">Add A Note</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="/auth/logout">Logout</a>
-            </ul>
+              <a class="dropdown-item" href="#">Logout</a>
+            </div>
           </li>
-        {{else}}
+       
           <li class="nav-item">
             <a class="nav-link" href="/users/signin">Login</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/users/signup">Register</a>
           </li>
-        {{/if}}
+        
       </ul>
     </div>
   </div>
