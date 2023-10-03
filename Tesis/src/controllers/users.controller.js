@@ -1,5 +1,6 @@
 const usersCtrl = {};
 const User = require('../models/User');
+const passport = require('passport');
 
 //Renderiza el formulario de registro
 usersCtrl.renderSignUpForm =(req,res) => {
@@ -43,12 +44,19 @@ usersCtrl.renderSignInForm =(req,res) => {
     res.render('users/signin');
 }
 //valida los datos
-usersCtrl.signIn =(req,res) => {
-    res.send('sing In');
-}
-//valida los datos
-usersCtrl.logOut =(req,res) => {
-    res.send('Log Out');
+usersCtrl.signIn = passport.authenticate('local' , {//VALIDANDO CON PASSPORT Y CONFIG/PASSPORT.JS
+    failureRedirect : '/users/signin',
+    successRedirect : '/notes',
+    failureFlash : true
+}); 
+
+//Cerrar sesión
+usersCtrl.logOut = (req, res) => {
+    req.logOut( (err) => {
+        if (err) { return next(err); }
+        req.flash( "success_msg" , "Session cerrada" );
+        res.redirect( "/users/signin" );
+    });
 }
 
 module.exports = usersCtrl;
