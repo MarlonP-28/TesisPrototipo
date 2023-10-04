@@ -6,6 +6,11 @@
           Account Register
         </h4>
       </div>
+      <img
+        class="mx-auto d-block logo m-4"
+        src="/img/fis.png"
+        alt="Logo"
+      />
       <div class="card-body">
         <form action="/users/signup" method="POST">
           <div class="mb-3">
@@ -48,13 +53,11 @@
               value="{{confirm_password}}"
             />
           </div>
-          <button class="btn btn-success btn-block">
-            Signup
-          </button>
+          <div class="center">
+            <button class="btn btn-success btn-block">Sign Up</button>
+          </div>
         </form>
       </div>
-      <p class="text-center">Already Have an Account?
-        <a href="/users/signin" class="text-info">Login</a></p>
     </div>
   </div>
 </div>
