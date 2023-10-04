@@ -1,8 +1,8 @@
-require('dotenv').config();
+require("dotenv").config();
 
-const app = require('./server');
-require('./database');
+const app = require("./server");
+require("./database");
 
-app.listen(app.get('port'), ()=>{
-    console.log('Server on port:', app.get('port'));
-})
+app.listen(app.get("port"), () => {
+  console.log("Server on port:", app.get("port"));
+});
