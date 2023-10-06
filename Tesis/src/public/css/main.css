@@ -10,3 +10,10 @@ body {
 .center {
   text-align: center;
 }
+
+footer {
+  text-align: center; /* Centra el contenido del footer */
+  background-color: #333; /* Cambia el color de fondo a tu preferencia */
+  color: #fff; /* Cambia el color del texto a tu preferencia */
+  padding: 10px 0; /* Espaciado interior del footer */
+}

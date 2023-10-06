@@ -30,6 +30,22 @@ notesCtrl.updateNote = async (req, res) => {
   req.flash("success_msg", "Note Updated Successfuly");
   res.redirect("/notes");
 };
+/*
+notesCtrl.deleteNote = async (req, res) => {
+  // Mostrar un cuadro de diálogo de confirmación
+  const confirmation = window.confirm("¿Estás seguro de que deseas eliminar esta nota?");
+  
+  if (confirmation) {
+    // Si el usuario confirma la eliminación, realizar la eliminación en el servidor
+    await Note.findByIdAndDelete(req.params.id);
+    req.flash("success_msg", "Note Deleted Successfully"); // Mensaje de éxito
+  } else {
+    req.flash("info_msg", "Note Deletion Cancelled"); // Mensaje de cancelación
+  }
+
+  res.redirect("/notes");
+};
+*/
 
 notesCtrl.deleteNote = async (req, res) => {
   await Note.findByIdAndDelete(req.params.id);
