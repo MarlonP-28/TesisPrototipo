@@ -57,7 +57,7 @@ usersCtrl.logOut = (req, res) => {
     if (err) {
       return next(err);
     }
-    req.flash("success_msg", "Session cerrada");
+    req.flash("success_msg", "Session closed successfully.");
     res.redirect("/users/signin");
   });
 };
