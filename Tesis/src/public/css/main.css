@@ -2,12 +2,20 @@ body {
     background: whitesmoke;
   }
 
+.titulo{/*Gestor de archivos*/
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  padding: 5px;
+  margin: 0;
+}
+
 .logo {
   width: 100px;
   height: 100px;
 }
 
-.center {
+.center {/*boton signIn/signUp*/
   text-align: center;
 }
 
