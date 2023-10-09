@@ -34,7 +34,7 @@ usersCtrl.signUp = async (req, res) => {
       const newUser = new User({ name, email, password });
       newUser.password = await newUser.encryptPassword(password);
       await newUser.save();
-      req.flash("success_msg", "User registered");
+      req.flash("success_msg", "You are registered");
       res.redirect("/users/signin");
     }
   }
@@ -57,7 +57,7 @@ usersCtrl.logOut = (req, res) => {
     if (err) {
       return next(err);
     }
-    req.flash("success_msg", "Session closed successfully.");
+    req.flash("success_msg", "You are logged out now.");
     res.redirect("/users/signin");
   });
 };
