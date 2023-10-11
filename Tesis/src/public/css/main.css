@@ -25,3 +25,25 @@ footer {
   color: #fff; /* Cambia el color del texto a tu preferencia */
   padding: 10px 0; /* Espaciado interior del footer */
 }
+/*Reseña del developer*/
+.developer-review {
+  width: 30%;
+  margin: 1%;
+  float: left;
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.circulo {
+  width: 150px; /* Ancho del círculo */
+  height: 150px; /* Alto del círculo */
+  border-radius: 50%; /* Establece el radio para crear un círculo perfecto */
+  overflow: hidden; /* Oculta el contenido que se sale del círculo */
+  border: 2px solid #333; /* Añade un borde opcional */  
+}
+
+.circulo img {
+  width: 100%; /* Asegura que la imagen llene completamente el círculo */
+  height: auto; /* Mantiene la proporción original de la imagen */
+}
+

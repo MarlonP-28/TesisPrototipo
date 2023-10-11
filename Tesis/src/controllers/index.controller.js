@@ -7,5 +7,8 @@ indexCtrl.renderIndex = (req, res) => {
 indexCtrl.renderAbout = (req, res) => {
   res.render("about");
 };
+indexCtrl.renderDeveloper = (req, res) => {
+  res.render("developer");
+};
 
 module.exports = indexCtrl;

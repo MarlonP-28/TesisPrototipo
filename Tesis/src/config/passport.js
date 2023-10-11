@@ -9,12 +9,12 @@ passport.use(
     {
       usernameField: "email",
       passwordField: "password",
-    },
+    },//Verifica si el usuario ingresado existe en la bd
     async (email, password, done) => {
       const user = await User.findOne({ email: email });
       if (!user) {
         return done(null, false, { message: "Not User Found" });
-      } else {
+      } else {//verifica si la clave ingresada coincide con la bd
         const match = await user.matchPassword(password);
         if (match) {
           return done(null, user);
