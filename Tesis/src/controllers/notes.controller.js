@@ -4,7 +4,7 @@ const Note = require("../models/Note");
 notesCtrl.renderNoteFrom = (req, res) => {
   res.render("notes/new-notes");
 };
-
+//Esta función se encarga de crear una nueva nota en la base de datos.
 notesCtrl.createNewNotes = async (req, res) => {
   const { title, description } = req.body;
   const errors = [];
@@ -26,14 +26,14 @@ notesCtrl.createNewNotes = async (req, res) => {
   req.flash("success_msg", "Note Added Successfuly");
   res.redirect("/notes"); //direcciona a notas automaticamente
 };
-//Consulta hacia la base de datos
+//Esta función consulta todas las notas en la base de datos que pertenecen al usuario actual 
 notesCtrl.renderNotes = async (req, res) => {
   const notes = await Note.find({ user: req.user.id })//filtra las notas de un solo usuario
     //.sort({ createdAt: "desc" })
     .lean();
   res.render("notes/all-notes", { notes });
 };
-
+//Esta función se encarga de mostrar un formulario para editar una nota específica
 notesCtrl.renderEditFrom = async (req, res) => {
   const note = await Note.findById(req.params.id).lean();
   if (note.user != req.user.id) {
@@ -42,30 +42,14 @@ notesCtrl.renderEditFrom = async (req, res) => {
   }
   res.render("notes/edit-notes", { note });
 };
-
+//Esta función se utiliza para actualizar una nota existente en la base de datos
 notesCtrl.updateNote = async (req, res) => {
   const { title, description } = req.body;
   await Note.findByIdAndUpdate(req.params.id, { title, description });
   req.flash("success_msg", "Note Updated Successfuly");
   res.redirect("/notes");
 };
-/*
-notesCtrl.deleteNote = async (req, res) => {
-  // Mostrar un cuadro de diálogo de confirmación
-  const confirmation = window.confirm("¿Estás seguro de que deseas eliminar esta nota?");
-  
-  if (confirmation) {
-    // Si el usuario confirma la eliminación, realizar la eliminación en el servidor
-    await Note.findByIdAndDelete(req.params.id);
-    req.flash("success_msg", "Note Deleted Successfully"); // Mensaje de éxito
-  } else {
-    req.flash("info_msg", "Note Deletion Cancelled"); // Mensaje de cancelación
-  }
-
-  res.redirect("/notes");
-};
-*/
-
+//Esta función se encarga de eliminar una nota. 
 notesCtrl.deleteNote = async (req, res) => {
   await Note.findByIdAndDelete(req.params.id);
   req.flash("success_msg", "Note Deleted Successfuly"); //mensajes que todo esta ok

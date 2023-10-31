@@ -62,4 +62,36 @@ usersCtrl.logOut = (req, res) => {
   });
 };
 
+usersCtrl.renderForgotPasswordForm = (req, res) => {
+  res.render("users/forgot-password");
+};
+
+usersCtrl.forgotPassword = async (req, res) => {
+  const { email } = req.body;
+  
+  try {
+    const user = await User.findOne({ email });
+    
+    if (!user) {
+      req.flash("error_msg", "No user found with that email address.");
+      return res.redirect("/users/forgot-password");
+    }
+    
+    // Genera un token único para la recuperación de contraseña y almacénalo en la base de datos
+    user.resetPasswordToken = // Genera un token único aquí
+    user.resetPasswordExpires = Date.now() + 3600000; // Expira en 1 hora
+    
+    await user.save();
+    
+    // Envía un correo electrónico al usuario con un enlace para restablecer la contraseña (usando nodemailer o una librería similar)
+    
+    req.flash("success_msg", "An email with instructions to reset your password has been sent.");
+    res.redirect("/users/signin");
+  } catch (err) {
+    console.error(err);
+    req.flash("error_msg", "An error occurred. Please try again.");
+    res.redirect("/users/forgot-password");
+  }
+};
+
 module.exports = usersCtrl;
