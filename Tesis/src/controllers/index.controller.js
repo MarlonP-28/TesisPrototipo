@@ -1,14 +1,7 @@
 const indexCtrl = {};
 
-indexCtrl.renderIndex = (req, res) => {
-  res.render("index");
-};
-
-indexCtrl.renderAbout = (req, res) => {
-  res.render("about");
-};
-indexCtrl.renderDeveloper = (req, res) => {
-  res.render("developer");
+indexCtrl.renderSignin = (req, res) => {
+  res.render("users/signin");
 };
 
 module.exports = indexCtrl;
