@@ -6,24 +6,41 @@ notesCtrl.renderNoteFrom = (req, res) => {
 };
 //Esta función se encarga de crear una nueva nota en la base de datos.
 notesCtrl.createNewNotes = async (req, res) => {
-  const { title, description } = req.body;
+  const { area, cargo, departamento, subdepartamento, periodo, carrera } = req.body;
   const errors = [];
-  if (!title) {
-    errors.push({ text: "Please Write a Title." });
+  if (!area) {
+    errors.push({ text: "Escoja una opción A." });
   }
-  if (!description) {
-    errors.push({ text: "Please Write a Description" });
+  if (!cargo) {
+    errors.push({ text: "Escoja una opción B." });
+  }
+  if (!departamento) {
+    errors.push({ text: "Escoja una opción C." });
+  }
+  if (!subdepartamento) {
+    errors.push({ text: "Escoja una opción D." });
+  }
+  if (!periodo) {
+    errors.push({ text: "Escoja una opción E." });
+  }
+  if (!carrera) {
+    errors.push({ text: "Escoja una opción F." });
   }
   if (errors.length > 0)
     return res.render("notes/new-notes", {
       errors,
-      title,
-      description,
+      area,
+      cargo,
+      departamento,
+      subdepartamento,
+      periodo,
+      carrera
+
     });
-  const newNote = new Note({ title, description });
+  const newNote = new Note({ area, cargo, departamento, subdepartamento, periodo, carrera  });
   newNote.user = req.user.id;
   await newNote.save();
-  req.flash("success_msg", "Note Added Successfuly");
+  req.flash("success_msg", "!Archivo creado con exito¡");
   res.redirect("/notes"); //direcciona a notas automaticamente
 };
 //Esta función consulta todas las notas en la base de datos que pertenecen al usuario actual 
@@ -37,22 +54,22 @@ notesCtrl.renderNotes = async (req, res) => {
 notesCtrl.renderEditFrom = async (req, res) => {
   const note = await Note.findById(req.params.id).lean();
   if (note.user != req.user.id) {
-    req.flash("error_msg", "Not Authorized");
+    req.flash("error_msg", "!Not Authorized¡");
     return res.redirect("/notes");
   }
   res.render("notes/edit-notes", { note });
 };
 //Esta función se utiliza para actualizar una nota existente en la base de datos
 notesCtrl.updateNote = async (req, res) => {
-  const { title, description } = req.body;
-  await Note.findByIdAndUpdate(req.params.id, { title, description });
-  req.flash("success_msg", "Note Updated Successfuly");
+  const { area, cargo, departamento, subdepartamento, periodo, carrera } = req.body;
+  await Note.findByIdAndUpdate(req.params.id, { area, cargo, departamento, subdepartamento, periodo, carrera });
+  req.flash("success_msg", "!Archivo actualizado con exito¡");
   res.redirect("/notes");
 };
 //Esta función se encarga de eliminar una nota. 
 notesCtrl.deleteNote = async (req, res) => {
   await Note.findByIdAndDelete(req.params.id);
-  req.flash("success_msg", "Note Deleted Successfuly"); //mensajes que todo esta ok
+  req.flash("success_msg", "!Archivo eliminado con exito¡"); //mensajes que todo esta ok
   res.redirect("/notes");
 };
 

@@ -15,31 +15,21 @@
     <div class="card-body">
       <form action="/notes/edit-notes/{{note._id}}?_method=PUT" method="POST">
         <input type="hidden" name="_method" value="PUT" />
+        <!-- Add the following code for the fields you mentioned -->
         <div class="mb-3">
-          <label for="title">Titulo:</label>
-          <input
-            type="text"
-            name="title"
-            class="form-control"
-            value="{{note.title}}"
-          />
+          <label for="area">Área:</label>
+          <select name="area" class="form-control">
+            <!-- Add options as needed, and set the selected option based on note.area -->
+            <option value="option1" {{#if (eq note.area "option1")}}selected{{/if}}>Option 1</option>
+            <option value="option2" {{#if (eq note.area "option2")}}selected{{/if}}>Option 2</option>
+          </select>
         </div>
-        <div class="mb-3">
-          <label for="description">Descripción:</label>
-          <textarea
-            name="description"
-            class="form-control"
-          >{{note.description}}</textarea>
-        </div>
+        <!-- Repeat the above block for other fields like secretariaType, documentType, etc. -->
+
         <button class="btn btn-primary w-100" type="submit">
           Guardar
         </button>
       </form>
     </div>
   </div>
-</div>
-<div>
-  <footer class="mt-4">
-        <p>&copy; 2023 Gestor de Archivos FIS. Todos los derechos reservados.</p>
-    </footer>
 </div>

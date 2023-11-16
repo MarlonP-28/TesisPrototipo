@@ -5,17 +5,25 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Título</th>
-                <th>Descripción</th>
+                <th>Area</th>
+                <th>Secretaria</th>
+                <th>Documento</th>
+                <th>Sub-Documento</th>
+                <th>Periodo/Año</th>
+                <th>Carrera</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
             {{#each notes}}
                 <tr>
-                    <td>{{title}}</td>
-                    <td>{{description}}</td>
-                    <td>{{Periodo}}</td>
+                    <td>{{area}}</td>
+                    <td>{{cargo}}</td>
+                    <td>{{departamento}}</td>
+                    <td>{{subdepartamento}}</td>
+                    <td>{{periodo}}</td>
+                    <td>{{carrera}}</td>
+                    
                     <td>
                         <a href="/notes/edit/{{_id}}"><i class="fas fa-edit"></i></a>
                         <!-- DELETE REQUEST -->
