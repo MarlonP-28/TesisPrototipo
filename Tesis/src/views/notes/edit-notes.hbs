@@ -17,19 +17,63 @@
         <input type="hidden" name="_method" value="PUT" />
         <!-- Add the following code for the fields you mentioned -->
         <div class="mb-3">
-          <label for="area">Área:</label>
-          <select name="area" class="form-control">
-            <!-- Add options as needed, and set the selected option based on note.area -->
-            <option value="option1" {{#if (eq note.area "option1")}}selected{{/if}}>Option 1</option>
-            <option value="option2" {{#if (eq note.area "option2")}}selected{{/if}}>Option 2</option>
-          </select>
-        </div>
-        <!-- Repeat the above block for other fields like secretariaType, documentType, etc. -->
+              <label for="area">Area:</label>
+              <select id="area" name="area" onchange="actualizarArea()">
+                  <option value="decanato">Decanato</option>
+                  <option value="subdecanato">Sub-Decanato</option>
+                  <option value="jefatura">Jefatura de Departamento</option>
+              </select>
+              <br>
+          </div>
 
-        <button class="btn btn-primary w-100" type="submit">
-          Guardar
-        </button>
+          <div class="mb-3">
+              <label for="cargo">Secretaria:</label>
+              <select id="cargo" name="cargo" onchange="actualizarDepartamento()">
+                  <!-- Las opciones se actualizarán dinámicamente mediante JavaScript -->
+              </select>
+              <br>
+          </div>
+
+          <div class="mb-3">
+              <label for="departamento">Documento:</label>
+              <select id="departamento" name="departamento" onchange="actualizarSubtipoDocumento()">
+                  <!-- Las opciones se actualizarán dinámicamente mediante JavaScript -->
+              </select>
+              <br>
+          </div>
+
+          <div class="mb-3">
+              <label for="subdepartamento">Subtipo de Documento:</label>
+              <select id="subdepartamento" name="subdepartamento" onchange="actualizarPeriodo()">
+                <!-- Las opciones se actualizarán dinámicamente mediante JavaScript -->
+              </select>
+              <br>
+          </div>
+
+          <div class="mb-3">
+              <label for="periodo">Perido/Año:</label>
+              <select id="periodo" name="periodo">
+                <!-- Las opciones se actualizarán dinámicamente mediante JavaScript -->
+              </select>
+              <br>
+          </div>
+
+          <div class="mb-3">
+              <label for="carrera">Carrera:</label>
+              <select id="carrera" name="carrera">
+                <option value="computacion">Computación</option>
+                <option value="software">Software</option>
+              </select>
+              <br>
+          </div>
+
+          <div class="d-flex justify-content-between mb-3">
+              <button onclick="regresarPaginaPrincipal()" class="btn btn-primary">Cancelar</button>
+              <button class="btn btn-primary" type="submit">Guardar</button>
+          </div>
       </form>
     </div>
   </div>
 </div>
+
+<script src="/js/script.js"></script>

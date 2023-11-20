@@ -72,5 +72,34 @@ notesCtrl.deleteNote = async (req, res) => {
   req.flash("success_msg", "!Archivo eliminado con exito¡"); //mensajes que todo esta ok
   res.redirect("/notes");
 };
+//Esta funcio se en carga de la busqueda de una nota 
+notesCtrl.searchArchive = async (req, res) => {
+  const { searchTerm } = req.query;
+
+  try {
+    let notes;
+    if (searchTerm) {
+      notes = await Note.find({
+        user: req.user.id,
+        $or: [
+          { area: { $regex: new RegExp(searchTerm, 'Decanato') } },
+          { cargo: { $regex: new RegExp(searchTerm, 'i') } },
+          { departamento: { $regex: new RegExp(searchTerm, 'i') } },
+          { subdepartamento: { $regex: new RegExp(searchTerm, 'i') } },
+          { periodo: { $regex: new RegExp(searchTerm, 'i') } },
+          { carrera: { $regex: new RegExp(searchTerm, 'i') } },
+        ],
+      }).lean();
+    } else {
+      notes = await Note.find({ user: req.user.id }).lean();
+    }
+
+    res.render("notes/all-notes", { notes, searchTerm });
+  } catch (error) {
+    console.error('Error en la búsqueda de archivos:', error);
+    req.flash("error_msg", "Error en la búsqueda de archivos");
+    res.redirect("/notes");
+  }
+};
 
 module.exports = notesCtrl;

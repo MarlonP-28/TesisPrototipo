@@ -1,46 +1,61 @@
-<div>
-    <h1 class="titulo">Historial de Archivos</h1>
-</div>
-<div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Area</th>
-                <th>Secretaria</th>
-                <th>Documento</th>
-                <th>Sub-Documento</th>
-                <th>Periodo/Año</th>
-                <th>Carrera</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#each notes}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de Archivos</title>
+</head>
+<body>
+<!--  
+    <div class="mt-4">
+        <form action="/search-archive" method="GET">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Buscar..." name="searchTerm">
+                <button class="btn btn-outline-secondary bg-dark" type="submit">Buscar</button>
+            </div>
+        </form>
+    </div>
+    -->
+    <div>
+        <h1 class="titulo">Historial de Archivos</h1>
+    </div>
+    <div>
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>{{area}}</td>
-                    <td>{{cargo}}</td>
-                    <td>{{departamento}}</td>
-                    <td>{{subdepartamento}}</td>
-                    <td>{{periodo}}</td>
-                    <td>{{carrera}}</td>
-                    
-                    <td>
-                        <a href="/notes/edit/{{_id}}"><i class="fas fa-edit"></i></a>
-                        <!-- DELETE REQUEST -->
-                        <form action="/notes/delete/{{_id}}?_method=DELETE" method="POST" class="d-inline">
-                            <input type="hidden" name="_method" value="DELETE">
-                            <button type="submit" class="btn btn-danger btn-sm">
-                                Eliminar
-                            </button>
-                        </form>
-                    </td>
+                    <th>Area</th>
+                    <th>Cargo</th>
+                    <th>Departamento</th>
+                    <th>Sub-Departamento</th>
+                    <th>Periodo/Año</th>
+                    <th>Carrera</th>
                 </tr>
-            {{/each}}
-        </tbody>
-    </table>
-</div>
-<div class="mt-4">
-    <a href="/notes/add" class="btn btn-primary">Nuevo</a>
-    <button class="btn btn-info" id="buscarBtn">Buscar</button>
-</div>
-
+            </thead>
+            <tbody>
+                {{#each notes}}
+                    <tr>
+                        <td>{{area}}</td>
+                        <td>{{cargo}}</td>
+                        <td>{{departamento}}</td>
+                        <td>{{subdepartamento}}</td>
+                        <td>{{periodo}}</td>
+                        <td>{{carrera}}</td>
+                        <td>
+                            <a href="/notes/edit/{{_id}}"><i class="fas fa-edit"></i></a>
+                            <!-- DELETE REQUEST -->
+                            <form action="/notes/delete/{{_id}}?_method=DELETE" method="POST" class="d-inline">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+    <div class="mt-4">
+        <a href="/notes/add" class="btn btn-primary">Nuevo</a>
+        <a href="search-archive" class="btn btn-primary">Buscar</a>
+    </div>
+</body>
+</html>

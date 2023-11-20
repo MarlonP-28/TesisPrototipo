@@ -5,6 +5,4 @@ const { renderSignin } = require("../controllers/index.controller");
 
 router.get("/", renderSignin);
 
-
-
 module.exports = router;
