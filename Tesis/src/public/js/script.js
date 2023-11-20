@@ -7,7 +7,7 @@
         cargoSelect.innerHTML = "";
 
         // Agregar opciones según el área seleccionada
-        if (areaSelect.value === "decanato") {
+        if (areaSelect.value === "Decanato") {
             var opcionesCargo = ["Decanato", "Titulación"];
         } else if (areaSelect.value === "subdecanato") {
             var opcionesCargo = ["a", "b"]; // Aquí se debe manejar los diferentes cargos de subdecanato
@@ -36,9 +36,9 @@
         
         departamentoSelect.innerHTML = "";
           //Decanato
-          if (areaSelect.value === "decanato" && cargoSelect.value === "Decanato") {
+          if (areaSelect.value === "Decanato" && cargoSelect.value === "Decanato") {
               var opcionesDepartamento = ["Consejo de Facultad", "Solicitud de Estudiantes", "Procesos Electorales", "Inventario FIS"];
-          } else if (areaSelect.value === "decanato" && cargoSelect.value === "Titulación") {
+          } else if (areaSelect.value === "Decanato" && cargoSelect.value === "Titulación") {
               var opcionesDepartamento = ["Designación de Revisores Calificadores", "Expedientes de Grado", "Pensum", "Comisiones"];
           //Subdecanato
           } else if (areaSelect.value === "subdecanato") {
@@ -71,23 +71,23 @@
         
         subdepartamentoSelect.innerHTML = "";
 
-        if (areaSelect.value === "decanato" && cargoSelect.value === "Decanato" && departamentoSelect.value === "Consejo de Facultad") {
+        if (areaSelect.value === "Decanato" && cargoSelect.value === "Decanato" && departamentoSelect.value === "Consejo de Facultad") {
               var opcionesSubdepartamento = ["Convocatorias", "Actas/Resoluciones"];
-          } else if (areaSelect.value === "decanato" && cargoSelect.value === "Decanato" && departamentoSelect.value === "Solicitud de Estudiantes") {
+          } else if (areaSelect.value === "Decanato" && cargoSelect.value === "Decanato" && departamentoSelect.value === "Solicitud de Estudiantes") {
               var opcionesSubdepartamento = ["Formularios de Autorización"];
-          } else if (areaSelect.value === "decanato" && cargoSelect.value === "Decanato" && departamentoSelect.value === "Procesos Electorales") {
+          } else if (areaSelect.value === "Decanato" && cargoSelect.value === "Decanato" && departamentoSelect.value === "Procesos Electorales") {
               var opcionesSubdepartamento = ["Actas de Proceos Electoral"];
-          } else if (areaSelect.value === "decanato" && cargoSelect.value === "Decanato" && departamentoSelect.value === "Inventario FIS") {
+          } else if (areaSelect.value === "Decanato" && cargoSelect.value === "Decanato" && departamentoSelect.value === "Inventario FIS") {
               var opcionesSubdepartamento = ["Bienes"];
           }
           //Titulacion
-          else if (areaSelect.value === "decanato" && cargoSelect.value === "Titulación" && departamentoSelect.value === "Designación de Revisores Calificadores") {
+          else if (areaSelect.value === "Decanato" && cargoSelect.value === "Titulación" && departamentoSelect.value === "Designación de Revisores Calificadores") {
               var opcionesSubdepartamento = ["Pre-Grado"];
-          } else if (areaSelect.value === "decanato" && cargoSelect.value === "Titulación" && departamentoSelect.value === "Expedientes de Grado") {
+          } else if (areaSelect.value === "Decanato" && cargoSelect.value === "Titulación" && departamentoSelect.value === "Expedientes de Grado") {
               var opcionesSubdepartamento = ["Pre-Grado"];
-          } else if (areaSelect.value === "decanato" && cargoSelect.value === "Titulación" && departamentoSelect.value === "Pensum") {
+          } else if (areaSelect.value === "Decanato" && cargoSelect.value === "Titulación" && departamentoSelect.value === "Pensum") {
               var opcionesSubdepartamento = ["Silabos", "Mallas"];
-          } else if (areaSelect.value === "decanato" && cargoSelect.value === "Titulación" && departamentoSelect.value === "Comisiones") {
+          } else if (areaSelect.value === "Decanato" && cargoSelect.value === "Titulación" && departamentoSelect.value === "Comisiones") {
               var opcionesSubdepartamento = ["Practicas Pre-Profesionales"];
           }
 
