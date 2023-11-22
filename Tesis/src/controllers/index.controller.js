@@ -7,7 +7,7 @@ indexCtrl.renderSignin = (req, res) => {
 indexCtrl.searchArchive = (req, res) => {
   res.render("notes/search");
 };
-
+//redirige a la pagina historial de archvios
 indexCtrl.renderNotes = (req, res) => {
   res.render("notes/all-notes");
 };
