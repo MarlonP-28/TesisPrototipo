@@ -139,9 +139,4 @@
     }
     // Llamar a actualizarArea al cargar la página para establecer las opciones iniciales
     actualizarArea();
-    
-    //Funcion para regresar a la pagina principal de los archivos generados
-    function regresarPaginaPrincipal() {
-        window.location.href = "/all-notes";
-    }
 
