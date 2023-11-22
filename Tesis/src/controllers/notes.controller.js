@@ -72,32 +72,59 @@ notesCtrl.deleteNote = async (req, res) => {
   req.flash("success_msg", "!Archivo eliminado con exito¡"); //mensajes que todo esta ok
   res.redirect("/notes");
 };
-//Esta funcio se en carga de la busqueda de una nota 
-notesCtrl.searchArchive = async (req, res) => {
-  const { searchTerm } = req.query;
+//Esta funcion se en carga de la busqueda de una nota 
+notesCtrl.searchNote = async (req, res) => {
+  const { area, cargo, departamento, subdepartamento, periodo, carrera } = req.body;
+  const errors = [];
+
+  // Validaciones de campos seleccionables
+  if (!area) {
+    errors.push({ text: "Escoja una opción A." });
+  }
+  if (!cargo) {
+    errors.push({ text: "Escoja una opción B." });
+  }
+  if (!departamento) {
+    errors.push({ text: "Escoja una opción C." });
+  }
+  if (!subdepartamento) {
+    errors.push({ text: "Escoja una opción D." });
+  }
+  if (!periodo) {
+    errors.push({ text: "Escoja una opción E." });
+  }
+  if (!carrera) {
+    errors.push({ text: "Escoja una opción F." });
+  }
+
+  if (errors.length > 0) {
+    return res.render("notes/all-notes", {
+      errors,
+      area,
+      cargo,
+      departamento,
+      subdepartamento,
+      periodo,
+      carrera
+    });
+  }
 
   try {
-    let notes;
-    if (searchTerm) {
-      notes = await Note.find({
-        user: req.user.id,
-        $or: [
-          { area: { $regex: new RegExp(searchTerm, 'Decanato') } },
-          { cargo: { $regex: new RegExp(searchTerm, 'i') } },
-          { departamento: { $regex: new RegExp(searchTerm, 'i') } },
-          { subdepartamento: { $regex: new RegExp(searchTerm, 'i') } },
-          { periodo: { $regex: new RegExp(searchTerm, 'i') } },
-          { carrera: { $regex: new RegExp(searchTerm, 'i') } },
-        ],
-      }).lean();
-    } else {
-      notes = await Note.find({ user: req.user.id }).lean();
-    }
+    // Consulta todas las notas en la base de datos que coinciden con los filtros
+    const notes = await Note.find({
+      user: req.user.id,
+      area,
+      cargo,
+      departamento,
+      subdepartamento,
+      periodo,
+      carrera
+    }).lean();
 
-    res.render("notes/all-notes", { notes, searchTerm });
+    res.render("notes/all-notes", { notes });
   } catch (error) {
-    console.error('Error en la búsqueda de archivos:', error);
-    req.flash("error_msg", "Error en la búsqueda de archivos");
+    console.error("Error al buscar notas:", error);
+    req.flash("error_msg", "Error al buscar archivos");
     res.redirect("/notes");
   }
 };
