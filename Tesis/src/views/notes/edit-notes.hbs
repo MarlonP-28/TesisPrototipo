@@ -17,55 +17,83 @@
         <input type="hidden" name="_method" value="PUT" />
         <!-- Add the following code for the fields you mentioned -->
         <div class="mb-3">
-              <label for="area">Area:</label>
-              <select id="area" name="area" onchange="actualizarArea()">
-                  <option value="decanato">Decanato</option>
-                  <option value="subdecanato">Sub-Decanato</option>
-                  <option value="jefatura">Jefatura de Departamento</option>
-              </select>
-              <br>
-          </div>
+                    <label for="facultad">Facultad:</label>
+                    <select id="facultad" name="facultad">
+                        <option value="facultad">FIS</option>
+                    </select>
+                    <br>
+                </div>
 
-          <div class="mb-3">
-              <label for="cargo">Secretaria:</label>
-              <select id="cargo" name="cargo" onchange="actualizarDepartamento()">
-                  <!-- Las opciones se actualizarán dinámicamente mediante JavaScript -->
-              </select>
-              <br>
-          </div>
+                <div class="mb-3">
+                    <label for="carrera">Carrera:</label>
+                    <select id="carrera" name="carrera">
+                        <option value="Computacion">Computación</option>
+                        <option value="Software">Software</option>
+                    </select>
+                    <br>
+                </div>
 
-          <div class="mb-3">
-              <label for="departamento">Documento:</label>
-              <select id="departamento" name="departamento" onchange="actualizarSubtipoDocumento()">
-                  <!-- Las opciones se actualizarán dinámicamente mediante JavaScript -->
-              </select>
-              <br>
-          </div>
+                <div class="mb-3">
+                    <label for="area">Área:</label>
+                    <select id="area" name="area" onchange="actualizarArea()">
+                        <option value="Decanato">Decanato</option>
+                        <option value="Subdecanato">Sub-Decanato</option>
+                        <option value="Jefatura">Jefatura de Departamento</option>
+                    </select>
+                    <br>
+                </div>
 
-          <div class="mb-3">
-              <label for="subdepartamento">Subtipo de Documento:</label>
-              <select id="subdepartamento" name="subdepartamento" onchange="actualizarPeriodo()">
-                <!-- Las opciones se actualizarán dinámicamente mediante JavaScript -->
-              </select>
-              <br>
-          </div>
+                <div class="mb-3">
+                    <label for="subArea">Subárea:</label>
+                    <select id="subArea" name="subArea" onchange="actualizarTipoDocumento()">
+                        <!-- Las opciones se actualizarán dinámicamente mediante JavaScript -->
+                    </select>
+                    <br>
+                </div>
 
-          <div class="mb-3">
-              <label for="periodo">Perido/Año:</label>
-              <select id="periodo" name="periodo">
-                <!-- Las opciones se actualizarán dinámicamente mediante JavaScript -->
-              </select>
-              <br>
-          </div>
+                <div class="mb-3">
+                    <label for="tipoDocumento">Tipo de Documento:</label>
+                    <select id="tipoDocumento" name="tipoDocumento" onchange="actualizarSubtipoDocumento()">
+                        <!-- Las opciones se actualizarán dinámicamente mediante JavaScript -->
+                    </select>
+                    <br>
+                </div>
 
-          <div class="mb-3">
-              <label for="carrera">Carrera:</label>
-              <select id="carrera" name="carrera">
-                <option value="computacion">Computación</option>
-                <option value="software">Software</option>
-              </select>
-              <br>
-          </div>
+                <div class="mb-3">
+                    <label for="subTipoDocumento">Subtipo de Documento:</label>
+                    <select id="subTipoDocumento" name="subTipoDocumento" onchange="actualizarPeriodo()">
+                        <!-- Las opciones se actualizarán dinámicamente mediante JavaScript -->
+                    </select>
+                    <br>
+                </div>
+
+                <div class="mb-3">
+                    <label for="periodo">Perido/Año:</label>
+                    <select id="periodo" name="periodo">
+                        <!-- Las opciones se actualizarán dinámicamente mediante JavaScript -->
+                    </select>
+                    <br>
+                </div>
+
+                <div class="mb-3">
+                    <label for="pdfArchivo">Archivo PDF:</label>
+                    <input type="file" id="pdfArchivo" name="pdfArchivo" accept=".pdf">
+                    <br>
+                </div>
+
+                <div class="mb-3">
+                    <label for="asunto">Asunto:</label>
+                    <textarea id="asunto" name="asunto" rows="3" cols="35"></textarea>
+                    <!-- Puedes ajustar rows y cols según tus necesidades -->
+                    <br>
+                </div>
+
+                <div class="mb-3">
+                    <label for="observaciones">Observaciones:</label>
+                    <textarea id="observaciones" name="observaciones" rows="3" cols="35"></textarea>
+                    <!-- Puedes ajustar rows y cols según tus necesidades -->
+                    <br>
+                </div>
 
           <div class="d-flex justify-content-between mb-3">
               <a href="/all-notes" class="btn btn-primary">Cancelar</a>

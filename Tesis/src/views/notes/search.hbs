@@ -7,7 +7,24 @@
         <div class="card-body text-right">
             <form action="/notes/search" method="POST">
                 <div class="mb-3">
-                    <label for="area">Area:</label>
+                    <label for="facultad">Facultad:</label>
+                    <select id="facultad" name="facultad">
+                        <option value="facultad">FIS</option>
+                    </select>
+                    <br>
+                </div>
+
+                <div class="mb-3">
+                    <label for="carrera">Carrera:</label>
+                    <select id="carrera" name="carrera">
+                        <option value="Computacion">Computación</option>
+                        <option value="Software">Software</option>
+                    </select>
+                    <br>
+                </div>
+
+                <div class="mb-3">
+                    <label for="area">Área:</label>
                     <select id="area" name="area" onchange="actualizarArea()">
                         <option value="Decanato">Decanato</option>
                         <option value="Subdecanato">Sub-Decanato</option>
@@ -17,24 +34,24 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="cargo">Secretaria:</label>
-                    <select id="cargo" name="cargo" onchange="actualizarDepartamento()">
+                    <label for="subArea">Subárea:</label>
+                    <select id="subArea" name="subArea" onchange="actualizarTipoDocumento()">
                         <!-- Las opciones se actualizarán dinámicamente mediante JavaScript -->
                     </select>
                     <br>
                 </div>
 
                 <div class="mb-3">
-                    <label for="departamento">Documento:</label>
-                    <select id="departamento" name="departamento" onchange="actualizarSubtipoDocumento()">
+                    <label for="tipoDocumento">Tipo de Documento:</label>
+                    <select id="tipoDocumento" name="tipoDocumento" onchange="actualizarSubtipoDocumento()">
                         <!-- Las opciones se actualizarán dinámicamente mediante JavaScript -->
                     </select>
                     <br>
                 </div>
 
                 <div class="mb-3">
-                    <label for="subdepartamento">Subtipo de Documento:</label>
-                    <select id="subdepartamento" name="subdepartamento" onchange="actualizarPeriodo()">
+                    <label for="subTipoDocumento">Subtipo de Documento:</label>
+                    <select id="subTipoDocumento" name="subTipoDocumento" onchange="actualizarPeriodo()">
                         <!-- Las opciones se actualizarán dinámicamente mediante JavaScript -->
                     </select>
                     <br>
@@ -49,11 +66,22 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="carrera">Carrera:</label>
-                    <select id="carrera" name="carrera">
-                        <option value="Computacion">Computación</option>
-                        <option value="Software">Software</option>
-                    </select>
+                    <label for="pdfArchivo">Archivo PDF:</label>
+                    <input type="file" id="pdfArchivo" name="pdfArchivo" accept=".pdf">
+                    <br>
+                </div>
+
+                <div class="mb-3">
+                    <label for="asunto">Asunto:</label>
+                    <textarea id="asunto" name="asunto" rows="3" cols="35"></textarea>
+                    <!-- Puedes ajustar rows y cols según tus necesidades -->
+                    <br>
+                </div>
+
+                <div class="mb-3">
+                    <label for="observaciones">Observaciones:</label>
+                    <textarea id="observaciones" name="observaciones" rows="3" cols="35"></textarea>
+                    <!-- Puedes ajustar rows y cols según tus necesidades -->
                     <br>
                 </div>
 
