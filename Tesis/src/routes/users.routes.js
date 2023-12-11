@@ -10,8 +10,10 @@ const {
 
 } = require("../controllers/users.controller");
 
-router.get("/users/signup", renderSignUpForm);
-router.post("/users/signup", signUp);
+const { isAuthenticated, isAdmin } = require("../helpers/auth");
+
+router.get("/users/signup", isAuthenticated, isAdmin, renderSignUpForm);
+router.post("/users/signup", isAuthenticated, isAdmin, signUp);
 router.get("/users/signin", renderSignInForm);
 router.post("/users/signin", signIn);
 router.get("/users/logout", logOut);
