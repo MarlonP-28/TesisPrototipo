@@ -1,15 +1,15 @@
 <div class="col-md-4 mx-auto">
     <div class="card">
         <div class="card-header bg-dark text-center">
-            <h3 class="text-white">Nuevo Archivo</h3>
-         </div>
+            <h3 class="text-white">Buscar Archivo</h3>
+        </div>
 
         <div class="card-body text-right">
-            <form action="/notes/new-notes" method="POST">
+            <form action="/notes/search" method="POST">
                 <div class="mb-3">
                     <label for="facultad">Facultad:</label>
                     <select id="facultad" name="facultad">
-                        <option value="FIS">FIS</option>
+                        <option value="facultad">FIS</option>
                     </select>
                     <br>
                 </div>
@@ -86,8 +86,8 @@
                 </div>
 
                 <div class="d-flex justify-content-between mb-3">
-                    <a href="/all-notes" class="btn btn-primary">Cancelar</a>
-                    <button class="btn btn-primary" type="submit">Guardar</button>
+                    <button onclick="regresarPaginaPrincipal()" class="btn btn-primary">Cancelar</button>
+                    <button class="btn btn-primary" type="submit">Buscar</button>
                 </div>
             </form>
         </div>
