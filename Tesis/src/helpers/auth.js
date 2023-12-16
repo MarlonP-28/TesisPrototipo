@@ -1,15 +1,10 @@
 const helpers = {};
 
-helpers.isAuthenticated = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  req.flash("error_msg", "Not Authorized");
-  res.redirect("/users/signin");
+helpers.isAuthenticated = (req, res) => {
+  return req.isAuthenticated()
 };
 
 helpers.isAdmin = (req) => {
-  return req.user && req.user.rol === 'admin';
+  return  req.user.rol === 'admin';
 };
-
 module.exports = helpers;
