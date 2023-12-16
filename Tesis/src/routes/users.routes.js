@@ -12,6 +12,7 @@ const {
   deletUser,
   updateView,
   updateUser,
+  redirect,
 
 } = require("../controllers/users.controller");
 
@@ -25,6 +26,7 @@ router.get("/users/logout", logOut);
 
 /*********************/
 router.get("/administration", enlistUsers);
+router.get("/redirect", redirect);
 router.post("/administration/add", addUser);
 router.delete("/administration/delete/:id", deletUser);
 router.get("/administration/update/:id", updateView);

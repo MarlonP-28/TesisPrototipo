@@ -52,17 +52,7 @@ usersCtrl.signUp = async (req, res) => {
 
 //Renderiza el formulario de registro
 usersCtrl.renderSignInForm = (req, res) => {
-  if(auth.isAuthenticated(req,res)){
-    if(auth.isAdmin(req)){
-      res.redirect("/administration")
-    }else{
-      res.redirect("/notes")
-    }
-  
-  }else{
-    
-    res.render("users/signin");
-  }
+  res.render("users/signin");
   
 };
 
@@ -75,15 +65,27 @@ usersCtrl.renderSignInForm = (req, res) => {
 usersCtrl.signIn = passport.authenticate("local", {
   //VALIDANDO CON PASSPORT Y CONFIG/PASSPORT.JS
   failureRedirect: "/users/signin",
-  successRedirect: "/administration",
+  successRedirect: "/redirect",
   failureFlash: true,
 });
+
+usersCtrl.redirect = (req,res)=>{
+  
+  if(auth.isAdmin(req.user.rol)){
+    res.redirect("/administration")
+  }else{
+    res.redirect("/notes")
+
+  }
+}
+
 
 
 
 
 usersCtrl.enlistUsers = async(req, res) => {
-  const users = await User.find().lean();
+  if(auth.isAdmin(req.user.rol)){
+    const users = await User.find().lean();
   console.log(users)
   for (var clave in users) {
     console.log(clave)
@@ -91,6 +93,11 @@ usersCtrl.enlistUsers = async(req, res) => {
 
   }
   res.render("users/userlist",{ users });
+  }else{
+    res.redirect("/notes")
+
+  }
+  
 }
 
 
@@ -103,9 +110,31 @@ usersCtrl.enlistUsers = async(req, res) => {
 
 
 usersCtrl.deletUser= async(req, res) => {
-  await User.findByIdAndDelete(req.params.id);
+
+  if(auth.isAdmin(req.user.rol)){
+    await User.findByIdAndDelete(req.params.id);
   req.flash("success_msg", "!Usuario eliminado con exito¡"); //mensajes que todo esta ok
   res.redirect("/administration");
+  }
+  else{
+    res.redirect("/notes")
+  }
+
+
+  await User.findByIdAndDelete(req.params.id);
+
+
+  if(auth.isAdmin(req.user.rol)){
+    await User.findByIdAndDelete(req.params.id);
+    req.flash("success_msg", "!Usuario eliminado con exito¡"); //mensajes que todo esta ok
+    res.redirect("/administration");
+  }
+  else{
+    res.redirect("/notes")
+  }
+
+
+  
 }
 
 
@@ -140,9 +169,18 @@ usersCtrl.logOut = (req, res) => {
 
 
 usersCtrl.updateView = async(req, res) => {
-   const user =  await User.findById(req.params.id).lean();
-   console.log(user)
-  res.render("users/editusers",{user})
+
+  if(auth.isAdmin(req.user.rol)){
+    const user =  await User.findById(req.params.id).lean();
+    console.log(user)
+   res.render("users/editusers",{user})
+  }
+  else{
+    res.redirect("/notes")
+  }
+
+
+   
 };
 
 
@@ -152,6 +190,10 @@ usersCtrl.updateView = async(req, res) => {
 
 
 usersCtrl.updateUser = async (req, res) => {
+
+
+  if(auth.isAdmin(req.user.rol)){
+    
   console.log(req.body)
   const errors = [];
   
@@ -190,6 +232,12 @@ usersCtrl.updateUser = async (req, res) => {
       res.redirect("/administration");
     }
   }
+  }
+  else{
+    res.redirect("/notes")
+  }
+
+
 };
 
 
@@ -204,7 +252,10 @@ usersCtrl.updateUser = async (req, res) => {
 
 
 usersCtrl.addUser = async (req, res) => {
-  console.log(req.body)
+
+
+  if(auth.isAdmin(req.user.rol)){
+    console.log(req.body)
   const errors = [];
   const { name, email, rol, password, confirm_password } = req.body;
   console.log(req.body)
@@ -237,6 +288,14 @@ usersCtrl.addUser = async (req, res) => {
       res.redirect("/administration");
     }
   }
+  }
+  else{
+    res.redirect("/notes")
+  }
+
+
+
+  
 };
 
 
