@@ -50,7 +50,8 @@ notesCtrl.createNewNotes = async (req, res) => {
       periodo, 
       pdfArchivo, 
       asunto, 
-      observaciones
+      observaciones,
+      user
 
     });
   const newNote = new Note({ facultad, carrera, area, subArea, tipoDocumento, subTipoDocumento, periodo, pdfArchivo, asunto, observaciones  });
