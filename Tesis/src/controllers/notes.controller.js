@@ -137,7 +137,8 @@ notesCtrl.searchNote = async (req, res) => {
       periodo, 
       pdfArchivo, 
       asunto, 
-      observaciones
+      observaciones, 
+      user
     });
   }
 
