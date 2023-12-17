@@ -139,4 +139,3 @@ function actualizarSubtipoDocumento() {
 }
 // Llamar a actualizarArea al cargar la página para establecer las opciones iniciales
 actualizarArea();
-
