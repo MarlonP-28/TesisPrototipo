@@ -1,34 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Historial de Archivos</title>
-</head>
-<body>
-<!--  
-    <div class="mt-4">
-        <form action="/search-archive" method="GET">
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Buscar..." name="searchTerm">
-                <button class="btn btn-outline-secondary bg-dark" type="submit">Buscar</button>
-            </div>
-        </form>
-    </div>
--->
     <div>
-        <h1 class="titulo">Historial de Archivos</h1>
+        <h1 class="titulo text-center">Historial de Archivos</h1>
     </div>
-    <div>
-        <table class="table">
+
+    <div>        
+        <table class="table table-bordered table-bordered">
             <thead>
                 <tr>
-                    <th>Area</th>
-                    <th>Cargo</th>
-                    <th>Departamento</th>
-                    <th>Sub-Departamento</th>
-                    <th>Periodo/Año</th>
+                    <th>Facultad</th>
                     <th>Carrera</th>
+                    <th>Área</th>
+                    <th>Subárea</th>
+                    <th>Serie</th>
+                    <th>Subserie</th>
+                    <th>Periodo/Año</th>
+                    <th>Archivo pdf</th>
+                    <th>Asunto</th>
+                    <th>Observaciones</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -55,9 +42,11 @@
             </tbody>
         </table>
     </div>
-    <div class="mt-4">
+
+   <div class="mt-4">
         <a href="/notes/add" class="btn btn-primary">Nuevo</a>
-        <a href="/search-archive" class="btn btn-primary">Buscar</a>
-    </div>
-</body>
-</html>
+        <a href="/search" class="btn btn-primary">Buscar</a>
+   </div>
+
+
+<script src="/js/script.js"></script>
