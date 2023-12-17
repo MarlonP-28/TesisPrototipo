@@ -139,6 +139,7 @@ notesCtrl.searchNote = async (req, res) => {
       asunto, 
       observaciones, 
       user
+      
     });
   }
 
