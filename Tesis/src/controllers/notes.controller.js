@@ -34,11 +34,12 @@ notesCtrl.createNewNotes = async (req, res) => {
       departamento,
       subdepartamento,
       periodo,
-      carrera
+      carrera,
+      user
 
     });
   const newNote = new Note({ area, cargo, departamento, subdepartamento, periodo, carrera  });
-  newNote.user = req.user.id;
+  newNote.user = req.user.id; //Obtiene la id del usuario que inicio sesion para guardar en la base de datos
   await newNote.save();
   req.flash("success_msg", "!Archivo creado con exito¡");
   res.redirect("/notes"); //direcciona a notas automaticamente
