@@ -2,7 +2,7 @@
         <h1 class="titulo text-center">Historial de Archivos</h1>
     </div>
 
-    <div>        
+    <div class="table-responsive">        
         <table class="table table-bordered table-bordered">
             <thead>
                 <tr>
@@ -23,12 +23,16 @@
             <tbody>
                 {{#each notes}}
                     <tr>
-                        <td>{{area}}</td>
-                        <td>{{cargo}}</td>
-                        <td>{{departamento}}</td>
-                        <td>{{subdepartamento}}</td>
-                        <td>{{periodo}}</td>
+                        <td>{{facultad}}</td>
                         <td>{{carrera}}</td>
+                        <td>{{area}}</td>
+                        <td>{{subArea}}</td>
+                        <td>{{tipoDocumento}}</td>
+                        <td>{{subTipoDocumento}}</td>
+                        <td>{{periodo}}</td>
+                        <td>{{pdfArchivo}}</td>
+                        <td>{{asunto}}</td>
+                        <td>{{observaciones}}</td>
                         <td>
                             <a href="/notes/edit/{{_id}}"><i class="fas fa-edit"></i></a>
                             <!-- DELETE REQUEST -->
