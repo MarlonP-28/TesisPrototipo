@@ -72,7 +72,7 @@ function actualizarSubtipoDocumento() {
     subTipoDocumentoSelect.innerHTML = "";
 
     if (areaSelect.value === "Decanato" && subAreaSelect.value === "Secretaria de Decanato" && tipoDocumentoSelect.value === "Consejo de Facultad") {
-          var opcionesSubTipoDocumento = ["Convocatorias", "Actas/Resoluciones"];
+          var opcionesSubTipoDocumento = ["Actas/Resoluciones"];
       } else if (areaSelect.value === "Decanato" && subAreaSelect.value === "Secretaria de Decanato" && tipoDocumentoSelect.value === "Solicitud de Estudiantes") {
           var opcionesSubTipoDocumento = ["Formularios de Autorización"];
       } else if (areaSelect.value === "Decanato" && subAreaSelect.value === "Secretaria de Decanato" && tipoDocumentoSelect.value === "Procesos Electorales") {
@@ -139,4 +139,3 @@ function actualizarSubtipoDocumento() {
 }
 // Llamar a actualizarArea al cargar la página para establecer las opciones iniciales
 actualizarArea();
-

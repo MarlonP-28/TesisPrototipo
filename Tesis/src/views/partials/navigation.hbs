@@ -7,6 +7,17 @@
       <ul class="navbar-nav ms-auto">
           {{#if user}}
           <li class="nav-item dropdown">
+            {{#if isAdmin }}
+            <a
+              class="nav-link"
+              href="/administration"
+            >
+              Usuarios
+            </a>
+            
+            {{/if}}
+          </li>
+          <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
               href="#"
