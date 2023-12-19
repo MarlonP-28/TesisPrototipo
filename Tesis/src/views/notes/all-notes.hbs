@@ -34,7 +34,7 @@
                         <td>{{asunto}}</td>
                         <td>{{observaciones}}</td>
                         <td>
-                            <a href="/notes/edit/{{_id}}"><i class="fas fa-edit"></i></a>
+                            <a href="/notes/edit/{{_id}}" class="btn btn-success btn-sm">Editar</a>
                             <!-- DELETE REQUEST -->
                             <form action="/notes/delete/{{_id}}?_method=DELETE" method="POST" class="d-inline">
                                 <input type="hidden" name="_method" value="DELETE">
