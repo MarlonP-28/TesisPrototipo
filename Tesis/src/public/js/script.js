@@ -137,5 +137,16 @@ function actualizarSubtipoDocumento() {
         periodoSelect.add(opcion);
     }
 }
+
+function confirmarEliminacion() {
+    // Muestra una ventana de confirmación
+    var confirmacion = confirm("¿Está seguro que desea eliminar este archivo?");
+
+    // Si el usuario hace clic en "Aceptar", envía el formulario para eliminar
+    if (confirmacion) {
+        var deleteForm = document.getElementById('deleteForm');
+        deleteForm.submit();
+    }
+}
 // Llamar a actualizarArea al cargar la página para establecer las opciones iniciales
 actualizarArea();
