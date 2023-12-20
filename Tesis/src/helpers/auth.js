@@ -8,4 +8,7 @@ helpers.isAuthenticated = (req, res, next) => {
   res.redirect("/users/signin");
 };
 
+helpers.isAdmin = (rol) => {
+  return  rol === 'admin';
+};
 module.exports = helpers;

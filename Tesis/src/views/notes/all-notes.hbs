@@ -1,34 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Historial de Archivos</title>
-</head>
-<body>
-<!--  
-    <div class="mt-4">
-        <form action="/search-archive" method="GET">
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Buscar..." name="searchTerm">
-                <button class="btn btn-outline-secondary bg-dark" type="submit">Buscar</button>
-            </div>
-        </form>
-    </div>
--->
+    <h1>Filtrado para la busqueda de archivos por implementar</h1>
+    
     <div>
-        <h1 class="titulo">Historial de Archivos</h1>
+        <h1 class="titulo text-center">Historial de Archivos</h1>
     </div>
-    <div>
-        <table class="table">
+
+    <div class="table-responsive">        
+        <table class="table table-bordered table-bordered">
             <thead>
                 <tr>
-                    <th>Area</th>
-                    <th>Cargo</th>
-                    <th>Departamento</th>
-                    <th>Sub-Departamento</th>
-                    <th>Periodo/Año</th>
+                    <th>Facultad</th>
                     <th>Carrera</th>
+                    <th>Área</th>
+                    <th>Subárea</th>
+                    <th>Serie</th>
+                    <th>Subserie</th>
+                    <th>Periodo/Año</th>
+                    <th>Archivo pdf</th>
+                    <th>Asunto</th>
+                    <th>Observaciones</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -36,18 +25,29 @@
             <tbody>
                 {{#each notes}}
                     <tr>
-                        <td>{{area}}</td>
-                        <td>{{cargo}}</td>
-                        <td>{{departamento}}</td>
-                        <td>{{subdepartamento}}</td>
-                        <td>{{periodo}}</td>
+                        <td>{{facultad}}</td>
                         <td>{{carrera}}</td>
+                        <td>{{area}}</td>
+                        <td>{{subArea}}</td>
+                        <td>{{tipoDocumento}}</td>
+                        <td>{{subTipoDocumento}}</td>
+                        <td>{{periodo}}</td>
+                        <td>{{pdfArchivo}}</td>
+                        <td>{{asunto}}</td>
+                        <td>{{observaciones}}</td>
                         <td>
-                            <a href="/notes/edit/{{_id}}"><i class="fas fa-edit"></i></a>
+                            <a href="/notes/edit/{{_id}}" class=" btn btn-success btn-sm">
+                                <i class="fas fa-edit"></i>
+                                <span class="ml-2">Editar</span>
+                            </a>
+                            
                             <!-- DELETE REQUEST -->
                             <form action="/notes/delete/{{_id}}?_method=DELETE" method="POST" class="d-inline">
                                 <input type="hidden" name="_method" value="DELETE">
-                                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash-alt"></i>
+                                    <span class="ml-2">Eliminar</span>
+                                </button>
                             </form>
                         </td>
                     </tr>
@@ -55,11 +55,14 @@
             </tbody>
         </table>
     </div>
+
    <div class="mt-4">
-    <a href="/notes/add" class="btn btn-primary">Nuevo</a>
-    <a href="/search" class="btn btn-primary">Buscar</a>
-</div>
-</body>
-</html>
+        <a href="/notes/add" class="btn btn-primary">
+            <i class="fas fa-plus"></i> <!-- Ícono -->
+            <span class="ml-2">Nuevo</span> <!-- Texto con margen a la izquierda (ml-2) -->
+        </a>
+
+   </div>
+
 
 <script src="/js/script.js"></script>
