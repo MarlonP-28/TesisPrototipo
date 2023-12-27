@@ -76,7 +76,7 @@ function actualizarSubtipoDocumento() {
       } else if (areaSelect.value === "Decanato" && subAreaSelect.value === "Secretaria de Decanato" && tipoDocumentoSelect.value === "Solicitud de Estudiantes") {
           var opcionesSubTipoDocumento = ["Formularios de Autorización"];
       } else if (areaSelect.value === "Decanato" && subAreaSelect.value === "Secretaria de Decanato" && tipoDocumentoSelect.value === "Procesos Electorales") {
-          var opcionesSubTipoDocumento = ["Actas de Proceos Electoral"];
+          var opcionesSubTipoDocumento = ["Actas de Procesos Electorales"];
       } else if (areaSelect.value === "Decanato" && subAreaSelect.value === "Secretaria de Decanato" && tipoDocumentoSelect.value === "Inventario FIS") {
           var opcionesSubTipoDocumento = ["Bienes"];
       }
