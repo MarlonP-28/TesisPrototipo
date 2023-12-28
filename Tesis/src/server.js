@@ -6,6 +6,7 @@ const methodOverride = require("method-override");
 const flash = require("connect-flash");
 const session = require("express-session");
 const passport = require("passport");
+const fileUpload = require('express-fileupload');
 
 //Initializations
 const app = express();
@@ -39,6 +40,12 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+
+//subir archivos
+app.use(fileUpload({
+  createParentPath: true
+
+}))
 
 //Global variables
 app.use((req, res, next) => {
