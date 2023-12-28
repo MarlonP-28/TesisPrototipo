@@ -2,19 +2,27 @@ const { Schema, model } = require("mongoose");
 
 const NoteSchema = new Schema(
   {
-    area: {
+    facultad: {
       type: String, // Puedes cambiar el tipo según tus necesidades
       required: true,
     },
-    cargo: {
+    carrera: {
       type: String,
       required: true,
     },
-    departamento: {
+    area: {
       type: String,
       required: true,
     },
-    subdepartamento: {
+    subArea: {
+      type: String,
+      required: true,
+    },
+    tipoDocumento: {
+      type: String,
+      required: true,
+    },
+    subTipoDocumento: {
       type: String,
       required: true,
     },
@@ -22,7 +30,15 @@ const NoteSchema = new Schema(
       type: String,
       required: true,
     },
-    carrera: {
+    pdfArchivo: {
+      type: String,
+      required: true,
+    },
+    asunto: {
+      type: String,
+      required: true,
+    },
+    observaciones: {
       type: String,
       required: true,
     },

@@ -6,40 +6,56 @@ notesCtrl.renderNoteFrom = (req, res) => {
 };
 //Esta función se encarga de crear una nueva nota en la base de datos.
 notesCtrl.createNewNotes = async (req, res) => {
-  const { area, cargo, departamento, subdepartamento, periodo, carrera } = req.body;
+  const { facultad, carrera, area, subArea, tipoDocumento, subTipoDocumento, periodo, pdfArchivo, asunto, observaciones } = req.body;
   const errors = [];
-  if (!area) {
-    errors.push({ text: "Escoja una opción A." });
-  }
-  if (!cargo) {
-    errors.push({ text: "Escoja una opción B." });
-  }
-  if (!departamento) {
-    errors.push({ text: "Escoja una opción C." });
-  }
-  if (!subdepartamento) {
-    errors.push({ text: "Escoja una opción D." });
-  }
-  if (!periodo) {
-    errors.push({ text: "Escoja una opción E." });
+  if (!facultad) {
+    errors.push({ text: "Escoja una Facultad." });
   }
   if (!carrera) {
-    errors.push({ text: "Escoja una opción F." });
+    errors.push({ text: "Escoja una carrera." });
+  }
+  if (!area) {
+    errors.push({ text: "Escoja una área." });
+  }
+  if (!subArea) {
+    errors.push({ text: "Escoja una subárea." });
+  }
+  if (!tipoDocumento) {
+    errors.push({ text: "Escoja un tipo de documento." });
+  }
+  if (!subTipoDocumento) {
+    errors.push({ text: "Escoja un subtipo de documento." });
+  }
+  if (!periodo) {
+    errors.push({ text: "Escoja un periodo." });
+  }
+  if (!pdfArchivo) {
+    errors.push({ text: "Seleccione un archivo Pdf." });
+  }
+  if (!asunto) {
+    errors.push({ text: "Escriba un asunto." });
+  }
+  if (!observaciones) {
+    errors.push({ text: "Escriba una observación." });
   }
   if (errors.length > 0)
     return res.render("notes/new-notes", {
       errors,
-      area,
-      cargo,
-      departamento,
-      subdepartamento,
-      periodo,
-      carrera,
+      facultad, 
+      carrera, 
+      area, 
+      subArea, 
+      tipoDocumento, 
+      subTipoDocumento, 
+      periodo, 
+      pdfArchivo, 
+      asunto, 
+      observaciones,
       user
 
     });
-  const newNote = new Note({ area, cargo, departamento, subdepartamento, periodo, carrera  });
-  newNote.user = req.user.id; //Obtiene la id del usuario que inicio sesion para guardar en la base de datos
+  const newNote = new Note({ facultad, carrera, area, subArea, tipoDocumento, subTipoDocumento, periodo, pdfArchivo, asunto, observaciones  });
+  newNote.user = req.user.id;
   await newNote.save();
   req.flash("success_msg", "!Archivo creado con exito¡");
   res.redirect("/notes"); //direcciona a notas automaticamente
@@ -62,8 +78,8 @@ notesCtrl.renderEditFrom = async (req, res) => {
 };
 //Esta función se utiliza para actualizar una nota existente en la base de datos
 notesCtrl.updateNote = async (req, res) => {
-  const { area, cargo, departamento, subdepartamento, periodo, carrera } = req.body;
-  await Note.findByIdAndUpdate(req.params.id, { area, cargo, departamento, subdepartamento, periodo, carrera });
+  const { facultad, carrera, area, subArea, tipoDocumento, subTipoDocumento, periodo, pdfArchivo, asunto, observaciones } = req.body;
+  await Note.findByIdAndUpdate(req.params.id, { facultad, carrera, area, subArea, tipoDocumento, subTipoDocumento, periodo, pdfArchivo, asunto, observaciones });
   req.flash("success_msg", "!Archivo actualizado con exito¡");
   res.redirect("/notes");
 };
@@ -72,35 +88,6 @@ notesCtrl.deleteNote = async (req, res) => {
   await Note.findByIdAndDelete(req.params.id);
   req.flash("success_msg", "!Archivo eliminado con exito¡"); //mensajes que todo esta ok
   res.redirect("/notes");
-};
-//Esta funcio se en carga de la busqueda de una nota 
-notesCtrl.searchArchive = async (req, res) => {
-  const { searchTerm } = req.query;
-
-  try {
-    let notes;
-    if (searchTerm) {
-      notes = await Note.find({
-        user: req.user.id,
-        $or: [
-          { area: { $regex: new RegExp(searchTerm, 'Decanato') } },
-          { cargo: { $regex: new RegExp(searchTerm, 'i') } },
-          { departamento: { $regex: new RegExp(searchTerm, 'i') } },
-          { subdepartamento: { $regex: new RegExp(searchTerm, 'i') } },
-          { periodo: { $regex: new RegExp(searchTerm, 'i') } },
-          { carrera: { $regex: new RegExp(searchTerm, 'i') } },
-        ],
-      }).lean();
-    } else {
-      notes = await Note.find({ user: req.user.id }).lean();
-    }
-
-    res.render("notes/all-notes", { notes, searchTerm });
-  } catch (error) {
-    console.error('Error en la búsqueda de archivos:', error);
-    req.flash("error_msg", "Error en la búsqueda de archivos");
-    res.redirect("/notes");
-  }
 };
 
 module.exports = notesCtrl;
