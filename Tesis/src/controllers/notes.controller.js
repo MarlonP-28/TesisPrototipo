@@ -62,7 +62,7 @@ notesCtrl.createNewNotes = async (req, res) => {
 };
 //Esta función consulta todas las notas en la base de datos que pertenecen al usuario actual 
 notesCtrl.renderNotes = async (req, res) => {
-  const notes = await Note.find({ user: req.user.id })//filtra las notas de un solo usuario
+  const notes = await Note.find({ area: req.user.rol })//Se filtran las notas por rol
     //.sort({ createdAt: "desc" })
     .lean();
   res.render("notes/all-notes", { notes });
