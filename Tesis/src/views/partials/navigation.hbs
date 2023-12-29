@@ -9,12 +9,21 @@
           <li class="nav-item dropdown">
             {{#if isAdmin }}
             <a
-              class="nav-link"
-              href="/administration"
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdownMenuLink"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
             >
               Usuarios
             </a>
-            
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/users/signup">Crear usuario</a>
+              <a class="dropdown-item" href="/notes/add">Eliminar Usuario</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/users/logout">Salir</a>
+            </div>
             {{/if}}
           </li>
           <li class="nav-item dropdown">
@@ -29,19 +38,10 @@
               Modulos
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                
-              <a class="dropdown-item" href="/notes">
-                <i class="fas fa-folder-open"></i> Todos los Archivos
-              </a>
-
-              <!--
+              <a class="dropdown-item" href="/notes">Todos los Archivos</a>
               <a class="dropdown-item" href="/notes/add">Nuevo Archivo</a>
-              -->
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="/users/logout">
-                <i class="fas fa-sign-out-alt"></i> Salir
-              </a>
-
+              <a class="dropdown-item" href="/users/logout">Salir</a>
             </div>
           </li>
           {{/if}}

@@ -1,5 +1,3 @@
-    <h1>Filtrado para la busqueda de archivos por implementar</h1>
-    
     <div>
         <h1 class="titulo text-center">Historial de Archivos</h1>
     </div>
@@ -36,18 +34,11 @@
                         <td>{{asunto}}</td>
                         <td>{{observaciones}}</td>
                         <td>
-                            <a href="/notes/edit/{{_id}}" class=" btn btn-success btn-sm">
-                                <i class="fas fa-edit"></i>
-                                <span class="ml-2">Editar</span>
-                            </a>
-                            
+                            <a href="/notes/edit/{{_id}}"><i class="fas fa-edit"></i></a>
                             <!-- DELETE REQUEST -->
                             <form action="/notes/delete/{{_id}}?_method=DELETE" method="POST" class="d-inline">
                                 <input type="hidden" name="_method" value="DELETE">
-                                <button type="submit" class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash-alt"></i>
-                                    <span class="ml-2">Eliminar</span>
-                                </button>
+                                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                             </form>
                         </td>
                     </tr>
@@ -55,11 +46,11 @@
             </tbody>
         </table>
     </div>
-    <div class="mt-4">
+
+   <div class="mt-4">
         <a href="/notes/add" class="btn btn-primary">Nuevo</a>
-        <a href="/search-archive" class="btn btn-primary">Buscar</a>
-    </div>
-</body>
-</html>
+        <a href="/search" class="btn btn-primary">Buscar</a>
+   </div>
+
 
 <script src="/js/script.js"></script>
