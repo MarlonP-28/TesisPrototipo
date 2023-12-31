@@ -4,6 +4,12 @@ const Note = require("../models/Note");
 notesCtrl.renderNoteFrom = (req, res) => {
   res.render("notes/new-notes");
 };
+
+//funcion para renderizar la vista de busqueda
+notesCtrl.renderFindForm = (req, res) => {
+  res.render("notes/find-notes");
+};
+
 //Esta función se encarga de crear una nueva nota en la base de datos.
 notesCtrl.createNewNotes = async (req, res) => {
 
@@ -97,5 +103,7 @@ notesCtrl.deleteNote = async (req, res) => {
   req.flash("success_msg", "!Archivo eliminado con exito¡"); //mensajes que todo esta ok
   res.redirect("/notes");
 };
+
+
 
 module.exports = notesCtrl;
