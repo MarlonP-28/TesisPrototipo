@@ -104,6 +104,45 @@ notesCtrl.deleteNote = async (req, res) => {
   res.redirect("/notes");
 };
 
+//Esta función se encarga de buscar una nota en la base de datos
+notesCtrl.findNote = async (req, res) => {
+  const { facultad, carrera, area, subArea, tipoDocumento, subTipoDocumento, periodo, asunto, observaciones } = req.body;
+  const errors = [];
+  if (!facultad) {
+    errors.push({ text: "Escoja una Facultad." });
+  }
+  if (!carrera) {
+    errors.push({ text: "Escoja una carrera." });
+  }
+  if (!area) {
+    errors.push({ text: "Escoja una área." });
+  }
+  if (!subArea) {
+    errors.push({ text: "Escoja una subárea." });
+  }
+  if (!tipoDocumento) {
+    errors.push({ text: "Escoja un tipo de documento." });
+  }
+  if (!subTipoDocumento) {
+    errors.push({ text: "Escoja un subtipo de documento." });
+  }
+  if (!periodo) {
+    errors.push({ text: "Escoja un periodo." });
+  }
+  if (errors.length > 0)
+    return res.render("notes/find-notes", {
+      errors,
+      facultad, 
+      carrera, 
+      area, 
+      subArea, 
+      tipoDocumento, 
+      subTipoDocumento, 
+      periodo
+    });
 
+  const notes = await Note.find({ facultad, carrera, area, subArea, tipoDocumento, subTipoDocumento, periodo}).lean();
+  res.render("notes/all-notes", { notes });
+}
 
 module.exports = notesCtrl;
