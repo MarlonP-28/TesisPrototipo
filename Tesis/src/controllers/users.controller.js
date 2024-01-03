@@ -9,10 +9,10 @@ usersCtrl.renderSignUpForm = (req, res) => {
 
 //valida los datos
 usersCtrl.signUp = async (req, res) => {
-  console.log(req.body)
+  //console.log(req.body)
   const errors = [];
   const { name, facultad, email, rol, password, confirm_password } = req.body;
-  console.log(req.body)
+  //console.log(req.body)
   if (password != confirm_password) {
     errors.push({ text: "Password do not match." });
   }
@@ -80,9 +80,9 @@ usersCtrl.redirect = (req,res)=>{
 usersCtrl.enlistUsers = async(req, res) => {
   if(auth.isAdmin(req.user.rol)){
     const users = await User.find().lean();
-  console.log(users)
+  //console.log(users)
   for (var clave in users) {
-    console.log(clave)
+    //console.log(clave)
     users[clave].password=users[clave].password.dec
   }
   res.render("users/userlist",{ users });
@@ -137,7 +137,7 @@ usersCtrl.updateView = async(req, res) => {
 
   if(auth.isAdmin(req.user.rol)){
     const user =  await User.findById(req.params.id).lean();
-    console.log(user)
+    console.log("USER UPDATE: ", user)
    res.render("users/editusers",{user})
   }
   else{
@@ -149,15 +149,13 @@ usersCtrl.updateView = async(req, res) => {
 };
 
 usersCtrl.updateUser = async (req, res) => {
-
-
-  if(auth.isAdmin(req.user.rol)){
-    
-  console.log(req.body)
+  if(auth.isAdmin(req.user.rol)){ 
+  console.log("req.params.id", req.params.id)
+  console.log("First ReqBody", req.body)
   const errors = [];
   
-  const { name, facultad, email, rol, password, confirm_password, _id } = req.body;
-  console.log(req.body)
+  const { name, facultad, email, rol, password, confirm_password} = req.body;
+  console.log("Update req.body",req.body)
   if (password != confirm_password) {
     errors.push({ text: "Las contraseñas no coinciden" });
   }
@@ -165,6 +163,7 @@ usersCtrl.updateUser = async (req, res) => {
     errors.push({ text: "La contraseña debe tener al menos 8 caracteres" });
   }
   if (errors.length > 0) {
+    console.log("if 1")
     res.render("users/editusers", {
       //Me devuelve los errores establecidos
       errors,
@@ -177,15 +176,19 @@ usersCtrl.updateUser = async (req, res) => {
       _id
     });
   } else {
+    console.log("else 1")
     const emailUser = await User.findOne({ email: email });
     if (emailUser) {
+      console.log("if email 2")
       req.flash("error_msg", "El email ya esta en uso");
       res.redirect("/administration/update/:"+_id);
     } else {
+      console.log("else email 2")
       const newUser = new User({ name, facultad, email, rol, password });
+      console.log("newUser", newUser)
       const passwordenc = await newUser.encryptPassword(password);
-      console.log(passwordenc)
-      await User.findByIdAndUpdate(_id,{name, facultad, email, rol, passwordenc})
+      //console.log(passwordenc)
+      await User.findByIdAndUpdate(req.params.id,{name, facultad, email, rol, passwordenc})
       
       await newUser.save();
       req.flash("success_msg", "Datos actualizados correctamente");
@@ -204,10 +207,10 @@ usersCtrl.addUser = async (req, res) => {
 
 
   if(auth.isAdmin(req.user.rol)){
-    console.log(req.body)
+    //console.log(req.body)
   const errors = [];
   const { name, facultad, email, rol, password, confirm_password } = req.body;
-  console.log(req.body)
+  //console.log(req.body)
   if (password != confirm_password) {
     errors.push({ text: "Las contraseñas no coinciden" });
   }
