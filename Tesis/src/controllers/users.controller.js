@@ -13,7 +13,7 @@ usersCtrl.renderSignUpForm = (req, res) => {
 usersCtrl.signUp = async (req, res) => {
   console.log(req.body)
   const errors = [];
-  const { name, email, rol, password, confirm_password } = req.body;
+  const { name, facultad, email, rol, password, confirm_password } = req.body;
   console.log(req.body)
   if (password != confirm_password) {
     errors.push({ text: "Password do not match." });
@@ -26,6 +26,7 @@ usersCtrl.signUp = async (req, res) => {
       //Me devuelve los errores establecidos
       errors,
       name,
+      facultad,
       email,
       rol,
       password,
@@ -37,7 +38,7 @@ usersCtrl.signUp = async (req, res) => {
       req.flash("error_msg", "The email is already in use.");
       res.redirect("/users/signup");
     } else {
-      const newUser = new User({ name, email, rol, password });
+      const newUser = new User({ name, facultad, email, rol, password });
       newUser.password = await newUser.encryptPassword(password);
       await newUser.save();
       req.flash("success_msg", "You are registered");
@@ -47,17 +48,11 @@ usersCtrl.signUp = async (req, res) => {
 };
 
 
-
-
-
 //Renderiza el formulario de registro
 usersCtrl.renderSignInForm = (req, res) => {
   res.render("users/signin");
   
 };
-
-
-
 
 
 //valida los datos
