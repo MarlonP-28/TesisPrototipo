@@ -67,7 +67,15 @@ usersCtrl.signIn = passport.authenticate("local", {
 });
 
 
+usersCtrl.redirect = (req,res)=>{
 
+  if(auth.isAdmin(req.user.rol)){
+    res.redirect("/administration")
+  }else{
+    res.redirect("/notes")
+
+  }
+}
 
 usersCtrl.enlistUsers = async(req, res) => {
   if(auth.isAdmin(req.user.rol)){
@@ -100,14 +108,7 @@ usersCtrl.deletUser= async(req, res) => {
   await User.findByIdAndDelete(req.params.id);
 
 
-  if(auth.isAdmin(req.user.rol)){
-    await User.findByIdAndDelete(req.params.id);
-    req.flash("success_msg", "!Usuario eliminado con exito¡"); //mensajes que todo esta ok
-    res.redirect("/administration");
-  }
-  else{
-    res.redirect("/notes")
-  }
+  
 
 
   
@@ -155,7 +156,7 @@ usersCtrl.updateUser = async (req, res) => {
   console.log(req.body)
   const errors = [];
   
-  const { name, email, rol, password, confirm_password, _id } = req.body;
+  const { name, facultad, email, rol, password, confirm_password, _id } = req.body;
   console.log(req.body)
   if (password != confirm_password) {
     errors.push({ text: "Las contraseñas no coinciden" });
@@ -168,6 +169,7 @@ usersCtrl.updateUser = async (req, res) => {
       //Me devuelve los errores establecidos
       errors,
       name,
+      facultad,
       email,
       rol,
       password,
@@ -180,10 +182,10 @@ usersCtrl.updateUser = async (req, res) => {
       req.flash("error_msg", "El email ya esta en uso");
       res.redirect("/administration/update/:"+_id);
     } else {
-      const newUser = new User({ name, email, rol, password });
+      const newUser = new User({ name, facultad, email, rol, password });
       const passwordenc = await newUser.encryptPassword(password);
       console.log(passwordenc)
-      await User.findByIdAndUpdate(_id,{name, email, rol, passwordenc})
+      await User.findByIdAndUpdate(_id,{name, facultad, email, rol, passwordenc})
       
       await newUser.save();
       req.flash("success_msg", "Datos actualizados correctamente");
@@ -204,7 +206,7 @@ usersCtrl.addUser = async (req, res) => {
   if(auth.isAdmin(req.user.rol)){
     console.log(req.body)
   const errors = [];
-  const { name, email, rol, password, confirm_password } = req.body;
+  const { name, facultad, email, rol, password, confirm_password } = req.body;
   console.log(req.body)
   if (password != confirm_password) {
     errors.push({ text: "Las contraseñas no coinciden" });
@@ -217,6 +219,7 @@ usersCtrl.addUser = async (req, res) => {
       //Me devuelve los errores establecidos
       errors,
       name,
+      facultad,
       email,
       rol,
       password,
@@ -228,7 +231,7 @@ usersCtrl.addUser = async (req, res) => {
       req.flash("error_msg", "El correo ingresado ya esta en uso");
       res.redirect("/administration");
     } else {
-      const newUser = new User({ name, email, rol, password });
+      const newUser = new User({ name, facultad, email, rol, password });
       newUser.password = await newUser.encryptPassword(password);
       await newUser.save();
       req.flash("success_msg", "Usuario creado exitosamente");
