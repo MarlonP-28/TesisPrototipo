@@ -11,4 +11,5 @@ helpers.isAuthenticated = (req, res, next) => {
 helpers.isAdmin = (rol) => {
   return  rol === 'admin';
 };
+
 module.exports = helpers;
