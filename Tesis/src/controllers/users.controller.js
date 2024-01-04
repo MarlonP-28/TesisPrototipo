@@ -80,10 +80,6 @@ usersCtrl.enlistUsers = async(req, res) => {
       users[clave].password=users[clave].password.dec
     }
     res.render("users/userlist",{ users });
-    for (var clave in users) {
-      users[clave].password=users[clave].password.dec
-    }
-    res.render("users/userlist",{ users });
   }else{
     res.redirect("/notes")
   }
@@ -176,7 +172,7 @@ usersCtrl.addUser = async (req, res) => {
     }
     if (errors.length > 0) {
       res.render("users/userlist", {
-        //devuelve los errores establecidos
+        //Me devuelve los errores establecidos
         errors,
         name,
         facultad,
