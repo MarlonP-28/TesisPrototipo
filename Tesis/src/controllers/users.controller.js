@@ -80,6 +80,10 @@ usersCtrl.enlistUsers = async(req, res) => {
       users[clave].password=users[clave].password.dec
     }
     res.render("users/userlist",{ users });
+    for (var clave in users) {
+      users[clave].password=users[clave].password.dec
+    }
+    res.render("users/userlist",{ users });
   }else{
     res.redirect("/notes")
   }
