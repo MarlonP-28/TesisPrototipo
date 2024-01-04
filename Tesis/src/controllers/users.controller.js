@@ -47,7 +47,7 @@ usersCtrl.signUp = async (req, res) => {
 
 //Renderiza el formulario de registro
 usersCtrl.renderSignInForm = (req, res) => {
-  if(auth.isAuthenticated(req,res)){
+  if(req.isAuthenticated()){
     if(auth.isAdmin(req)){
       res.redirect("/administration")
     }else{
@@ -137,7 +137,7 @@ usersCtrl.updateView = async(req, res) => {
 
   if(auth.isAdmin(req.user.rol)){
     const user =  await User.findById(req.params.id).lean();
-    console.log("USER UPDATE: ", user)
+  //  console.log("USER UPDATE: ", user)
    res.render("users/editusers",{user})
   }
   else{
@@ -149,13 +149,14 @@ usersCtrl.updateView = async(req, res) => {
 };
 
 usersCtrl.updateUser = async (req, res) => {
+  console.log(req.user.rol)
   if(auth.isAdmin(req.user.rol)){ 
-  console.log("req.params.id", req.params.id)
-  console.log("First ReqBody", req.body)
+  //console.log("req.params.id", req.params.id)
+  //console.log("First ReqBody", req.body)
   const errors = [];
   
   const { name, facultad, email, rol, password, confirm_password} = req.body;
-  console.log("Update req.body",req.body)
+  //console.log("Update req.body",req.body)
   if (password != confirm_password) {
     errors.push({ text: "Las contraseñas no coinciden" });
   }
@@ -163,7 +164,7 @@ usersCtrl.updateUser = async (req, res) => {
     errors.push({ text: "La contraseña debe tener al menos 8 caracteres" });
   }
   if (errors.length > 0) {
-    console.log("if 1")
+    //console.log("if 1")
     res.render("users/editusers", {
       //Me devuelve los errores establecidos
       errors,
@@ -176,24 +177,29 @@ usersCtrl.updateUser = async (req, res) => {
       _id
     });
   } else {
-    console.log("else 1")
-    const emailUser = await User.findOne({ email: email });
+    //console.log("else 1")
+  const emailUser = await User.findOne({ email: email });
+   
     if (emailUser) {
-      console.log("if email 2")
-      req.flash("error_msg", "El email ya esta en uso");
-      res.redirect("/administration/update/:"+_id);
-    } else {
-      console.log("else email 2")
-      const newUser = new User({ name, facultad, email, rol, password });
-      console.log("newUser", newUser)
-      const passwordenc = await newUser.encryptPassword(password);
-      //console.log(passwordenc)
-      await User.findByIdAndUpdate(req.params.id,{name, facultad, email, rol, passwordenc})
-      
-      await newUser.save();
-      req.flash("success_msg", "Datos actualizados correctamente");
-      res.redirect("/administration");
-    }
+      if(emailUser.id!=req.params.id){
+        req.flash("error_msg", "El email ya esta en uso");
+        res.redirect("/administration/update/"+req.params.id);
+      }
+      else {
+        //console.log("else email 2")
+        const newUser = new User({ name, facultad, email, rol, password });
+        //console.log("newUser", newUser)
+        const passwordenc = await newUser.encryptPassword(password);
+        //console.log(passwordenc)
+        await User.findByIdAndUpdate(req.params.id,{name, facultad, email, rol, passwordenc})
+        
+        //await newUser.save();
+        req.flash("success_msg", "Datos actualizados correctamente");
+        res.redirect("/administration");
+      }
+      //console.log("if email 2")
+     
+    } 
   }
   }
   else{
