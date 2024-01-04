@@ -16,10 +16,10 @@
       <form action="/notes/edit-notes/{{note._id}}?_method=PUT" method="POST">
         <input type="hidden" name="_method" value="PUT" />
         <!-- Add the following code for the fields you mentioned -->
-                <div class="mb-3">
+        <div class="mb-3">
                     <label for="facultad">Facultad:</label>
                     <select id="facultad" name="facultad">
-                    <option value="FIS">FIS</option>
+                        <option value="facultad">FIS</option>
                     </select>
                     <br>
                 </div>
@@ -27,7 +27,7 @@
                 <div class="mb-3">
                     <label for="carrera">Carrera:</label>
                     <select id="carrera" name="carrera">
-                        <option value="Computacion">Computacion</option>
+                        <option value="Computacion">Computación</option>
                         <option value="Software">Software</option>
                     </select>
                     <br>
@@ -37,8 +37,8 @@
                     <label for="area">Área:</label>
                     <select id="area" name="area" onchange="actualizarArea()">
                         <option value="Decanato">Decanato</option>
-                        <option value="Subdecanato">Subdecanato</option>
-                        <option value="Jefatura">Subdecanato</option>
+                        <option value="Subdecanato">Sub-Decanato</option>
+                        <option value="Jefatura">Jefatura de Departamento</option>
                     </select>
                     <br>
                 </div>
@@ -83,20 +83,20 @@
 
                 <div class="mb-3">
                     <label for="asunto">Asunto:</label>
-                    <textarea id="asunto" name="asunto" rows="3" cols="35">{{note.asunto}}</textarea>
+                    <textarea id="asunto" name="asunto" rows="3" cols="35"></textarea>
                     <!-- Puedes ajustar rows y cols según tus necesidades -->
                     <br>
                 </div>
 
                 <div class="mb-3">
                     <label for="observaciones">Observaciones:</label>
-                    <textarea id="observaciones" name="observaciones" rows="3" cols="35">{{note.observaciones}}</textarea>
+                    <textarea id="observaciones" name="observaciones" rows="3" cols="35"></textarea>
                     <!-- Puedes ajustar rows y cols según tus necesidades -->
                     <br>
                 </div>
 
           <div class="d-flex justify-content-between mb-3">
-              <a href="/notes" class="btn btn-primary"><i class="fas fa-times"></i> Cancelar</a>
+              <a href="/all-notes" class="btn btn-primary">Cancelar</a>
               <button class="btn btn-primary" type="submit">Guardar</button>
           </div>
       </form>
