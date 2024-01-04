@@ -9,10 +9,8 @@ usersCtrl.renderSignUpForm = (req, res) => {
 
 //valida los datos
 usersCtrl.signUp = async (req, res) => {
-  //console.log(req.body)
   const errors = [];
   const { name, facultad, email, rol, password, confirm_password } = req.body;
-  //console.log(req.body)
   if (password != confirm_password) {
     errors.push({ text: "Password do not match." });
   }
@@ -21,7 +19,7 @@ usersCtrl.signUp = async (req, res) => {
   }
   if (errors.length > 0) {
     res.render("users/signup", {
-      //Me devuelve los errores establecidos
+      //devuelve los errores establecidos
       errors,
       name,
       facultad,
@@ -68,33 +66,26 @@ usersCtrl.signIn = passport.authenticate("local", {
 
 
 usersCtrl.redirect = (req,res)=>{
-
   if(auth.isAdmin(req.user.rol)){
     res.redirect("/administration")
   }else{
     res.redirect("/notes")
-
   }
 }
 
 usersCtrl.enlistUsers = async(req, res) => {
   if(auth.isAdmin(req.user.rol)){
     const users = await User.find().lean();
-  //console.log(users)
-  for (var clave in users) {
-    //console.log(clave)
-    users[clave].password=users[clave].password.dec
-  }
-  res.render("users/userlist",{ users });
+    for (var clave in users) {
+      users[clave].password=users[clave].password.dec
+    }
+    res.render("users/userlist",{ users });
   }else{
     res.redirect("/notes")
-
   }
-  
 }
 
 usersCtrl.deletUser= async(req, res) => {
-
   if(auth.isAdmin(req.user.rol)){
     await User.findByIdAndDelete(req.params.id);
   req.flash("success_msg", "!Usuario eliminado con exito¡"); //mensajes que todo esta ok
@@ -103,24 +94,8 @@ usersCtrl.deletUser= async(req, res) => {
   else{
     res.redirect("/notes")
   }
-
-
   await User.findByIdAndDelete(req.params.id);
-
-
-  
-
-
-  
 }
-/*usersCtrl.signIn =  async(req, res) => {
-      const newUser = new User({ name:"jefatura", email:"jefatura@epn.edu.ec", rol:"jefatura-fis", password:"JefaturaF1$2023" });
-      newUser.password = await newUser.encryptPassword("@dminF1$2023");
-      await newUser.save();
-      req.flash("success_msg", "You are registered");
-      console.log("sfvsdfvgbdrbdtbsrtvs")
-      res.redirect("/users/signin");
-}*/
 
 //Cerrar sesión
 usersCtrl.logOut = (req, res) => {
@@ -134,29 +109,18 @@ usersCtrl.logOut = (req, res) => {
 };
 
 usersCtrl.updateView = async(req, res) => {
-
   if(auth.isAdmin(req.user.rol)){
     const user =  await User.findById(req.params.id).lean();
-  //  console.log("USER UPDATE: ", user)
-   res.render("users/editusers",{user})
-  }
-  else{
+    res.render("users/editusers",{user})
+  } else {
     res.redirect("/notes")
-  }
-
-
-   
+  }  
 };
 
 usersCtrl.updateUser = async (req, res) => {
-  console.log(req.user.rol)
   if(auth.isAdmin(req.user.rol)){ 
-  //console.log("req.params.id", req.params.id)
-  //console.log("First ReqBody", req.body)
   const errors = [];
-  
   const { name, facultad, email, rol, password, confirm_password} = req.body;
-  //console.log("Update req.body",req.body)
   if (password != confirm_password) {
     errors.push({ text: "Las contraseñas no coinciden" });
   }
@@ -164,9 +128,8 @@ usersCtrl.updateUser = async (req, res) => {
     errors.push({ text: "La contraseña debe tener al menos 8 caracteres" });
   }
   if (errors.length > 0) {
-    //console.log("if 1")
     res.render("users/editusers", {
-      //Me devuelve los errores establecidos
+      //devuelve los errores establecidos
       errors,
       name,
       facultad,
@@ -177,84 +140,63 @@ usersCtrl.updateUser = async (req, res) => {
       _id
     });
   } else {
-    //console.log("else 1")
-  const emailUser = await User.findOne({ email: email });
-   
+    const emailUser = await User.findOne({ email: email });
     if (emailUser) {
       if(emailUser.id!=req.params.id){
         req.flash("error_msg", "El email ya esta en uso");
         res.redirect("/administration/update/"+req.params.id);
       }
       else {
-        //console.log("else email 2")
         const newUser = new User({ name, facultad, email, rol, password });
-        //console.log("newUser", newUser)
         const passwordenc = await newUser.encryptPassword(password);
-        //console.log(passwordenc)
         await User.findByIdAndUpdate(req.params.id,{name, facultad, email, rol, passwordenc})
-        
-        //await newUser.save();
         req.flash("success_msg", "Datos actualizados correctamente");
         res.redirect("/administration");
-      }
-      //console.log("if email 2")
-     
+      }    
     } 
   }
-  }
-  else{
+  } else  {
     res.redirect("/notes")
   }
-
-
 };
 
 usersCtrl.addUser = async (req, res) => {
-
-
   if(auth.isAdmin(req.user.rol)){
-    //console.log(req.body)
-  const errors = [];
-  const { name, facultad, email, rol, password, confirm_password } = req.body;
-  //console.log(req.body)
-  if (password != confirm_password) {
-    errors.push({ text: "Las contraseñas no coinciden" });
-  }
-  if (password.length < 8) {
-    errors.push({ text: "La contraseña debe contener al menos 8 caracteres" });
-  }
-  if (errors.length > 0) {
-    res.render("users/userlist", {
-      //Me devuelve los errores establecidos
-      errors,
-      name,
-      facultad,
-      email,
-      rol,
-      password,
-      confirm_password,
-    });
-  } else {
-    const emailUser = await User.findOne({ email: email });
-    if (emailUser) {
-      req.flash("error_msg", "El correo ingresado ya esta en uso");
-      res.redirect("/administration");
-    } else {
-      const newUser = new User({ name, facultad, email, rol, password });
-      newUser.password = await newUser.encryptPassword(password);
-      await newUser.save();
-      req.flash("success_msg", "Usuario creado exitosamente");
-      res.redirect("/administration");
+    const errors = [];
+    const { name, facultad, email, rol, password, confirm_password } = req.body;
+    if (password != confirm_password) {
+      errors.push({ text: "Las contraseñas no coinciden" });
     }
-  }
-  }
-  else{
+    if (password.length < 8) {
+      errors.push({ text: "La contraseña debe contener al menos 8 caracteres" });
+    }
+    if (errors.length > 0) {
+      res.render("users/userlist", {
+        //devuelve los errores establecidos
+        errors,
+        name,
+        facultad,
+        email,
+        rol,
+        password,
+        confirm_password,
+      });
+    } else {
+      const emailUser = await User.findOne({ email: email });
+      if (emailUser) {
+        req.flash("error_msg", "El correo ingresado ya esta en uso");
+        res.redirect("/administration");
+      } else {
+        const newUser = new User({ name, facultad, email, rol, password });
+        newUser.password = await newUser.encryptPassword(password);
+        await newUser.save();
+        req.flash("success_msg", "Usuario creado exitosamente");
+        res.redirect("/administration");
+      }
+    }
+  }else{
     res.redirect("/notes")
-  }
-
-
-
-  
+  } 
 };
 
 module.exports = usersCtrl;
