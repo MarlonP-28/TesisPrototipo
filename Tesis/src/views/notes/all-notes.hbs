@@ -40,7 +40,9 @@
                             <!-- DELETE REQUEST -->
                             <form id="deleteForm" action="/notes/delete/{{_id}}?_method=DELETE" method="POST" class="d-inline">
                                 <input type="hidden" name="_method" value="DELETE">
-                                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash-alt"></i> Eliminar
+                                </button>
                             </form>
                         </td>
                     </tr>
@@ -50,8 +52,12 @@
     </div>
 
    <div class="mt-4">
-        <a href="/notes/add" class="btn btn-primary">Nuevo</a>
-        <a href="/search" class="btn btn-primary">Buscar</a>
+        <a href="/notes/add" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Nuevo
+        </a>
+        <a href="/search" class="btn btn-primary">
+            <i class="fas fa-search"></i> Buscar
+        </a>
    </div>
 
 
