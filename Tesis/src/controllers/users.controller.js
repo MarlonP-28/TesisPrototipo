@@ -62,7 +62,7 @@ usersCtrl.renderSignInForm = (req, res) => {
 usersCtrl.signIn = passport.authenticate("local", {
   //VALIDANDO CON PASSPORT Y CONFIG/PASSPORT.JS
   failureRedirect: "/users/signin",
-  successRedirect: "/administration",
+  successRedirect: "/redirect",
   failureFlash: true,
 });
 
@@ -78,13 +78,19 @@ usersCtrl.redirect = (req,res)=>{
 }
 
 usersCtrl.enlistUsers = async(req, res) => {
-  const users = await User.find().lean();
+  if(auth.isAdmin(req.user.rol)){
+    const users = await User.find().lean();
   //console.log(users)
   for (var clave in users) {
     //console.log(clave)
     users[clave].password=users[clave].password.dec
   }
   res.render("users/userlist",{ users });
+  }else{
+    res.redirect("/notes")
+
+  }
+  
 }
 
 usersCtrl.deletUser= async(req, res) => {
@@ -128,9 +134,18 @@ usersCtrl.logOut = (req, res) => {
 };
 
 usersCtrl.updateView = async(req, res) => {
-   const user =  await User.findById(req.params.id).lean();
- //  console.log("USER UPDATE: ", user)
-  res.render("users/editusers",{user})
+
+  if(auth.isAdmin(req.user.rol)){
+    const user =  await User.findById(req.params.id).lean();
+  //  console.log("USER UPDATE: ", user)
+   res.render("users/editusers",{user})
+  }
+  else{
+    res.redirect("/notes")
+  }
+
+
+   
 };
 
 usersCtrl.updateUser = async (req, res) => {
