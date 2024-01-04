@@ -28,7 +28,7 @@ router.get("/administration", enlistUsers);
 router.post("/administration/add", addUser);
 router.delete("/administration/delete/:id", deletUser);
 router.get("/administration/update/:id", updateView);
-router.post("/administration/update", updateUser);
+router.put("/administration/update/:id", updateUser);
 module.exports = router;
 
 // test para Branch

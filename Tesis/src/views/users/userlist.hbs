@@ -15,6 +15,7 @@
             <thead>
                 <tr>
                     <th>Nombre</th>
+                    <th>Facultad</th>
                     <th>Rol</th>
                     <th>Email</th>
                     <th>Acciones</th>
@@ -25,6 +26,7 @@
                 {{#each users}}
                     <tr>
                         <td>{{name}}</td>
+                        <td class="text-uppercase">{{facultad}}</td>
                         <td>{{rol}}</td>
                         <td>{{email}}</td>
                         <td>
@@ -70,6 +72,13 @@
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Confirmar contraseña</label>
     <input type="password" class="form-control" name="confirm_password" id="exampleInputPassword1" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="facultad">Facultad:</label>
+    <select class="form-select" aria-label="Default select example" name="facultad" required>
+      <option value="FIS">FIS</option>
+    </select>
   </div>
 
   <div class="mb-3">
