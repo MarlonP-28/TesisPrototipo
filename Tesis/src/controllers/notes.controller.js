@@ -12,7 +12,8 @@ notesCtrl.renderFindForm = (req, res) => {
 
 //Esta función se encarga de crear una nueva nota en la base de datos.
 notesCtrl.createNewNotes = async (req, res) => {
-  const { facultad, carrera, area, subArea, tipoDocumento, subTipoDocumento, periodo, pdfArchivo, asunto, observaciones } = req.body;
+
+  const { facultad, carrera, area, subArea, tipoDocumento, subTipoDocumento, periodo, asunto, observaciones } = req.body;
   const errors = [];
   if (!facultad) {
     errors.push({ text: "Escoja una Facultad." });
@@ -35,9 +36,6 @@ notesCtrl.createNewNotes = async (req, res) => {
   if (!periodo) {
     errors.push({ text: "Escoja un periodo." });
   }
-  if (!pdfArchivo) {
-    errors.push({ text: "Seleccione un archivo Pdf." });
-  }
   if (!asunto) {
     errors.push({ text: "Escriba un asunto." });
   }
@@ -54,21 +52,31 @@ notesCtrl.createNewNotes = async (req, res) => {
       tipoDocumento, 
       subTipoDocumento, 
       periodo, 
-      pdfArchivo, 
       asunto, 
-      observaciones,
-      user
-
+      observaciones
     });
-  const newNote = new Note({ facultad, carrera, area, subArea, tipoDocumento, subTipoDocumento, periodo, pdfArchivo, asunto, observaciones  });
+
+  const archivo = req.files.pdfArchivo;
+  const pdfArchivo = archivo.name;
+  const newNote = new Note({ facultad, carrera, area, subArea, tipoDocumento, subTipoDocumento, periodo,pdfArchivo, asunto, observaciones  });
+
+  
+  archivo.mv('src/uploads/' + pdfArchivo, (err) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+  });
   newNote.user = req.user.id;
+
+
+  //Guardar en la base de datos
   await newNote.save();
   req.flash("success_msg", "!Archivo creado con exito¡");
   res.redirect("/notes"); //direcciona a notas automaticamente
 };
 //Esta función consulta todas las notas en la base de datos que pertenecen al usuario actual 
 notesCtrl.renderNotes = async (req, res) => {
-  const notes = await Note.find({ user: req.user.id })//filtra las notas de un solo usuario
+  const notes = await Note.find({ area: req.user.rol })//Se filtran las notas por rol
     //.sort({ createdAt: "desc" })
     .lean();
   res.render("notes/all-notes", { notes });
@@ -94,83 +102,6 @@ notesCtrl.deleteNote = async (req, res) => {
   await Note.findByIdAndDelete(req.params.id);
   req.flash("success_msg", "!Archivo eliminado con exito¡"); //mensajes que todo esta ok
   res.redirect("/notes");
-};
-//Esta funcion se en carga de la busqueda de una nota 
-notesCtrl.searchNote = async (req, res) => {
-  const { facultad, carrera, area, subArea, tipoDocumento, subTipoDocumento, periodo, pdfArchivo, asunto, observaciones } = req.body;
-  const errors = [];
-
-  // Validaciones de campos seleccionables
-  if (!facultad) {
-    errors.push({ text: "Escoja una opción A." });
-  }
-  if (!carrera) {
-    errors.push({ text: "Escoja una opción B." });
-  }
-  if (!area) {
-    errors.push({ text: "Escoja una opción C." });
-  }
-  if (!subArea) {
-    errors.push({ text: "Escoja una opción D." });
-  }
-  if (!tipoDocumento) {
-    errors.push({ text: "Escoja una opción E." });
-  }
-  if (!subTipoDocumento) {
-    errors.push({ text: "Escoja una opción F." });
-  }
-  if (!periodo) {
-    errors.push({ text: "Escoja una opción F." });
-  }
-  if (!pdfArchivo) {
-    errors.push({ text: "Escoja una opción F." });
-  }
-  if (!asunto) {
-    errors.push({ text: "Escoja una opción F." });
-  }
-  if (!observaciones) {
-    errors.push({ text: "Escoja una opción F." });
-  }
-
-  if (errors.length > 0) {
-    return res.render("notes/all-notes", {
-      errors,
-      facultad, 
-      carrera, 
-      area, 
-      subArea, 
-      tipoDocumento, 
-      subTipoDocumento, 
-      periodo, 
-      pdfArchivo, 
-      asunto, 
-      observaciones, 
-      user
-      
-    });
-  }
-
-  try {
-    // Consulta todas las notas en la base de datos que coinciden con los filtros
-    const notes = await Note.find({
-      user: req.user.id,
-      facultad, 
-      carrera, 
-      area, 
-      subArea, 
-      tipoDocumento, 
-      subTipoDocumento, 
-      periodo, 
-      pdfArchivo, 
-      asunto, 
-      observaciones
-    }).lean();
-
-    res.render("notes/all-notes", { notes });
-  } catch (error) {
-    req.flash("error_msg", "Error al buscar archivos");
-    res.redirect("/notes");
-  }
 };
 
 //Esta función se encarga de buscar una nota en la base de datos
