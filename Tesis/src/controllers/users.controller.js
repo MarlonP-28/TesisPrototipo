@@ -76,9 +76,7 @@ usersCtrl.redirect = (req,res)=>{
 usersCtrl.enlistUsers = async(req, res) => {
   if(auth.isAdmin(req.user.rol)){
     const users = await User.find().lean();
-    for (var clave in users) {
-      users[clave].password=users[clave].password.dec
-    }
+    console.log(users)
     res.render("users/userlist",{ users });
   }else{
     res.redirect("/notes")
@@ -117,10 +115,21 @@ usersCtrl.updateView = async(req, res) => {
   }  
 };
 
+usersCtrl.addView = async(req, res) => {
+  if(auth.isAdmin(req.user.rol)){
+    res.render("users/createusers")
+  } else {
+    res.redirect("/notes")
+  }  
+};
+
+
+
+
 usersCtrl.updateUser = async (req, res) => {
   if(auth.isAdmin(req.user.rol)){ 
   const errors = [];
-  const { name, facultad, email, rol, password, confirm_password} = req.body;
+  const { name, facultad, email, rol, password, confirm_password,tipo, estado} = req.body;
   if (password != confirm_password) {
     errors.push({ text: "Las contraseñas no coinciden" });
   }
@@ -149,7 +158,7 @@ usersCtrl.updateUser = async (req, res) => {
       else {
         const newUser = new User({ name, facultad, email, rol, password });
         const passwordenc = await newUser.encryptPassword(password);
-        await User.findByIdAndUpdate(req.params.id,{name, facultad, email, rol, passwordenc})
+        await User.findByIdAndUpdate(req.params.id,{name, facultad, email, rol, passwordenc,estado,tipo})
         req.flash("success_msg", "Datos actualizados correctamente");
         res.redirect("/administration");
       }    
@@ -163,7 +172,8 @@ usersCtrl.updateUser = async (req, res) => {
 usersCtrl.addUser = async (req, res) => {
   if(auth.isAdmin(req.user.rol)){
     const errors = [];
-    const { name, facultad, email, rol, password, confirm_password } = req.body;
+    const { name, facultad, email, rol, password, confirm_password, tipo, estado } = req.body;
+    console.log(estado+tipo)
     if (password != confirm_password) {
       errors.push({ text: "Las contraseñas no coinciden" });
     }
@@ -187,7 +197,7 @@ usersCtrl.addUser = async (req, res) => {
         req.flash("error_msg", "El correo ingresado ya esta en uso");
         res.redirect("/administration");
       } else {
-        const newUser = new User({ name, facultad, email, rol, password });
+        const newUser = new User({ name, facultad, email, rol, password, estado, tipo });
         newUser.password = await newUser.encryptPassword(password);
         await newUser.save();
         req.flash("success_msg", "Usuario creado exitosamente");

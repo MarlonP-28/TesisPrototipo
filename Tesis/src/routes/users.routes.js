@@ -13,6 +13,7 @@ const {
   updateView,
   updateUser,
   redirect,
+  addView,
 
 } = require("../controllers/users.controller");
 
@@ -28,7 +29,8 @@ router.get("/users/logout", logOut);
 router.get("/administration",isAuthenticated, enlistUsers);
 router.get("/redirect", redirect);
 router.post("/administration/add",isAuthenticated, addUser);
-router.delete("/administration/delete/:id", deletUser);
-router.get("/administration/update/:id", updateView);
-router.put("/administration/update/:id", updateUser);
+router.get("/administration/add",isAuthenticated, addView);
+router.delete("/administration/delete/:id",isAuthenticated, deletUser);
+router.get("/administration/update/:id",isAuthenticated, updateView);
+router.put("/administration/update/:id",isAuthenticated, updateUser);
 module.exports = router;

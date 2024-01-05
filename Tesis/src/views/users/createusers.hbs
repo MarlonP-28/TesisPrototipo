@@ -1,21 +1,11 @@
-<h1>Actualizar</h1>
-
-<form action="/administration/update/{{user._id}}?_method=PUT" method="POST" >
+ <form method="post" action="/administration/add">
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Nombre</label>
-    <input  class="form-control" name="name" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder={{user.name}} required>
+    <input  class="form-control" name="name" id="exampleInputEmail1" aria-describedby="emailHelp" required>
   </div>
-
-  <div class="mb-3">
-    <label for="facultad">Facultad:</label>
-    <select class="form-select" aria-label="Default select example" name="facultad" required>
-      <option value="FIS">FIS</option>
-    </select>
-  </div>
-
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Email</label>
-    <input type="email" class="form-control" name="email" id="exampleInputPassword1" placeholder={{user.email}} required>
+    <input type="email" class="form-control" name="email" id="exampleInputPassword1" required>
   </div>
   
   <div class="mb-3">
@@ -28,7 +18,12 @@
     <input type="password" class="form-control" name="confirm_password" id="exampleInputPassword1" required>
   </div>
 
-  
+  <div class="mb-3">
+    <label for="facultad">Facultad:</label>
+    <select class="form-select" aria-label="Default select example" name="facultad" required>
+      <option value="FIS">FIS</option>
+    </select>
+  </div>
 
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Rol</label>
@@ -40,7 +35,7 @@
       <option value="jefatura-fis">Jefatura</option>
     </select>
   </div>
-   <div class="mb-3">
+  <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Tipo</label>
     <select class="form-select" aria-label="Default select example" name="tipo">
       <option selected>Seleccionar Tipo</option>
@@ -56,6 +51,6 @@
       <option value="0">Inactivo</option>
     </select>
   </div>
-  <button type="submit" class="btn btn-primary">Aceptar</button>
-  
+
+  <button type="submit" class="btn btn-primary">Guardar</button>
 </form>

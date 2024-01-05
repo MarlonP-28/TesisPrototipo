@@ -24,6 +24,14 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
+    state: {
+      type: String,
+      required: true,
+    },
+    typeuser:{
+      type: String,
+      required: true,
+    }
   },
   {
     timestamps: true,
