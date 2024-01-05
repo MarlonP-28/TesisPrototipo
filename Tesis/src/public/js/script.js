@@ -76,7 +76,7 @@ function actualizarSubtipoDocumento() {
       } else if (areaSelect.value === "Decanato" && subAreaSelect.value === "Secretaria de Decanato" && tipoDocumentoSelect.value === "Solicitud de Estudiantes") {
           var opcionesSubTipoDocumento = ["Formularios de Autorización"];
       } else if (areaSelect.value === "Decanato" && subAreaSelect.value === "Secretaria de Decanato" && tipoDocumentoSelect.value === "Procesos Electorales") {
-          var opcionesSubTipoDocumento = ["Actas de Procesos Electorales"];
+          var opcionesSubTipoDocumento = ["Actas de Proceos Electoral"];
       } else if (areaSelect.value === "Decanato" && subAreaSelect.value === "Secretaria de Decanato" && tipoDocumentoSelect.value === "Inventario FIS") {
           var opcionesSubTipoDocumento = ["Bienes"];
       }
@@ -135,17 +135,6 @@ function actualizarSubtipoDocumento() {
         opcion.value = opcionesPerido[j];
         opcion.text = opcionesPerido[j];
         periodoSelect.add(opcion);
-    }
-}
-
-function confirmarEliminacion() {
-    // Muestra una ventana de confirmación
-    var confirmacion = confirm("¿Está seguro que desea eliminar este archivo?");
-
-    // Si el usuario hace clic en "Aceptar", envía el formulario para eliminar
-    if (confirmacion) {
-        var deleteForm = document.getElementById('deleteForm');
-        deleteForm.submit();
     }
 }
 // Llamar a actualizarArea al cargar la página para establecer las opciones iniciales

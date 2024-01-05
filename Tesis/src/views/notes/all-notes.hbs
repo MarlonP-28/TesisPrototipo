@@ -8,7 +8,6 @@
         <table class="table table-bordered table-bordered">
             <thead>
                 <tr>
-                    <th>N°</th>
                     <th>Facultad</th>
                     <th>Carrera</th>
                     <th>Área</th>
@@ -26,7 +25,6 @@
             <tbody>
                 {{#each notes}}
                     <tr>
-                        <td>{{@index}}</td>
                         <td>{{facultad}}</td>
                         <td>{{carrera}}</td>
                         <td>{{area}}</td>
@@ -44,9 +42,9 @@
                             </a>
                             
                             <!-- DELETE REQUEST -->
-                            <form id="deleteForm" action="/notes/delete/{{_id}}?_method=DELETE" method="POST" class="d-inline">
+                            <form action="/notes/delete/{{_id}}?_method=DELETE" method="POST" class="d-inline">
                                 <input type="hidden" name="_method" value="DELETE">
-                                <button type="button" class="btn btn-danger btn-sm" onclick="confirmarEliminacion()">
+                                <button type="submit" class="btn btn-danger btn-sm">
                                     <i class="fas fa-trash-alt"></i>
                                     <span class="ml-2">Eliminar</span>
                                 </button>
