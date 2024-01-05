@@ -6,6 +6,7 @@
         <table class="table table-bordered table-bordered">
             <thead>
                 <tr>
+                    <th>N°</th>
                     <th>Facultad</th>
                     <th>Carrera</th>
                     <th>Área</th>
@@ -23,6 +24,7 @@
             <tbody>
                 {{#each notes}}
                     <tr>
+                        <td>{{@index}}</td>
                         <td>{{facultad}}</td>
                         <td>{{carrera}}</td>
                         <td>{{area}}</td>
