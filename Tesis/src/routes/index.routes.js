@@ -1,8 +1,10 @@
 const { Router } = require("express");
 const router = Router();
 
-const { renderSignin } = require("../controllers/index.controller");
+const { renderSignin, renderNotes } = require("../controllers/index.controller");
 
 router.get("/", renderSignin);
+
+router.get("/all-notes", renderNotes);
 
 module.exports = router;

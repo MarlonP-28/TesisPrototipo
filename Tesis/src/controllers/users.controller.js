@@ -7,10 +7,14 @@ usersCtrl.renderSignUpForm = (req, res) => {
   res.render("users/signup");
 };
 
+
+
 //valida los datos
 usersCtrl.signUp = async (req, res) => {
+  console.log(req.body)
   const errors = [];
-  const { name, facultad, email, rol, password, confirm_password } = req.body;
+  const { name, email, rol, password, confirm_password } = req.body;
+  console.log(req.body)
   if (password != confirm_password) {
     errors.push({ text: "Password do not match." });
   }
@@ -19,10 +23,9 @@ usersCtrl.signUp = async (req, res) => {
   }
   if (errors.length > 0) {
     res.render("users/signup", {
-      //devuelve los errores establecidos
+      //Me devuelve los errores establecidos
       errors,
       name,
-      facultad,
       email,
       rol,
       password,
@@ -34,7 +37,7 @@ usersCtrl.signUp = async (req, res) => {
       req.flash("error_msg", "The email is already in use.");
       res.redirect("/users/signup");
     } else {
-      const newUser = new User({ name, facultad, email, rol, password });
+      const newUser = new User({ name, email, rol, password });
       newUser.password = await newUser.encryptPassword(password);
       await newUser.save();
       req.flash("success_msg", "You are registered");
@@ -43,20 +46,22 @@ usersCtrl.signUp = async (req, res) => {
   }
 };
 
+
+
+
+
 //Renderiza el formulario de registro
 usersCtrl.renderSignInForm = (req, res) => {
-  if(req.isAuthenticated()){
-    if(auth.isAdmin(req)){
-      res.redirect("/administration")
-    }else{
-      res.redirect("/notes")
-    }
-  }else{    
-    res.render("users/signin");
-  }
+  res.render("users/signin");
+  
 };
 
+
+
+
+
 //valida los datos
+
 usersCtrl.signIn = passport.authenticate("local", {
   //VALIDANDO CON PASSPORT Y CONFIG/PASSPORT.JS
   failureRedirect: "/users/signin",
@@ -64,14 +69,19 @@ usersCtrl.signIn = passport.authenticate("local", {
   failureFlash: true,
 });
 
-
 usersCtrl.redirect = (req,res)=>{
+  
   if(auth.isAdmin(req.user.rol)){
     res.redirect("/administration")
   }else{
     res.redirect("/notes")
+
   }
 }
+
+
+
+
 
 usersCtrl.enlistUsers = async(req, res) => {
   if(auth.isAdmin(req.user.rol)){
@@ -80,10 +90,22 @@ usersCtrl.enlistUsers = async(req, res) => {
     res.render("users/userlist",{ users });
   }else{
     res.redirect("/notes")
+
   }
+  
 }
 
+
+
+
+
+
+
+
+
+
 usersCtrl.deletUser= async(req, res) => {
+
   if(auth.isAdmin(req.user.rol)){
     await User.findByIdAndDelete(req.params.id);
   req.flash("success_msg", "!Usuario eliminado con exito¡"); //mensajes que todo esta ok
@@ -92,8 +114,42 @@ usersCtrl.deletUser= async(req, res) => {
   else{
     res.redirect("/notes")
   }
+
+
   await User.findByIdAndDelete(req.params.id);
+
+
+  if(auth.isAdmin(req.user.rol)){
+    await User.findByIdAndDelete(req.params.id);
+    req.flash("success_msg", "!Usuario eliminado con exito¡"); //mensajes que todo esta ok
+    res.redirect("/administration");
+  }
+  else{
+    res.redirect("/notes")
+  }
+
+
+  
 }
+
+
+
+
+/*usersCtrl.signIn =  async(req, res) => {
+      const newUser = new User({ name:"jefatura", email:"jefatura@epn.edu.ec", rol:"jefatura-fis", password:"JefaturaF1$2023" });
+      newUser.password = await newUser.encryptPassword("@dminF1$2023");
+      await newUser.save();
+      req.flash("success_msg", "You are registered");
+      console.log("sfvsdfvgbdrbdtbsrtvs")
+      res.redirect("/users/signin");
+}*/
+
+
+
+
+
+
+
 
 //Cerrar sesión
 usersCtrl.logOut = (req, res) => {
@@ -106,11 +162,15 @@ usersCtrl.logOut = (req, res) => {
   });
 };
 
+
 usersCtrl.updateView = async(req, res) => {
+
   if(auth.isAdmin(req.user.rol)){
     const user =  await User.findById(req.params.id).lean();
-    res.render("users/editusers",{user})
-  } else {
+    console.log(user)
+   res.render("users/editusers",{user})
+  }
+  else{
     res.redirect("/notes")
   }  
 };
@@ -127,7 +187,11 @@ usersCtrl.addView = async(req, res) => {
 
 
 usersCtrl.updateUser = async (req, res) => {
-  if(auth.isAdmin(req.user.rol)){ 
+
+
+  if(auth.isAdmin(req.user.rol)){
+    
+  console.log(req.body)
   const errors = [];
   const { name, facultad, email, rol, password, confirm_password,tipo, estado} = req.body;
   if (password != confirm_password) {
@@ -138,10 +202,9 @@ usersCtrl.updateUser = async (req, res) => {
   }
   if (errors.length > 0) {
     res.render("users/editusers", {
-      //devuelve los errores establecidos
+      //Me devuelve los errores establecidos
       errors,
       name,
-      facultad,
       email,
       rol,
       password,
@@ -164,12 +227,27 @@ usersCtrl.updateUser = async (req, res) => {
       }    
     } 
   }
-  } else  {
+  else{
     res.redirect("/notes")
   }
+
+
 };
 
+
+
+
+
+
+
+
+
+
+
+
 usersCtrl.addUser = async (req, res) => {
+
+
   if(auth.isAdmin(req.user.rol)){
     const errors = [];
     const { name, facultad, email, rol, password, confirm_password, tipo, estado } = req.body;
@@ -206,7 +284,26 @@ usersCtrl.addUser = async (req, res) => {
     }
   }else{
     res.redirect("/notes")
-  } 
+  }
+
+
+
+  
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 module.exports = usersCtrl;

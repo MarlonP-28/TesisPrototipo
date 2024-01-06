@@ -1,21 +1,12 @@
-<h1>Usuarios</h1>
+<div>
+  <h1 class="titulo">Historial de Usuarios Creados</h1>
+</div>
 
-
-
-  
-  
-  
-
-
-          <div>
-        <h1 class="titulo">Historial de Archivos</h1>
-    </div>
     <div>
         <table class="table">
             <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th>Facultad</th>
                     <th>Rol</th>
                     <th>Email</th>
                     <th>Acciones</th>
@@ -26,7 +17,6 @@
                 {{#each users}}
                     <tr>
                         <td>{{name}}</td>
-                        <td class="text-uppercase">{{facultad}}</td>
                         <td>{{rol}}</td>
                         <td>{{email}}</td>
                         <td>
@@ -58,11 +48,11 @@
 
 
 <script>
-        function desbloquearInput() {
-            var input = document.getElementById('miInput');
-            input.disabled = !input.disabled;
-        }
-    </script>
+  function desbloquearInput() {
+    var input = document.getElementById('miInput');
+    input.disabled = !input.disabled;
+  }
+</script>
 
 
 
