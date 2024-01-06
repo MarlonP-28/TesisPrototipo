@@ -190,48 +190,65 @@ usersCtrl.updateUser = async (req, res) => {
 
 
   if(auth.isAdmin(req.user.rol)){
-    
-  console.log(req.body)
-  const errors = [];
-  const { name, facultad, email, rol, password, confirm_password,tipo, estado} = req.body;
-  if (password != confirm_password) {
-    errors.push({ text: "Las contraseñas no coinciden" });
-  }
-  if (password.length < 4) {
-    errors.push({ text: "La contraseña debe tener al menos 8 caracteres" });
-  }
-  if (errors.length > 0) {
-    res.render("users/editusers", {
-      //Me devuelve los errores establecidos
-      errors,
-      name,
-      email,
-      rol,
-      password,
-      confirm_password,
-      _id
-    });
-  } else {
-    const emailUser = await User.findOne({ email: email });
-    if (emailUser) {
-      if(emailUser.id!=req.params.id){
+    console.log(req.body)
+    const errors = [];
+    const { name, facultad, email, rol, password, confirm_password,tipo, estado} = req.body;
+    console.log("pasa 1")
+    if (password != confirm_password) {
+      errors.push({ text: "Las contraseñas no coinciden" });
+    }
+    console.log("pasa 2")
+    if (password.length < 4) {
+      errors.push({ text: "La contraseña debe tener al menos 8 caracteres" });
+    }
+    console.log("pasa 3")
+    if (errors.length > 0) {
+      res.render("users/editusers", {
+        //Me devuelve los errores establecidos
+        errors,
+        name,
+        email,
+        rol,
+        password,
+        confirm_password,
+        _id
+      });
+      console.log("4")
+    } 
+    else {
+      console.log("5")
+      const emailUser = await User.findOne({ email: email });
+      if (emailUser && emailUser.id!=req.params.id) {
+        console.log("7")
         req.flash("error_msg", "El email ya esta en uso");
         res.redirect("/administration/update/"+req.params.id);
-      }
+          
+      } 
       else {
-        const newUser = new User({ name, facultad, email, rol, password });
+        console.log("pasa 4")
+        const newUser = new User({ "name": name, 
+        "facultad":facultad, 
+        "email":email, 
+        "rol":rol, 
+        "password":password, 
+        "state": estado, 
+        "typeuser": tipo  });
         const passwordenc = await newUser.encryptPassword(password);
-        await User.findByIdAndUpdate(req.params.id,{name, facultad, email, rol, passwordenc,estado,tipo})
+        await User.findByIdAndUpdate(req.params.id,{ "name": name, 
+        "facultad":facultad, 
+        "email":email, 
+        "rol":rol, 
+        "password":password, 
+        "state": estado, 
+        "typeuser": tipo })
         req.flash("success_msg", "Datos actualizados correctamente");
         res.redirect("/administration");
-      }    
-    } 
-  }
-  else{
+      }  
+    }
+  } else {
     res.redirect("/notes")
   }
-
-
+  
 };
 
 
@@ -250,8 +267,9 @@ usersCtrl.addUser = async (req, res) => {
 
   if(auth.isAdmin(req.user.rol)){
     const errors = [];
+    console.log("req.body-----------", req.body)
     const { name, facultad, email, rol, password, confirm_password, tipo, estado } = req.body;
-    console.log(estado+tipo)
+    
     if (password != confirm_password) {
       errors.push({ text: "Las contraseñas no coinciden" });
     }
@@ -275,7 +293,16 @@ usersCtrl.addUser = async (req, res) => {
         req.flash("error_msg", "El correo ingresado ya esta en uso");
         res.redirect("/administration");
       } else {
-        const newUser = new User({ name, facultad, email, rol, password, estado, tipo });
+        const newUser = new User({ "name": name, 
+        "facultad":facultad, 
+        "email":email, 
+        "rol":rol, 
+        "password":password, 
+        "state": estado, 
+        "typeuser": tipo });
+        
+        console.log("NEW USER-----------", newUser )
+
         newUser.password = await newUser.encryptPassword(password);
         await newUser.save();
         req.flash("success_msg", "Usuario creado exitosamente");

@@ -1,4 +1,12 @@
- <form method="post" action="/administration/add">
+
+<div class="col-md-4 mx-auto">
+    <div class="card">
+        <div class="card-header bg-dark text-center">
+            <h3 class="text-white">Agregar usuario</h3>
+        </div>
+
+        <div class="card-body text-right">
+             <form method="post" action="/administration/add">
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Nombre</label>
     <input  class="form-control" name="name" id="exampleInputEmail1" aria-describedby="emailHelp" required>
@@ -28,7 +36,6 @@
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Rol</label>
     <select class="form-select" aria-label="Default select example" name="rol">
-      <option selected>Seleccionar Rol</option>
       <option value="admin">Administrador</option>
       <option value="decanato-fis">Decanato</option>
       <option value="subdecanato-fis">Subdecanato</option>
@@ -36,21 +43,26 @@
     </select>
   </div>
   <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Tipo</label>
-    <select class="form-select" aria-label="Default select example" name="tipo">
-      <option selected>Seleccionar Tipo</option>
-      <option value="visualizador">Visualizador</option>
-      <option value="editor">Editor</option>
-    </select>
+     <label  class="form-label">Tipo de usuario</label><br>
+    <input type="checkbox" id="editor" name="tipo" value="editor">
+    <label for="vehicle1"> Editor</label><br>
+    <input type="checkbox" id="visualizador" name="tipo" value="visualizador" >
+    <label for="vehicle2"> Visualizador</label><br>
   </div>
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Estado</label>
     <select class="form-select" aria-label="Default select example" name="estado">
-      <option selected>Seleccionar Estado</option>
       <option value="1">Activo</option>
       <option value="0">Inactivo</option>
     </select>
   </div>
+  <div class="d-flex justify-content-between mb-3">
+                    <a class="btn btn-primary"  href="/administration" role="button" > Cancelar</a>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+  </div>
 
-  <button type="submit" class="btn btn-primary">Guardar</button>
+  
 </form>
+        </div>
+    </div>
+</div>
