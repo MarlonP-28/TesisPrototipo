@@ -7,6 +7,10 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
+    facultad: {
+      type: String,
+      required: true,
+    },
     rol: {
       type: String,
       required: true,
