@@ -7,6 +7,7 @@
             <thead>
                 <tr>
                     <th>Nombre</th>
+                    <th>Facultad</th>
                     <th>Rol</th>
                     <th>Email</th>
                     <th>Acciones</th>
@@ -17,16 +18,20 @@
                 {{#each users}}
                     <tr>
                         <td>{{name}}</td>
+                        <td>{{facultad}}</td>
                         <td>{{rol}}</td>
                         <td>{{email}}</td>
                         <td>
-                            <a href="/administration/update/{{_id}}"><i class="fas fa-edit"></i></a>
+                            <a href="/administration/update/{{_id}}" class=" btn btn-success btn-sm">
+                                <i class="fas fa-edit"></i>
+                                <span class="ml-2">Editar</span>
+                            </a>
                             <!-- DELETE REQUEST -->
-                            <form action="/administration/delete/{{_id}}?_method=DELETE" method="POST" class="d-inline">
+                           <!-- <form action="/administration/delete/{{_id}}?_method=DELETE" method="POST" class="d-inline">
                             
                                 <input type="hidden" name="_method" value="DELETE">
                                 <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-                            </form>
+                            </form> --> 
                         </td>
                     </tr>
                 {{/each}}
@@ -34,50 +39,14 @@
         </table>
     </div>
 
+    <div class="mt-4">
+        <a href="/administration/add" class="btn btn-primary">
+            <i class="fas fa-plus"></i> <!-- Ícono -->
+            <span class="ml-2">Crear Usuario</span> <!-- Texto con margen a la izquierda (ml-2) -->
+        </a>
+   </div>
 
-
-
-    <p class="d-inline-flex gap-1">
-  <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapse1" role="button" aria-expanded="false" aria-controls="collapse1">
-    Crear Usuario
-  </a>
 </p>
-<div class="collapse" id="collapse1">
-  <div class="card card-body">
-    <form method="post" action="/administration/add">
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Nombre</label>
-    <input  class="form-control" name="name" id="exampleInputEmail1" aria-describedby="emailHelp" required>
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Email</label>
-    <input type="email" class="form-control" name="email" id="exampleInputPassword1" required>
-  </div>
-  
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-    <input type="password" class="form-control" name="password" id="exampleInputPassword1" required>
-  </div>
-
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Confirmar contraseña</label>
-    <input type="password" class="form-control" name="confirm_password" id="exampleInputPassword1" required>
-  </div>
-
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Rol</label>
-    <select class="form-select" aria-label="Default select example" name="rol">
-      <option selected>Seleccionar Rol</option>
-      <option value="admin">Administrador</option>
-      <option value="decanato-fis">Decanato</option>
-      <option value="subdecanato-fis">Subdecanato</option>
-      <option value="jefatura-fis">Jefatura</option>
-    </select>
-  </div>
-  <button type="submit" class="btn btn-primary">Guardar</button>
-</form>
-  </div>
-</div>
 
 <script>
   function desbloquearInput() {

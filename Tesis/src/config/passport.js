@@ -14,7 +14,12 @@ passport.use(
       const user = await User.findOne({ email: email });
       if (!user) {
         return done(null, false, { message: "Not User Found" });
-      } else {//verifica si la clave ingresada coincide con la bd
+      }
+      else if(user.state=="0"){
+        return done(null, false, { message: "Inactive user" });
+      }
+      
+      else {//verifica si la clave ingresada coincide con la bd
         const match = await user.matchPassword(password);
         if (match) {
           return done(null, user);

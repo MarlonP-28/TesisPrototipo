@@ -7,6 +7,10 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
+    facultad: {
+      type: String,
+      required: true,
+    },
     rol: {
       type: String,
       required: true,
@@ -20,6 +24,14 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
+    state: {
+      type: String,
+      required: true,
+    },
+    typeuser:{
+      type: Array,
+      required: true,
+    }
   },
   {
     timestamps: true,

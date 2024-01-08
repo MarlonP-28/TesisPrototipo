@@ -1,37 +1,144 @@
-<h1>Actualizar</h1>
 
-<form method="post" action="/administration/update">
+
+
+
+
+
+<h1 id="facultad" style="display: none;" >{{user.facultad}}</h1>
+<h1 id="rol" style="display: none;" >{{user.rol}}</h1>
+<h1 id="estado" style="display: none;" >{{user.state}}</h1>
+{{#each user.typeuser}}
+    <h1 id={{this}} class="tipo1" style="display: none;" >{{this}}</h1>
+  {{/each}}
+
+
+
+
+
+<div class="col-md-4 mx-auto">
+    <div class="card">
+        <div class="card-header bg-dark text-center">
+            <h3 class="text-white">Actualizar usuario</h3>
+        </div>
+
+        <div class="card-body text-right">
+          <form action="/administration/update/{{user._id}}?_method=PUT" method="POST" >
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Nombre</label>
-    <input  class="form-control" name="name" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder={{user.name}} required>
+    <input  class="form-control" name="name" id="nombre" aria-describedby="emailHelp" value={{user.name}} required>
   </div>
+
+  <div class="mb-3">
+    <label for="facultad">Facultad:</label>
+    <select class="form-select facultad1" aria-label="Default select example" name="facultad" required >
+      <option value="FIS">FIS</option>
+    </select>
+  </div>
+
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Email</label>
-    <input type="email" class="form-control" name="email" id="exampleInputPassword1" placeholder={{user.email}} required>
+    <input type="email" class="form-control" name="email" id="email" value={{user.email}} required>
   </div>
   
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-    <input type="password" class="form-control" name="password" id="exampleInputPassword1" required>
+    <input type="password" class="form-control" name="password" id="contra" required>
   </div>
 
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Confirmar contraseña</label>
-    <input type="password" class="form-control" name="confirm_password" id="exampleInputPassword1" required>
+    <input type="password" class="form-control" name="confirm_password" id="contrasc" required>
   </div>
 
   <input type="hidden" name="_method" value={{_id}}>
 
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Rol</label>
-    <select class="form-select" aria-label="Default select example" name="rol">
-      <option selected>Seleccionar Rol</option>
+    <select class="form-select  rol1" aria-label="Default select example" name="rol">
       <option value="admin">Administrador</option>
       <option value="decanato-fis">Decanato</option>
       <option value="subdecanato-fis">Subdecanato</option>
       <option value="jefatura-fis">Jefatura</option>
     </select>
   </div>
-  <button type="submit" class="btn btn-primary">Aceptar</button>
+   <div class="mb-3">
+      <label  class="form-label">Tipo de usuario</label><br>
+    <input type="checkbox" class="tipo" id="editor" name="tipo" value="editor">
+    <label for="vehicle1"> Editor</label><br>
+    <input type="checkbox" class="tipo" id="visualizador"  name="tipo" value="visualizador" >
+    <label for="vehicle2"> Visualizador</label><br>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Estado</label>
+    <select class="form-select estado1" aria-label="Default select example" name="estado">
+      <option value="1">Activo</option>
+      <option value="0">Inactivo</option>
+    </select>
+  </div>
+   <div class="d-flex justify-content-between mb-3">
+                    <a class="btn btn-primary"  href="/administration" role="button" > <i class="fas fa-times"></i> Cancelar</a>
+                    <button type="submit" class="btn btn-primary"> <i class="fas fa-check"></i> Aceptar</button>
+  </div>
   
 </form>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+   
+    window.onload=function(){ 
+      //autosleccionar el roll
+    const rol=document.getElementById("rol").textContent
+    const select = document.querySelector(".rol1");
+    const options = document.querySelectorAll(".rol1 option");
+    for(const option of options) {
+        if(rol==option.value){
+          option.setAttribute("selected", "")
+        }
+      
+     
+    } 
+    //autosleccionar el estado
+    const estado=document.getElementById("estado").textContent
+    const select1 = document.querySelector(".estado1");
+    const options1 = document.querySelectorAll(".estado1 option");
+      for(const option of options1) {
+        if(estado==option.value){
+          option.setAttribute("selected", "")
+        }
+    } 
+ //autosleccionar la facultad
+
+    const facultad=document.getElementById("facultad").textContent
+        const select2 = document.querySelector(".facultad1");
+        const options2 = document.querySelectorAll(".facultad1 option");
+        for(const option of options2) {
+            if(facultad==option.value){
+              option.setAttribute("selected", "")
+            }
+          
+        
+    } 
+
+
+
+     //autosleccionar el tipo
+     const tiposopc = document.querySelectorAll(".tipo");
+     const tipos=document.querySelectorAll(".tipo1")
+    for(const aux1 of tipos) {
+        for(const aux2 of tiposopc) {
+        if(aux1.textContent==aux2.value){
+          aux2.setAttribute("checked","")
+        }
+    } 
+    } 
+    
+     }
+    
+</script>

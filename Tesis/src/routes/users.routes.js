@@ -13,22 +13,22 @@ const {
   updateView,
   updateUser,
   redirect,
+  addView,
 
 } = require("../controllers/users.controller");
 
 const { isAuthenticated, isAdmin } = require("../helpers/auth");
 
-router.get("/users/signup",isAuthenticated, renderSignUpForm);
-router.post("/users/signup",isAuthenticated, signUp);
 router.get("/users/signin",  renderSignInForm);
 router.post("/users/signin", signIn);
 router.get("/users/logout", logOut);
 
 /*********************/
-router.get("/administration", enlistUsers);
+router.get("/administration", isAuthenticated, enlistUsers);
 router.get("/redirect", redirect);
-router.post("/administration/add", addUser);
-router.delete("/administration/delete/:id", deletUser);
-router.get("/administration/update/:id", updateView);
-router.post("/administration/update", updateUser);
+router.post("/administration/add",isAuthenticated, addUser);
+router.get("/administration/add",isAuthenticated, addView);
+router.delete("/administration/delete/:id",isAuthenticated, deletUser);
+router.get("/administration/update/:id",isAuthenticated, updateView);
+router.put("/administration/update/:id",isAuthenticated, updateUser);
 module.exports = router;
