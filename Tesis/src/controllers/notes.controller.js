@@ -48,22 +48,22 @@ notesCtrl.createNewNotes = async (req, res) => {
   if (errors.length > 0)
     return res.render("notes/new-notes", {
       errors,
-      facultad, 
-      carrera, 
-      area, 
-      subArea, 
-      tipoDocumento, 
-      subTipoDocumento, 
-      periodo, 
-      asunto, 
+      facultad,
+      carrera,
+      area,
+      subArea,
+      tipoDocumento,
+      subTipoDocumento,
+      periodo,
+      asunto,
       observaciones
     });
 
   const archivo = req.files.pdfArchivo;
   const pdfArchivo = archivo.name;
-  const newNote = new Note({ facultad, carrera, area, subArea, tipoDocumento, subTipoDocumento, periodo,pdfArchivo, asunto, observaciones  });
+  const newNote = new Note({ facultad, carrera, area, subArea, tipoDocumento, subTipoDocumento, periodo, pdfArchivo, asunto, observaciones });
 
-  
+
   archivo.mv('src/uploads/' + pdfArchivo, (err) => {
     if (err) {
       return res.status(500).send(err);
@@ -79,10 +79,18 @@ notesCtrl.createNewNotes = async (req, res) => {
 };
 //Esta función consulta todas las notas en la base de datos en base al rol y facultad
 notesCtrl.renderNotes = async (req, res) => {
-  const notes = await Note.find({ area: req.user.rol })//Se filtran las notas por rol
-    //.sort({ createdAt: "desc" })
-    .lean();
-  res.render("notes/all-notes", { notes });
+  if (req.user.rol === "admin") {
+    const notes = await Note.find()//Se filtran las notas por facultad
+      //.sort({ createdAt: "desc" })
+      .lean();
+    return res.render("notes/all-notes", { notes });
+  } else {
+    const notes = await Note.find({ area: req.user.rol })//Se filtran las notas por rol
+      //.sort({ createdAt: "desc" })
+      .lean();
+    res.render("notes/all-notes", { notes });
+  }
+
 };
 //Esta función se encarga de mostrar un formulario para editar una nota específica
 notesCtrl.renderEditFrom = async (req, res) => {
@@ -131,16 +139,16 @@ notesCtrl.findNote = async (req, res) => {
   if (errors.length > 0)
     return res.render("notes/find-notes", {
       errors,
-      facultad, 
-      carrera, 
-      area, 
-      subArea, 
-      tipoDocumento, 
-      subTipoDocumento, 
+      facultad,
+      carrera,
+      area,
+      subArea,
+      tipoDocumento,
+      subTipoDocumento,
       periodo
     });
 
-  const notes = await Note.find({ facultad, carrera, area, subArea, tipoDocumento, subTipoDocumento, periodo}).lean();
+  const notes = await Note.find({ facultad, carrera, area, subArea, tipoDocumento, subTipoDocumento, periodo }).lean();
   res.render("notes/all-notes", { notes });
 }
 
