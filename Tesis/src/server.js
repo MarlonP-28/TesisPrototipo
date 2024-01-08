@@ -44,7 +44,6 @@ app.use(flash());
 //subir archivos
 app.use(fileUpload({
   createParentPath: true
-
 }))
 
 //Global variables

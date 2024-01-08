@@ -9,7 +9,8 @@ const {
   updateNote,
   deleteNote,
   renderFindForm,
-  findNote
+  findNote,
+  viewNote
   
 } = require("../controllers/notes.controller");
 
@@ -24,6 +25,8 @@ router.put("/notes/edit-notes/:id", isAuthenticated,   updateNote);
 router.delete("/notes/delete/:id", isAuthenticated, deleteNote);
 router.get("/notes/find", isAuthenticated, renderFindForm);
 router.post("/notes/find-notes", isAuthenticated, findNote);
+router.get("/notes/view/:id", isAuthenticated, viewNote);
+
 
 
 module.exports = router;
