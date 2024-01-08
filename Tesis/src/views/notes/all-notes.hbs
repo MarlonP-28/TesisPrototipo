@@ -3,7 +3,7 @@
     </div>
 
     <div class="table-responsive">        
-        <table class="table table-bordered table-bordered">
+        <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>N°</th>
@@ -49,6 +49,11 @@
                                     <span class="ml-2">Eliminar</span>
                                 </button>
                             </form>
+
+                            <a href="/notes/view/{{_id}}" class=" btn btn-info btn-sm">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <span class="ml-2">Visualizar</span>
+                            </a>
                         </td>
                     </tr>
                 {{/each}}
