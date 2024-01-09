@@ -9,6 +9,8 @@ helpers.isAuthenticated = (req, res, next) => {
 };
 
 helpers.isAdmin = (rol) => {
+  console.log("isAdmin: ", rol)
   return  rol === 'Admin';
 };
+
 module.exports = helpers;

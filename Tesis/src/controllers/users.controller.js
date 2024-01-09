@@ -18,6 +18,7 @@ usersCtrl.signIn = passport.authenticate("local", {
 
 
 usersCtrl.redirect = (req,res)=>{
+  console.log(" redirect isAdmin: ", auth.isAdmin(req.user.rol))
   if(auth.isAdmin(req.user.rol)){
     res.redirect("/administration")
   } else {
@@ -28,6 +29,7 @@ usersCtrl.redirect = (req,res)=>{
 
 
 usersCtrl.enlistUsers = async(req, res) => {
+  console.log(" enlistUsers isAdmin: ", auth.isAdmin(req.user.rol))
   if(auth.isAdmin(req.user.rol)){
     const users = await User.find().lean();
     res.render("users/userlist",{ users });
@@ -38,6 +40,7 @@ usersCtrl.enlistUsers = async(req, res) => {
 
 
 usersCtrl.deletUser= async(req, res) => {
+  console.log(" deletUser isAdmin: ", auth.isAdmin(req.user.rol))
   if(auth.isAdmin(req.user.rol)){
     await User.findByIdAndDelete(req.params.id);
     req.flash("success_msg", "!Usuario eliminado con exito¡"); //mensajes que todo esta ok
@@ -69,6 +72,7 @@ usersCtrl.logOut = (req, res) => {
 
 
 usersCtrl.updateView = async(req, res) => {
+  console.log(" updateView isAdmin: ", auth.isAdmin(req.user.rol))
   if(auth.isAdmin(req.user.rol)){
     const user =  await User.findById(req.params.id).lean();
     res.render("users/editusers",{user})
@@ -79,6 +83,7 @@ usersCtrl.updateView = async(req, res) => {
 
 
 usersCtrl.addView = async(req, res) => {
+  console.log(" addView isAdmin: ", auth.isAdmin(req.user.rol))
   if(auth.isAdmin(req.user.rol)){
     res.render("users/createusers")
   } else {
@@ -88,6 +93,7 @@ usersCtrl.addView = async(req, res) => {
 
 
 usersCtrl.updateUser = async (req, res) => {
+  console.log(" updateUser isAdmin: ", auth.isAdmin(req.user.rol))
   if(auth.isAdmin(req.user.rol)){
     const errors = [];
     const { name, facultad, email, rol, password, confirm_password,tipo, estado} = req.body;
@@ -146,7 +152,7 @@ usersCtrl.updateUser = async (req, res) => {
 
 
 usersCtrl.addUser = async (req, res) => {
-
+  console.log(" addUser isAdmin: ", auth.isAdmin(req.user.rol))
   if(auth.isAdmin(req.user.rol)){
     const errors = [];
     const { name, facultad, email, rol, password, confirm_password, tipo, estado } = req.body;

@@ -2,8 +2,6 @@ const { Router } = require("express");
 const router = Router();
 
 const {
-  renderSignUpForm,
-  signUp,
   renderSignInForm,
   signIn,
   logOut,
@@ -25,7 +23,7 @@ router.get("/users/logout", logOut);
 
 /*********************/
 router.get("/administration", isAuthenticated, enlistUsers);
-router.get("/redirect", redirect);
+router.get("/redirect", isAuthenticated, redirect);
 router.post("/administration/add",isAuthenticated, addUser);
 router.get("/administration/add",isAuthenticated, addView);
 router.delete("/administration/delete/:id",isAuthenticated, deletUser);
