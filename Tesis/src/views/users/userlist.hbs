@@ -2,49 +2,45 @@
   <h1 class="titulo">Historial de Usuarios Creados</h1>
 </div>
 
-    <div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Facultad</th>
-                    <th>Rol</th>
-                    <th>Email</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
+<div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Facultad</th>
+        <th>Rol</th>
+        <th>Email</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
 
-            <tbody>
-                {{#each users}}
-                    <tr>
-                        <td>{{name}}</td>
-                        <td>{{facultad}}</td>
-                        <td>{{rol}}</td>
-                        <td>{{email}}</td>
-                        <td>
-                            <a href="/administration/update/{{_id}}" class=" btn btn-success btn-sm">
-                                <i class="fas fa-edit"></i>
-                                <span class="ml-2">Editar</span>
-                            </a>
-                            <!-- DELETE REQUEST -->
-                           <!-- <form action="/administration/delete/{{_id}}?_method=DELETE" method="POST" class="d-inline">
-                            
-                                <input type="hidden" name="_method" value="DELETE">
-                                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-                            </form> --> 
-                        </td>
-                    </tr>
-                {{/each}}
-            </tbody>
-        </table>
-    </div>
+    <tbody>
+      {{#each users}}
+      <tr>
+        <td>{{name}}</td>
+        <td>{{facultad}}</td>
+        <td>{{rol}}</td>
+        <td>{{email}}</td>
+        <td>
+          <a href="/administration/update/{{_id}}" class=" btn btn-success btn-sm">
+            <i class="fas fa-edit"></i>
+            <span class="ml-2">Editar</span>
+          </a>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
 
-    <div class="mt-4">
-        <a href="/administration/add" class="btn btn-primary">
-            <i class="fas fa-plus"></i> <!-- Ícono -->
-            <span class="ml-2">Crear Usuario</span> <!-- Texto con margen a la izquierda (ml-2) -->
-        </a>
-   </div>
+<div class="mt-4">
+  <a href="/administration/add" class="btn btn-primary">
+    <i class="fas fa-plus"></i> <!-- Ícono -->
+    <span class="ml-2">Crear Usuario</span> <!-- Texto con margen a la izquierda (ml-2) -->
+  </a>
+</div>
+
+
 
 </p>
 
@@ -55,12 +51,3 @@
   }
 </script>
 
-
-
-
-
-
-
-
-    
-        

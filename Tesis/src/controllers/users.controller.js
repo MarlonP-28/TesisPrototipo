@@ -132,7 +132,7 @@ usersCtrl.updateUser = async (req, res) => {
                                                       "facultad":facultad, 
                                                       "email":email, 
                                                       "rol":rol, 
-                                                      "password":password, 
+                                                      "password":passwordenc, 
                                                       "state": estado, 
                                                       "typeuser": tipo })
         req.flash("success_msg", "Datos actualizados correctamente");
