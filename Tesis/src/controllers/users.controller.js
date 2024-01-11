@@ -96,8 +96,10 @@ usersCtrl.updateUser = async (req, res) => {
   console.log(" updateUser isAdmin: ", auth.isAdmin(req.user.rol))
   if(auth.isAdmin(req.user.rol)){
     const errors = [];
-    const { name, facultad, email, rol, password, confirm_password,tipo, estado} = req.body;
-
+    var { name, facultad, email, rol, password, confirm_password,tipo, estado} = req.body;
+    if (tipo==undefined){
+      tipo=[]
+    }
     if (password != confirm_password) {
       errors.push({ text: "Las contraseñas no coinciden" });
     }
