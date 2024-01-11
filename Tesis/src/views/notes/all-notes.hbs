@@ -64,11 +64,16 @@
         <i class="fas fa-plus"></i> <!-- Ícono -->
         <span class="ml-2">Nuevo</span> <!-- Texto con margen a la izquierda (ml-2) -->
     </a>
-    <a href="/notes/find" class="btn btn-primary">
-        <i class="fas fa-magnifying-glass"></i> <!-- Ícono -->
-        <span class="ml-2">Buscar</span> <!-- Texto con margen a la izquierda (ml-2) -->
-    </a>
-
 </div>
+<!-- DataTables CSS and JavaScript files -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 
 <script src="/js/script.js"></script>
+<script>
+    //Filtrado para la busqueda 
+    $(document).ready(function () {
+        $('#archiveTable').DataTable();
+    });
+</script>

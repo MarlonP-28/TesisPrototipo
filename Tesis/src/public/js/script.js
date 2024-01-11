@@ -202,8 +202,3 @@ function actualizarPeriodo() {
 }
 // Llamar a actualizarArea al cargar la página para establecer las opciones iniciales
 actualizarSubArea();
-
-//Filtrado para la busqueda 
-$(document).ready(function () {
-    $('#archiveTable').DataTable();
-});
