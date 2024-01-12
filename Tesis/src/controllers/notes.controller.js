@@ -79,7 +79,7 @@ notesCtrl.createNewNotes = async (req, res) => {
 };
 //Esta función consulta todas las notas en la base de datos en base al rol y facultad
 notesCtrl.renderNotes = async (req, res) => {
-  if (req.user.rol === "admin") {
+  if (req.user.rol === "Admin") {
     const notes = await Note.find()//Se filtran las notas por facultad
       //.sort({ createdAt: "desc" })
       .lean();
