@@ -40,11 +40,21 @@
   </a>
 </div>
 
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+<!-- DataTables CSS and JavaScript files -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+
+<!-- DataTables Spanish Language File -->
+<script type="text/javascript" charset="utf8"
+  src="https://cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json"></script>
+
 <script>
   $(document).ready(function () {
-    $('#userTable').DataTable();
+    $('#userTable').DataTable({
+      language: {
+        url: "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json"
+      }
+    });
   });
 </script>

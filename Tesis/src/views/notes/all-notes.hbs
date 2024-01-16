@@ -70,10 +70,19 @@
 <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 
+<!-- DataTables Spanish Language File -->
+<script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json"></script>
+
+
 <script src="/js/script.js"></script>
 <script>
-    //Filtrado para la busqueda 
+    // Configuración de DataTablesa
     $(document).ready(function () {
-        $('#archiveTable').DataTable();
+        $('#archiveTable').DataTable({
+            language: {
+                url: "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json"
+            }
+        });
     });
 </script>
