@@ -105,7 +105,7 @@ function actualizarSubtipoDocumento() {
     } else if (areaSelect.value === "Decanato" && subAreaSelect.value === "Secretaria de Titulación" && tipoDocumentoSelect.value === "Pensum") {
         var opcionesSubTipoDocumento = ["Silabos", "Mallas"];
     } else if (areaSelect.value === "Decanato" && subAreaSelect.value === "Secretaria de Titulación" && tipoDocumentoSelect.value === "Comisiones") {
-        var opcionesSubTipoDocumento = ["Practicas Pre-Profesionales"];
+        var opcionesSubTipoDocumento = ["Practicas Pre-Profesionales","Convalidación"];
     }
 
     //opciones subdecanato
