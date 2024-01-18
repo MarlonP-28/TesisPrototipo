@@ -1,3 +1,4 @@
+
 {{#each errors}}
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
     {{text}}
@@ -6,6 +7,7 @@
     </button>
 </div>
 {{/each}}
+<!-- Script que pasa como parametro el area a la funcion actualizarSubArea de los scripts-->
 
 <div class="col-md-4 mx-auto">
     <div class="card">
@@ -16,36 +18,25 @@
             <form action="/notes/edit-notes/{{note._id}}?_method=PUT" method="POST">
                 <input type="hidden" name="_method" value="PUT" />
                 <!-- Add the following code for the fields you mentioned -->
-                <div class="mb-3">
-                    <label for="facultad">Facultad:</label>
-                    <select id="facultad" name="facultad">
-                        <option value="FIS">FIS</option>
-                    </select>
-                    <br>
-                </div>
 
                 <div class="mb-3">
                     <label for="carrera">Carrera:</label>
                     <select id="carrera" name="carrera">
-                        <option value="Computacion">Computacion</option>
+                        {{#if_equal note.carrera "Computación"}}
+                        <option value="Computación" selected>Computación</option>
                         <option value="Software">Software</option>
-                    </select>
-                    <br>
-                </div>
-
-                <div class="mb-3">
-                    <label for="area">Área:</label>
-                    <select id="area" name="area" onchange="actualizarArea()">
-                        <option value="Decanato">Decanato</option>
-                        <option value="Subdecanato">Subdecanato</option>
-                        <option value="Jefatura">Subdecanato</option>
+                        {{else}}
+                        <option value="Computación">Computación</option>
+                        <option value="Software" selected>Software</option>
+                        {{/if_equal}}
                     </select>
                     <br>
                 </div>
 
                 <div class="mb-3">
                     <label for="subArea">Subárea:</label>
-                    <select id="subArea" name="subArea" onchange="actualizarTipoDocumento()">
+                    <select id="subArea" name="subArea" onchange="actualizarTipoDocumento('{{note.area}}')">
+
                         <!-- Las opciones se actualizarán dinámicamente mediante JavaScript -->
                     </select>
                     <br>
@@ -53,7 +44,8 @@
 
                 <div class="mb-3">
                     <label for="tipoDocumento">Tipo de Documento:</label>
-                    <select id="tipoDocumento" name="tipoDocumento" onchange="actualizarSubtipoDocumento()">
+                    <select id="tipoDocumento" name="tipoDocumento"
+                        onchange="actualizarSubtipoDocumento('{{note.area}}')">
                         <!-- Las opciones se actualizarán dinámicamente mediante JavaScript -->
                     </select>
                     <br>
@@ -72,12 +64,6 @@
                     <select id="periodo" name="periodo">
                         <!-- Las opciones se actualizarán dinámicamente mediante JavaScript -->
                     </select>
-                    <br>
-                </div>
-
-                <div class="mb-3">
-                    <label for="pdfArchivo">Archivo PDF:</label>
-                    <input type="file" id="pdfArchivo" name="pdfArchivo" accept=".pdf">
                     <br>
                 </div>
 
@@ -104,5 +90,4 @@
         </div>
     </div>
 </div>
-
-<script src="/js/script.js"></script>
+<script src="/js/scriptsEditDoc.js"></script>
