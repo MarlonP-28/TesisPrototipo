@@ -38,7 +38,6 @@ notesCtrl.createNewNotes = async (req, res) => {
     return res.render("notes/new-notes", {
       errors,
       carrera,
-      area,
       subArea,
       tipoDocumento,
       subTipoDocumento,
