@@ -1,8 +1,13 @@
-function actualizarSubArea(area) {
+
+function actualizarSubArea(area, subArea, tipoDocumento,subTipoDocumento,periodo) {
     // Obtener el valor almacenado en la base del rol del usuario
     var areaSelect = area;
+    var subAreaSelected = subArea;
+    var tipoDocumentoSelected = tipoDocumento;
+    var subTipoDocumentoSelected = subTipoDocumento;
+    var periodoSelected = periodo;
     var subAreaSelect = document.getElementById("subArea");
-    console.log(areaSelect);
+    console.log(areaSelect+ "  " +subAreaSelected+ "  " +tipoDocumentoSelected+ "  " +subTipoDocumentoSelected+ "  " +periodoSelected);
 
     // Limpiar opciones anteriores
     subAreaSelect.innerHTML = "";
@@ -21,27 +26,30 @@ function actualizarSubArea(area) {
         var opcion = document.createElement("option");
         opcion.value = opcionesSubArea[i];
         opcion.text = opcionesSubArea[i];
+        if  (opcionesSubArea[i] === subAreaSelected){
+            opcion.selected = true;
+        }
         subAreaSelect.add(opcion);
     }
 
     // Actualizar las opciones del departamento
-    actualizarTipoDocumento(areaSelect);
+    actualizarTipoDocumento(areaSelect,tipoDocumentoSelected,subTipoDocumentoSelected,periodoSelected);
 }
 
-function actualizarTipoDocumento(area) {
+function actualizarTipoDocumento(area,tipoDocumento,subTipoDocumento,periodo) {
     var areaSelect = area;
+    var tipoDocumentoSelected = tipoDocumento;
+    var subTipoDocumentoSelected = subTipoDocumento;
+    var periodoSelected = periodo;
     var subAreaSelect = document.getElementById("subArea");
     var tipoDocumentoSelect = document.getElementById("tipoDocumento");
+    console.log(areaSelect+ "  " +tipoDocumentoSelected+ "  " +subTipoDocumentoSelected+ "  " +periodoSelected);
 
     // Limpiar opciones anteriores
 
     tipoDocumentoSelect.innerHTML = "";
-    //Decanato
-    if (areaSelect == "" || subAreaSelect.value === "") {
-        var opcionesTipoDocumento = [""];
-    }
 
-    else if (areaSelect === "Decanato" && subAreaSelect.value === "Secretaria de Decanato") {
+    if (areaSelect === "Decanato" && subAreaSelect.value === "Secretaria de Decanato") {
         var opcionesTipoDocumento = ["Consejo de Facultad", "Solicitud de Estudiantes", "Procesos Electorales", "Inventario FIS"];
     } else if (areaSelect === "Decanato" && subAreaSelect.value === "Secretaria de Titulación") {
         var opcionesTipoDocumento = ["Designación de Revisores Calificadores", "Expedientes de Grado", "Pensum", "Comisiones"];
@@ -66,19 +74,26 @@ function actualizarTipoDocumento(area) {
         var opcion = document.createElement("option");
         opcion.value = opcionesTipoDocumento[i];
         opcion.text = opcionesTipoDocumento[i];
+        if  (opcionesTipoDocumento[i] === tipoDocumentoSelected){
+            opcion.selected = true;
+        }
         tipoDocumentoSelect.add(opcion);
     }
 
     // Crear y agregar opciones al select de subTipoDocumento
-    actualizarSubtipoDocumento(areaSelect);
+    actualizarSubtipoDocumento(areaSelect,subTipoDocumentoSelected,periodoSelected);
 
 }
 
-function actualizarSubtipoDocumento(area) {
+function actualizarSubtipoDocumento(area,subTipoDocumento,periodo) {
     var areaSelect = area;
+    var subTipoDocumentoSelected = subTipoDocumento;
+    var periodoSelected = periodo;
+
     var subAreaSelect = document.getElementById("subArea");
     var tipoDocumentoSelect = document.getElementById("tipoDocumento");
     var subTipoDocumentoSelect = document.getElementById("subTipoDocumento");
+    console.log(areaSelect+ "  " + subTipoDocumentoSelected);
 
     // Limpiar opciones anteriores
 
@@ -138,12 +153,18 @@ function actualizarSubtipoDocumento(area) {
         var opcion = document.createElement("option");
         opcion.value = opcionesSubTipoDocumento[j];
         opcion.text = opcionesSubTipoDocumento[j];
+        if  (opcionesSubTipoDocumento[j] === subTipoDocumentoSelected){
+            opcion.selected = true;
+        }
         subTipoDocumentoSelect.add(opcion);
     }
-    actualizarPeriodo()
+    actualizarPeriodo(periodoSelected)
+    
 }
 
-function actualizarPeriodo() {
+function actualizarPeriodo(periodo) {
+    var periodoSelected=periodo;
+    console.log(periodoSelected);
     var tipoDocumentoSelect = document.getElementById("tipoDocumento");
     var periodoSelect = document.getElementById("periodo");
 
@@ -183,7 +204,7 @@ function actualizarPeriodo() {
     } else if (tipoDocumentoSelect.value === "opciónB2") {
         var opcionesPerido = ["2018", "2019", "2020", "2021", "2022", "2023"];
     } else if (tipoDocumentoSelect.value === "opciónC2") {
-        var opcionesPerido = ["2018", "2019", "2020", "2021", "2022", "2023"];
+        var opcionesPerido = ["2018", "2019-A", "2020", "2021", "2022", "2023"];
     } else if (tipoDocumentoSelect.value === "opciónA3") {
         var opcionesPerido = ["2018-A", "2018-B", "2019-A", "2019-B", "2020-A", "2020-B", "2021-A", "2021-B", "2022-A", "2022-B", "2023-A"];
     } else if (tipoDocumentoSelect.value === "opciónB3") {
@@ -197,6 +218,9 @@ function actualizarPeriodo() {
         var opcion = document.createElement("option");
         opcion.value = opcionesPerido[j];
         opcion.text = opcionesPerido[j];
+        if  (opcionesPerido[j] == periodoSelected){
+            opcion.selected = true;
+        }
         periodoSelect.add(opcion);
     }
 }
