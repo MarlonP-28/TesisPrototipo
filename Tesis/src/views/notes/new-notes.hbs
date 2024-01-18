@@ -6,18 +6,11 @@
 
         <div class="card-body text-right">
             <form action="/notes/new-notes" method="POST" enctype="multipart/form-data">
-                <div class="mb-3">
-                    <label for="facultad">Facultad:</label>
-                    <select id="facultad" name="facultad">
-                        <option value="FIS">FIS</option>
-                    </select>
-                    <br>
-                </div>
 
                 <div class="mb-3">
                     <label for="carrera">Carrera:</label>
                     <select id="carrera" name="carrera">
-                        <option value="Computacion">Computación</option>
+                        <option value="Computación">Computación</option>
                         <option value="Software">Software</option>
                     </select>
                     <br>
@@ -28,7 +21,7 @@
                     <select id="area" name="area" onchange="actualizarSubArea()">
                         <option value=""></option>
                         <option value="Decanato">Decanato</option>
-                        <option value="Subdecanato">Sub-Decanato</option>
+                        <option value="Subdecanato">Subdecanato</option>
                         <option value="Jefatura de Departamento">Jefatura de Departamento</option>
                     </select>
                     <br>
@@ -96,4 +89,3 @@
     </div>
 </div>
 
-<script src="/js/script.js"></script>

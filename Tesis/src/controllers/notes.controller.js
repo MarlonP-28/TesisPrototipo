@@ -11,16 +11,10 @@ notesCtrl.renderNoteFrom = (req, res) => {
 //Esta función se encarga de crear una nuevo archivo en la base de datos.
 notesCtrl.createNewNotes = async (req, res) => {
 
-  const { facultad, carrera, area, subArea, tipoDocumento, subTipoDocumento, periodo, asunto, observaciones } = req.body;
+  const {carrera, subArea, tipoDocumento, subTipoDocumento, periodo, asunto, observaciones } = req.body;
   const errors = [];
-  if (!facultad) {
-    errors.push({ text: "Escoja una Facultad." });
-  }
   if (!carrera) {
     errors.push({ text: "Escoja una carrera." });
-  }
-  if (!area) {
-    errors.push({ text: "Escoja una área." });
   }
   if (!subArea) {
     errors.push({ text: "Escoja una subárea." });
@@ -43,7 +37,6 @@ notesCtrl.createNewNotes = async (req, res) => {
   if (errors.length > 0)
     return res.render("notes/new-notes", {
       errors,
-      facultad,
       carrera,
       area,
       subArea,
@@ -54,18 +47,22 @@ notesCtrl.createNewNotes = async (req, res) => {
       observaciones
     });
 
+
   const archivo = req.files.pdfArchivo;
   const pdfArchivo = archivo.name;
-  const newNote = new Note({ facultad, carrera, area, subArea, tipoDocumento, subTipoDocumento, periodo, pdfArchivo, asunto, observaciones });
 
   archivo.mv('src/uploads/' + pdfArchivo, (err) => {
     if (err) {
       return res.status(500).send(err);
     }
   });
-  newNote.user = req.user.id;
+  
+  //se obtiene parametros de usuarios
+  const user = req.user.id;
+  const facultad = req.user.facultad;
+  const area = req.user.rol;
 
-
+  const newNote = new Note({ facultad, carrera, area, subArea, tipoDocumento, subTipoDocumento, periodo, pdfArchivo, asunto, observaciones, user });
   //Guardar en la base de datos
   await newNote.save();
   req.flash("success_msg", "!Archivo creado con exito¡");
@@ -73,16 +70,18 @@ notesCtrl.createNewNotes = async (req, res) => {
 };
 //Esta función consulta todos los archivos en la base de datos en base al rol y facultad
 notesCtrl.renderNotes = async (req, res) => {
-  if (req.user.rol === "admin") {
+  const user = req.user;
+  
+  if (user.rol === "Admin") {
     const notes = await Note.find()//Se filtran los archivos por facultad
       //.sort({ createdAt: "desc" })
       .lean();
-    return res.render("notes/all-notes", { notes });
+    return res.render("notes/all-notes", { notes});
   } else {
-    const notes = await Note.find({ area: req.user.rol })//Se filtran los archivos por rol
+    const notes = await Note.find({ area: user.rol })//Se filtran los archivos por rol
       //.sort({ createdAt: "desc" })
       .lean();
-    res.render("notes/all-notes", { notes });
+    res.render("notes/all-notes", { notes});
   }
 
 };
