@@ -1,8 +1,9 @@
 body {
-    background: whitesmoke;
-  }
+  background: whitesmoke;
+}
 
-.titulo{/*Gestor de archivos*/
+.titulo {
+  /*Gestor de archivos*/
   background-color: #000;
   color: #fff;
   text-align: center;
@@ -15,24 +16,31 @@ body {
   height: 100px;
 }
 
-.center {/*boton signIn/signUp*/
+.center {
+  /*boton signIn/signUp*/
   text-align: center;
 }
 
 .circulo {
-  width: 150px; /* Ancho del círculo */
-  height: 150px; /* Alto del círculo */
-  border-radius: 50%; /* Establece el radio para crear un círculo perfecto */
-  overflow: hidden; /* Oculta el contenido que se sale del círculo */
-  border: 2px solid #333; /* Añade un borde opcional */  
+  width: 150px;
+  /* Ancho del círculo */
+  height: 150px;
+  /* Alto del círculo */
+  border-radius: 50%;
+  /* Establece el radio para crear un círculo perfecto */
+  overflow: hidden;
+  /* Oculta el contenido que se sale del círculo */
+  border: 2px solid #333;
+  /* Añade un borde opcional */
 }
 
 .circulo img {
-  width: 100%; /* Asegura que la imagen llene completamente el círculo */
-  height: auto; /* Mantiene la proporción original de la imagen */
+  width: 100%;
+  /* Asegura que la imagen llene completamente el círculo */
+  height: auto;
+  /* Mantiene la proporción original de la imagen */
 }
 
-.footer .fter{
+.footer .fter {
   text-align: center;
 }
-

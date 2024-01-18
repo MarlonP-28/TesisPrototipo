@@ -37,7 +37,7 @@ function actualizarTipoDocumento() {
 
     tipoDocumentoSelect.innerHTML = "";
     //Decanato
-    if(areaSelect.value === "" || subAreaSelect.value === ""){
+    if (areaSelect.value === "" || subAreaSelect.value === "") {
         var opcionesTipoDocumento = [""];
     }
 
@@ -174,24 +174,24 @@ function actualizarPeriodo() {
     //periodos para decanato y jefatura de departament
     else if (tipoDocumentoSelect.value === "opciónA1") {
         var opcionesPerido = ["2018-A", "2018-B", "2019-A", "2019-B", "2020-A", "2020-B", "2021-A", "2021-B", "2022-A", "2022-B", "2023-A"];
-    }else if (tipoDocumentoSelect.value === "opciónB1") {
+    } else if (tipoDocumentoSelect.value === "opciónB1") {
         var opcionesPerido = ["2018", "2019", "2020", "2021", "2022", "2023"];
-    }else if (tipoDocumentoSelect.value === "opciónC1") {
+    } else if (tipoDocumentoSelect.value === "opciónC1") {
         var opcionesPerido = ["2018", "2019", "2020", "2021", "2022", "2023"];
-    }else if (tipoDocumentoSelect.value === "opciónA2") {
+    } else if (tipoDocumentoSelect.value === "opciónA2") {
         var opcionesPerido = ["2018-A", "2018-B", "2019-A", "2019-B", "2020-A", "2020-B", "2021-A", "2021-B", "2022-A", "2022-B", "2023-A"];
-    }else if (tipoDocumentoSelect.value === "opciónB2") {
+    } else if (tipoDocumentoSelect.value === "opciónB2") {
         var opcionesPerido = ["2018", "2019", "2020", "2021", "2022", "2023"];
-    }else if (tipoDocumentoSelect.value === "opciónC2") {
+    } else if (tipoDocumentoSelect.value === "opciónC2") {
         var opcionesPerido = ["2018", "2019", "2020", "2021", "2022", "2023"];
-    }else if (tipoDocumentoSelect.value === "opciónA3") {
+    } else if (tipoDocumentoSelect.value === "opciónA3") {
         var opcionesPerido = ["2018-A", "2018-B", "2019-A", "2019-B", "2020-A", "2020-B", "2021-A", "2021-B", "2022-A", "2022-B", "2023-A"];
-    }else if (tipoDocumentoSelect.value === "opciónB3") {
+    } else if (tipoDocumentoSelect.value === "opciónB3") {
         var opcionesPerido = ["2018", "2019", "2020", "2021", "2022", "2023"];
-    }else if (tipoDocumentoSelect.value === "opciónC3") {
+    } else if (tipoDocumentoSelect.value === "opciónC3") {
         var opcionesPerido = ["2018", "2019", "2020", "2021", "2022", "2023"];
     }
-        
+
     // Crear y agregar opciones al select de subTipoDocumento
     for (var j = 0; j < opcionesPerido.length; j++) {
         var opcion = document.createElement("option");

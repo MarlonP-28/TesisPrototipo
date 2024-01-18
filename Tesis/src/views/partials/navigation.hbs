@@ -4,53 +4,42 @@
       <span class="fas fa-file-alt"></span> GESTOR DE ARCHIVOS - FIS
     </a>
 
- 
-    <div class="collapse navbar-collapse" id="navbarNav">
-      
-      <ul class="navbar-nav ms-auto">
-          {{#if user}}
-          <li class="nav-item dropdown">
-            {{#if isAdmin }}
-            <a
-              class="nav-link"
-              href="/administration"
-            >
-              <span class="fas fa-user"></span> Usuarios
-            </a>
-            
-            {{/if}}
-          </li>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdownMenuLink"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              <span class="fas fa-cogs"></span> Modulos
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                
-              <a class="dropdown-item" href="/notes">
-                <i class="fas fa-folder-open"></i> Todos los Archivos
-              </a>
 
-              <!--
+    <div class="collapse navbar-collapse" id="navbarNav">
+
+      <ul class="navbar-nav ms-auto">
+        {{#if user}}
+        <li class="nav-item dropdown">
+          {{#if isAdmin }}
+          <a class="nav-link" href="/administration">
+            <span class="fas fa-user"></span> Usuarios
+          </a>
+
+          {{/if}}
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="fas fa-cogs"></span> Modulos
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+            <a class="dropdown-item" href="/notes">
+              <i class="fas fa-folder-open"></i> Todos los Archivos
+            </a>
+
+            <!--
               <a class="dropdown-item" href="/notes/add">Nuevo Archivo</a>
               -->
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="/users/logout">
-                <i class="fas fa-sign-out-alt"></i> Salir
-              </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/users/logout">
+              <i class="fas fa-sign-out-alt"></i> Salir
+            </a>
 
-            </div>
-          </li>
-          {{/if}}
+          </div>
+        </li>
+        {{/if}}
       </ul>
     </div>
   </div>
 </nav>
-
-

@@ -23,11 +23,11 @@
           <label for="facultad">Facultad:</label>
           <select class="form-select facultad1" aria-label="Default select example" name="facultad" required>
             {{#if_equal user.facultad "FIS"}}
-                <option value="FIS">FIS</option>
+            <option value="FIS">FIS</option>
             {{else}}
-                <option value="FIS">FIS</option>
+            <option value="FIS">FIS</option>
             {{/if_equal}}
-            
+
           </select>
         </div>
 
@@ -52,71 +52,66 @@
           <label for="exampleInputPassword1" class="form-label">Rol</label>
           <select class="form-select  rol1" aria-label="Default select example" name="rol">
             {{#if_equal user.rol "Admin"}}
-               <option selected value="Admin">Administrador</option>
+            <option selected value="Admin">Administrador</option>
             {{else}}
-                <option value="Admin">Administrador</option>
+            <option value="Admin">Administrador</option>
             {{/if_equal}}
 
             {{#if_equal user.rol "Decanato"}}
-                <option selected value="Decanato">Decanato</option>
+            <option selected value="Decanato">Decanato</option>
             {{else}}
-                <option value="Decanato">Decanato</option>
+            <option value="Decanato">Decanato</option>
             {{/if_equal}}
 
             {{#if_equal user.rol "Subdecanato"}}
-                <option selected value="Subdecanato">Subdecanato</option>
+            <option selected value="Subdecanato">Subdecanato</option>
             {{else}}
-                <option value="Subdecanato">Subdecanato</option>
+            <option value="Subdecanato">Subdecanato</option>
             {{/if_equal}}
 
             {{#if_equal user.rol "Jefatura"}}
-                <option selected value="Jefatura">Jefatura</option>
+            <option selected value="Jefatura">Jefatura</option>
             {{else}}
-                <option value="Jefatura">Jefatura</option>
+            <option value="Jefatura">Jefatura</option>
             {{/if_equal}}
           </select>
         </div>
-        
+
         <div class="mb-3">
           <label class="form-label">Tipo de usuario</label><br>
-         {{#ifIn "editor" user.typeuser }}
-         <input type="checkbox" checked class="tipo" id="editor" name="tipo" value="editor">
-         <label for="vehicle1"> Editor</label><br>
-         {{else}}
-         <input type="checkbox" class="tipo" id="editor" name="tipo" value="editor">
-         <label for="vehicle1"> Editor</label><br>
-         {{/ifIn}}
-          
+          {{#ifIn "editor" user.typeuser }}
+          <input type="checkbox" checked class="tipo" id="editor" name="tipo" value="editor">
+          <label for="vehicle1"> Editor</label><br>
+          {{else}}
+          <input type="checkbox" class="tipo" id="editor" name="tipo" value="editor">
+          <label for="vehicle1"> Editor</label><br>
+          {{/ifIn}}
+
 
           {{#ifIn "visualizador" user.typeuser }}
-         <input type="checkbox" checked class="tipo" id="visualizador" name="tipo" value="visualizador">
+          <input type="checkbox" checked class="tipo" id="visualizador" name="tipo" value="visualizador">
           <label for="vehicle2"> Visualizador</label><br>
-         {{else}}
-         <input type="checkbox" class="tipo" id="visualizador" name="tipo" value="visualizador">
+          {{else}}
+          <input type="checkbox" class="tipo" id="visualizador" name="tipo" value="visualizador">
           <label for="vehicle2"> Visualizador</label><br>
-         {{/ifIn}}
-          
+          {{/ifIn}}
 
-
-
-
-          
         </div>
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label">Estado</label>
           <select class="form-select estado1" aria-label="Default select example" name="estado">
 
             {{#if_equal user.state "1"}}
-                <option selected value="1">Activo</option>
-                 
+            <option selected value="1">Activo</option>
+
             {{else}}
-                <option value="1">Activo</option>
-                
+            <option value="1">Activo</option>
+
             {{/if_equal}}
             {{#if_equal user.state "0"}}
-                <option selected value="0">Inactivo</option>
+            <option selected value="0">Inactivo</option>
             {{else}}
-                <option value="0">Inactivo</option>
+            <option value="0">Inactivo</option>
             {{/if_equal}}
           </select>
         </div>
@@ -131,50 +126,50 @@
 </div>
 
 <script>/*
-  window.onload = function () {
-    //autosleccionar el roll
-    const rol = document.getElementById("rol").textContent
-    const select = document.querySelector(".rol1");
-    const options = document.querySelectorAll(".rol1 option");
-    for (const option of options) {
-      if (rol == option.value) {
-        option.setAttribute("selected", "")
-      }
+window.onload = function () {
+//autosleccionar el roll
+const rol = document.getElementById("rol").textContent
+const select = document.querySelector(".rol1");
+const options = document.querySelectorAll(".rol1 option");
+for (const option of options) {
+if (rol == option.value) {
+  option.setAttribute("selected", "")
+}
 
-    }
-    //autosleccionar el estado
-    const estado = document.getElementById("estado").textContent
-    const select1 = document.querySelector(".estado1");
-    const options1 = document.querySelectorAll(".estado1 option");
-    for (const option of options1) {
-      if (estado == option.value) {
-        option.setAttribute("selected", "")
-      }
-    }
-    //autosleccionar la facultad
+}
+//autosleccionar el estado
+const estado = document.getElementById("estado").textContent
+const select1 = document.querySelector(".estado1");
+const options1 = document.querySelectorAll(".estado1 option");
+for (const option of options1) {
+if (estado == option.value) {
+  option.setAttribute("selected", "")
+}
+}
+//autosleccionar la facultad
 
-    const facultad = document.getElementById("facultad").textContent
-    const select2 = document.querySelector(".facultad1");
-    const options2 = document.querySelectorAll(".facultad1 option");
-    for (const option of options2) {
-      if (facultad == option.value) {
-        option.setAttribute("selected", "")
-      }
+const facultad = document.getElementById("facultad").textContent
+const select2 = document.querySelector(".facultad1");
+const options2 = document.querySelectorAll(".facultad1 option");
+for (const option of options2) {
+if (facultad == option.value) {
+  option.setAttribute("selected", "")
+}
 
 
-    }
+}
 
-    //autosleccionar el tipo
-    const tiposopc = document.querySelectorAll(".tipo");
-    const tipos = document.querySelectorAll(".tipo1")
-    for (const aux1 of tipos) {
-      for (const aux2 of tiposopc) {
-        if (aux1.textContent == aux2.value) {
-          aux2.setAttribute("checked", "")
-        }
-      }
-    }
-
+//autosleccionar el tipo
+const tiposopc = document.querySelectorAll(".tipo");
+const tipos = document.querySelectorAll(".tipo1")
+for (const aux1 of tipos) {
+for (const aux2 of tiposopc) {
+  if (aux1.textContent == aux2.value) {
+    aux2.setAttribute("checked", "")
   }
+}
+}
+
+}
 */
 </script>

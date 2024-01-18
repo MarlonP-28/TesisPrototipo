@@ -22,24 +22,24 @@ app.engine(
     layoutsDir: path.join(app.get("views"), "layouts"),
     partialsDir: path.join(app.get("views"), "partials"),
     extname: ".hbs",
-    helpers :
-{
-if_equal : function(a, b, opts) {
-if (a == b) {
-return opts.fn(this)
-} else {
-return opts.inverse(this)
-}
-},
-ifIn : function(elem, list, options) {
-  if(list.indexOf(elem) > -1) {
-    return options.fn(this);
-  }
-  else {
-    return options.inverse(this)
-}
-}
-}
+    helpers:
+    {
+      if_equal: function (a, b, opts) {
+        if (a == b) {
+          return opts.fn(this)
+        } else {
+          return opts.inverse(this)
+        }
+      },
+      ifIn: function (elem, list, options) {
+        if (list.indexOf(elem) > -1) {
+          return options.fn(this);
+        }
+        else {
+          return options.inverse(this)
+        }
+      }
+    }
   })
 );
 app.set("view engine", ".hbs");
@@ -73,7 +73,6 @@ app.use((req, res, next) => {
   res.locals.isAdmin = req.user && req.user.rol === 'Admin';
   next();
 });
-
 
 //Routes
 app.use(require("./routes/index.routes"));

@@ -28,7 +28,7 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
-    typeuser:{
+    typeuser: {
       type: Array,
       required: true,
     }
