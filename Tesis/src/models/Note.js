@@ -30,6 +30,11 @@ const NoteSchema = new Schema(
       type: String,
       required: true,
     },
+    codigoCodificacion: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     pdfArchivo: {
       type: String,
       required: true,

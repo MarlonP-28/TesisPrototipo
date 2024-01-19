@@ -155,6 +155,7 @@ function actualizarPeriodo() {
     var areaSelect = document.getElementById("area");
     var tipoDocumentoSelect = document.getElementById("tipoDocumento");
     var periodoSelect = document.getElementById("periodo");
+    var codigoCodificacionInput = document.getElementById("codigoCodificacion");
 
     // Limpiar opciones anteriores
 
@@ -212,4 +213,56 @@ function actualizarPeriodo() {
             periodoSelect.add(opcion);
         }
     }
+
+    // Lógica para generar el código de codificación
+    var codigoBase = `FIS-${areaSelect.value.toUpperCase().slice(0, 0)}`;
+
+    // Agregar sufijo según la selección
+    if (areaSelect.value === "Decanato") {
+        codigoBase += "DEC";
+    } else if (areaSelect.value === "Subdecanato") {
+        codigoBase += "SBD";
+    } else if (areaSelect.value === "Jefatura de Departamento") {
+        codigoBase += "JDD";
+    }
+
+    // Agregar el periodo
+    codigoBase += `-${periodoSelect.value.slice(0, 4)}`;
+
+    // Agregar el código de codificación al campo correspondiente
+    codigoCodificacionInput.value = codigoBase;
+    
+    // Obtener y actualizar la última numeración desde alguna fuente persistente (por ejemplo, base de datos o sistema de archivos)
+    var ultimaNumeracion = obtenerUltimaNumeracion(); // Necesitarás implementar esta función
+
+    // Incrementar la última numeración
+    ultimaNumeracion++;
+
+    // Guardar la nueva última numeración en la fuente persistente
+    guardarUltimaNumeracion(ultimaNumeracion); // Necesitarás implementar esta función
+
+    // Formatear la numeración con ceros a la izquierda según sea necesario (por ejemplo, "0001")
+    var numeracionFormateada = ("0000" + ultimaNumeracion).slice(-4);
+
+    // Construir el código final
+    var codigoCodificacion = `${codigoBase}-${numeracionFormateada}`;
+
+    // Agregar el código de codificación al campo correspondiente
+    codigoCodificacionInput.value = codigoCodificacion;
 }
+
+// Funciones para obtener y guardar la última numeración (simuladas)
+function obtenerUltimaNumeracion() {
+    // Simplemente devuelve la última numeración almacenada en algún lugar persistente
+    // Por ejemplo, podrías utilizar una variable global o algún mecanismo de almacenamiento persistente.
+    return localStorage.getItem("ultimaNumeracion") || 0;
+}
+
+function guardarUltimaNumeracion(ultimaNumeracion) {
+    // Almacena la última numeración en algún lugar persistente
+    // Por ejemplo, podrías utilizar una variable global o algún mecanismo de almacenamiento persistente.
+    localStorage.setItem("ultimaNumeracion", ultimaNumeracion);
+}
+
+
+
