@@ -158,8 +158,8 @@ function actualizarPeriodo() {
     var codigoCodificacionInput = document.getElementById("codigoCodificacion");
 
     // Limpiar opciones anteriores
-
     periodoSelect.innerHTML = "";
+
     //Secretaria de Decanato
     if (tipoDocumentoSelect.value === "Consejo de Facultad") {
         var opcionesPerido = ["2018", "2019", "2020", "2021", "2022", "2023"];
@@ -213,56 +213,49 @@ function actualizarPeriodo() {
             periodoSelect.add(opcion);
         }
     }
+}
 
-    // Lógica para generar el código de codificación
-    var codigoBase = `FIS-${areaSelect.value.toUpperCase().slice(0, 0)}`;
+function obtenerCodigoArea() {
+    var areaSelect = document.getElementById("area");
+    var codigoArea =areaSelect.value.toUpperCase().slice(0, 0);
 
-    // Agregar sufijo según la selección
+    // Agregar sufijo según la selección en areaSelect
     if (areaSelect.value === "Decanato") {
-        codigoBase += "DEC";
+        codigoArea += "DEC";
     } else if (areaSelect.value === "Subdecanato") {
-        codigoBase += "SBD";
+        codigoArea += "SBD";
     } else if (areaSelect.value === "Jefatura de Departamento") {
-        codigoBase += "JDD";
+        codigoArea += "JDD";
     }
-
-    // Agregar el periodo
-    codigoBase += `-${periodoSelect.value.slice(0, 4)}`;
-
-    // Agregar el código de codificación al campo correspondiente
-    codigoCodificacionInput.value = codigoBase;
-    
-    // Obtener y actualizar la última numeración desde alguna fuente persistente (por ejemplo, base de datos o sistema de archivos)
-    var ultimaNumeracion = obtenerUltimaNumeracion(); // Necesitarás implementar esta función
-
-    // Incrementar la última numeración
-    ultimaNumeracion++;
-
-    // Guardar la nueva última numeración en la fuente persistente
-    guardarUltimaNumeracion(ultimaNumeracion); // Necesitarás implementar esta función
-
-    // Formatear la numeración con ceros a la izquierda según sea necesario (por ejemplo, "0001")
-    var numeracionFormateada = ("0000" + ultimaNumeracion).slice(-4);
-
-    // Construir el código final
-    var codigoCodificacion = `${codigoBase}-${numeracionFormateada}`;
-
-    // Agregar el código de codificación al campo correspondiente
-    codigoCodificacionInput.value = codigoCodificacion;
+    return codigoArea;
 }
 
-// Funciones para obtener y guardar la última numeración (simuladas)
-function obtenerUltimaNumeracion() {
-    // Simplemente devuelve la última numeración almacenada en algún lugar persistente
-    // Por ejemplo, podrías utilizar una variable global o algún mecanismo de almacenamiento persistente.
-    return localStorage.getItem("ultimaNumeracion") || 0;
+function obtenerCodigoPeriodo() {
+    var periodoSelect = document.getElementById("periodo");
+    var codigoPeriodo = periodoSelect.value.slice(0, 4);
+    return codigoPeriodo;
 }
 
-function guardarUltimaNumeracion(ultimaNumeracion) {
-    // Almacena la última numeración en algún lugar persistente
-    // Por ejemplo, podrías utilizar una variable global o algún mecanismo de almacenamiento persistente.
-    localStorage.setItem("ultimaNumeracion", ultimaNumeracion);
+// Función para generar un número único de 4 dígitos
+function generarNumeroUnico() {
+    return Math.floor(Math.random() * 9000) + 1000;
 }
 
+// Función para actualizar el campo de codificación
+function actualizarCodigoCodificacion() {
+    var codigoArea = obtenerCodigoArea();
+    var codigoPeriodo = obtenerCodigoPeriodo();
+    var numeroUnico = generarNumeroUnico();
+    var codigoBase = `FIS-${codigoArea}-${codigoPeriodo}-${numeroUnico.toString().padStart(4, '0')}`;
 
+    // Actualizar el valor del campo de codificación
+    document.getElementById("codigoCodificacion").value = codigoBase;
+}
 
+// Evento change para el elemento periodo
+document.getElementById("periodo").addEventListener("change", function () {
+    actualizarCodigoCodificacion();
+});
+
+// Llama a la función inicialmente para establecer el valor inicial
+actualizarCodigoCodificacion();
