@@ -217,7 +217,7 @@ function actualizarPeriodo() {
 
 function obtenerCodigoArea() {
     var areaSelect = document.getElementById("area");
-    var codigoArea =areaSelect.value.toUpperCase().slice(0, 0);
+    var codigoArea = areaSelect.value.toUpperCase().slice(0, 0);
 
     // Agregar sufijo según la selección en areaSelect
     if (areaSelect.value === "Decanato") {
