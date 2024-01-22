@@ -58,7 +58,7 @@ function actualizarTipoDocumento(areaSelect) {
     //Jefatura de Departamento
     else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "c") {
         var opcionesTipoDocumento = ["opciónA3", "opciónB3", "opciónC3"];
-    } else if (areaSelecte === "Jefatura de Departamento" && subAreaSelect.value === "d") {
+    } else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "d") {
         var opcionesTipoDocumento = ["opciónA4", "opciónB4", "opciónC4"];
     }
 
