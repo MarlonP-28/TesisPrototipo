@@ -39,7 +39,7 @@ usersCtrl.deletUser = async (req, res) => {
   console.log(" deletUser isAdmin: ", auth.isAdmin(req.user.rol))
   if (auth.isAdmin(req.user.rol)) {
     await User.findByIdAndDelete(req.params.id);
-    req.flash("success_msg", "!Usuario eliminado con exito¡"); //mensajes que todo esta ok
+    req.flash("success_msg", "!Usuario eliminado con exito¡"); 
     res.redirect("/administration");
   } else {
     res.redirect("/notes")
@@ -47,7 +47,7 @@ usersCtrl.deletUser = async (req, res) => {
   await User.findByIdAndDelete(req.params.id);
   if (auth.isAdmin(req.user.rol)) {
     await User.findByIdAndDelete(req.params.id);
-    req.flash("success_msg", "!Usuario eliminado con exito¡"); //mensajes que todo esta ok
+    req.flash("success_msg", "!Usuario eliminado con exito¡"); 
     res.redirect("/administration");
   } else {
     res.redirect("/notes")
@@ -60,7 +60,7 @@ usersCtrl.logOut = (req, res) => {
     if (err) {
       return next(err);
     }
-    req.flash("success_msg", "You are logged out now.");
+    req.flash("success_msg", "Sesión cerrado con éxito.");
     res.redirect("/users/signin");
   });
 };

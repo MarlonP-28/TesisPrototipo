@@ -18,7 +18,7 @@
                     </select>
                     <br>
                 </div>
-<!--
+                <!--
                 <div class="mb-3">
                     <label for="area">Área:</label>
                     <select id="area" name="area" onchange="actualizarSubArea()">
@@ -33,7 +33,8 @@
 
                 <div class="mb-3">
                     <label for="subArea">Subárea:</label>
-                    <select id="subArea" name="subArea" onchange="actualizarTipoDocumento('{{#each user}}{{rol}}{{/each}}')">
+                    <select id="subArea" name="subArea"
+                        onchange="actualizarTipoDocumento('{{#each user}}{{rol}}{{/each}}')">
                         <!-- Las opciones se actualizarán dinámicamente mediante JavaScript -->
                     </select>
                     <br>
@@ -41,7 +42,8 @@
 
                 <div class="mb-3">
                     <label for="tipoDocumento">Tipo de Documento:</label>
-                    <select id="tipoDocumento" name="tipoDocumento" onchange="actualizarSubtipoDocumento('{{#each user}}{{rol}}{{/each}}')">
+                    <select id="tipoDocumento" name="tipoDocumento"
+                        onchange="actualizarSubtipoDocumento('{{#each user}}{{rol}}{{/each}}')">
                         <!-- Las opciones se actualizarán dinámicamente mediante JavaScript -->
                     </select>
                     <br>
@@ -49,7 +51,8 @@
 
                 <div class="mb-3">
                     <label for="subTipoDocumento">Subtipo de Documento:</label>
-                    <select id="subTipoDocumento" name="subTipoDocumento" onchange="actualizarPeriodo('{{#each user}}{{rol}}{{/each}}')">
+                    <select id="subTipoDocumento" name="subTipoDocumento"
+                        onchange="actualizarPeriodo('{{#each user}}{{rol}}{{/each}}')">
                         <!-- Las opciones se actualizarán dinámicamente mediante JavaScript -->
                     </select>
                     <br>
@@ -57,7 +60,8 @@
 
                 <div class="mb-3">
                     <label for="periodo">Perido/Año:</label>
-                    <select id="periodo" name="periodo" onchange="actualizarCodigoCodificacion('{{#each user}}{{rol}}{{/each}}')">
+                    <select id="periodo" name="periodo"
+                        onchange="actualizarCodigoCodificacion('{{#each user}}{{rol}}{{/each}}')">
                         <!-- Las opciones se actualizarán dinámicamente mediante JavaScript -->
                     </select>
                     <br>
@@ -98,4 +102,4 @@
         </div>
     </div>
 </div>
-<script src="/js/script.js"></script>
+<script src="/js/script.js"></script>   

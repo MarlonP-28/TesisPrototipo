@@ -13,10 +13,10 @@ passport.use(
     async (email, password, done) => {
       const user = await User.findOne({ email: email });
       if (!user) {
-        return done(null, false, { message: "Not User Found" });
+        return done(null, false, { message: "El correo ingresado es incorrecto" });
       }
       else if(user.state=="0"){
-        return done(null, false, { message: "Inactive user" });
+        return done(null, false, { message: "El usuario no esta activo" });
       }
       
       else {//verifica si la clave ingresada coincide con la bd
@@ -24,7 +24,7 @@ passport.use(
         if (match) {
           return done(null, user);
         } else {
-          return done(null, false, { message: "Incorrec Password" });
+          return done(null, false, { message: "La contraseña ingresada es incorrecta" });
         }
       }
     }

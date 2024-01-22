@@ -1,6 +1,5 @@
 function actualizarSubArea(areaSelect) {
     var carreraSelect = document.getElementById("carrera");
-
     var subAreaSelect = document.getElementById("subArea");
 
     // Limpiar opciones anteriores
@@ -35,7 +34,7 @@ function actualizarSubArea(areaSelect) {
 
 function actualizarTipoDocumento(areaSelect) {
     var subAreaSelect = document.getElementById("subArea");
-    console.log('tipoDoc ' + areaSelect +' '+ subAreaSelect.value);
+    console.log('tipoDoc ' + areaSelect + ' ' + subAreaSelect.value);
     var tipoDocumentoSelect = document.getElementById("tipoDocumento");
 
     // Limpiar opciones anteriores
