@@ -1,12 +1,15 @@
 const notesCtrl = {};
 const Note = require("../models/Note");
+const User = require("../models/User");
 const fs = require('fs');
 const path = require('path');
 const notesDir = './src/uploads/';
 
 //Esta funcion se encarga de renderizar un archivo
 notesCtrl.renderNoteFrom = (req, res) => {
-  res.render("notes/new-notes");
+  //obtener los datos del usuario que esta logueado
+  const user = req.user;
+  res.render("notes/new-notes", { user });
 };
 //Esta función se encarga de crear una nuevo archivo en la base de datos.
 notesCtrl.createNewNotes = async (req, res) => {
@@ -70,7 +73,7 @@ notesCtrl.createNewNotes = async (req, res) => {
 //Esta función consulta todos los archivos en la base de datos en base al rol y facultad
 notesCtrl.renderNotes = async (req, res) => {
   const user = req.user;
-  
+  console.log(user);
   if (user.rol === "Admin") {
     const notes = await Note.find()//Se filtran los archivos por facultad
       //.sort({ createdAt: "desc" })
