@@ -1,35 +1,23 @@
 <div class="col-md-4 mx-auto">
     <div class="card">
+
         <div class="card-header bg-dark text-center">
             <h3 class="text-white">Nuevo Archivo</h3>
         </div>
-
-
 
         <div class="card-body text-right">
             <form action="/notes/new-notes" method="POST" enctype="multipart/form-data">
 
                 <div class="mb-3">
                     <label for="carrera">Carrera:</label>
-                    <select id="carrera" name="carrera" onchange="actualizarSubArea('{{#each user}}{{rol}}{{/each}}')">
+                    <select id="carrera" name="carrera" onchange="actualizarSubArea('{{#each user}}{{rol}}{{/each}}')"
+                        required>
                         <option value=""></option>
                         <option value="Computación">Computación</option>
                         <option value="Software">Software</option>
                     </select>
                     <br>
                 </div>
-                <!--
-                <div class="mb-3">
-                    <label for="area">Área:</label>
-                    <select id="area" name="area" onchange="actualizarSubArea()">
-                        <option value=""></option>
-                        <option value="Decanato">Decanato</option>
-                        <option value="Subdecanato">Subdecanato</option>
-                        <option value="Jefatura de Departamento">Jefatura de Departamento</option>
-                    </select>
-                    <br>
-                </div>
--->
 
                 <div class="mb-3">
                     <label for="subArea">Subárea:</label>
@@ -75,7 +63,7 @@
 
                 <div class="mb-3">
                     <label for="pdfArchivo">Archivo PDF:</label>
-                    <input type="file" id="pdfArchivo" name="pdfArchivo" accept=".pdf">
+                    <input type="file" id="pdfArchivo" name="pdfArchivo" accept=".pdf" required>
                     <br>
                 </div>
 
@@ -88,14 +76,14 @@
 
                 <div class="mb-3">
                     <label for="asunto">Asunto:</label>
-                    <textarea id="asunto" name="asunto" rows="3" cols="35"required></textarea>
+                    <textarea id="asunto" name="asunto" rows="3" cols="35" required></textarea>
                     <!-- Puedes ajustar rows y cols según tus necesidades -->
                     <br>
                 </div>
 
                 <div class="mb-3">
                     <label for="observaciones">Observaciones:</label>
-                    <textarea id="observaciones" name="observaciones" rows="3" cols="35"required></textarea>
+                    <textarea id="observaciones" name="observaciones" rows="3" cols="35" required></textarea>
                     <!-- Puedes ajustar rows y cols según tus necesidades -->
                     <br>
                 </div>
@@ -109,4 +97,5 @@
         </div>
     </div>
 </div>
+
 <script src="/js/script.js"></script>

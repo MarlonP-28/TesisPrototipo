@@ -14,42 +14,7 @@ notesCtrl.renderNoteFrom = (req, res) => {
 //Esta función se encarga de crear una nuevo archivo en la base de datos.
 notesCtrl.createNewNotes = async (req, res) => {
 
-  const {carrera, subArea, tipoDocumento, subTipoDocumento, periodo, codigoCodificacion, numPaginas, asunto, observaciones } = req.body;
-  const errors = [];
-  if (!carrera) {
-    errors.push({ text: "Escoja una carrera." });
-  }
-  if (!subArea) {
-    errors.push({ text: "Escoja una subárea." });
-  }
-  if (!tipoDocumento) {
-    errors.push({ text: "Escoja un tipo de documento." });
-  }
-  if (!subTipoDocumento) {
-    errors.push({ text: "Escoja un subtipo de documento." });
-  }
-  if (!periodo) {
-    errors.push({ text: "Escoja un periodo." });
-  }
-  if (!asunto) {
-    errors.push({ text: "Escriba un asunto." });
-  }
-  if (!observaciones) {
-    errors.push({ text: "Escriba una observación." });
-  }
-  if (errors.length > 0)
-    return res.render("notes/new-notes", {
-      errors,
-      carrera,
-      subArea,
-      tipoDocumento,
-      subTipoDocumento,
-      periodo,
-      numPaginas,
-      asunto,
-      observaciones
-    });
-
+  const { carrera, subArea, tipoDocumento, subTipoDocumento, periodo, codigoCodificacion, numPaginas, asunto, observaciones } = req.body;
 
   const archivo = req.files.pdfArchivo;
   const pdfArchivo = archivo.name;
@@ -59,13 +24,13 @@ notesCtrl.createNewNotes = async (req, res) => {
       return res.status(500).send(err);
     }
   });
-  
+
   //se obtiene parametros de usuarios
   const user = req.user.id;
   const facultad = req.user.facultad;
   const area = req.user.rol;
 
-  const newNote = new Note({ facultad, carrera, area, subArea, tipoDocumento, subTipoDocumento, periodo,codigoCodificacion, pdfArchivo, numPaginas, asunto, observaciones, user });
+  const newNote = new Note({ facultad, carrera, area, subArea, tipoDocumento, subTipoDocumento, periodo, codigoCodificacion, pdfArchivo, numPaginas, asunto, observaciones, user });
   //Guardar en la base de datos
   await newNote.save();
   req.flash("success_msg", "!Archivo creado con exito¡");
@@ -79,12 +44,12 @@ notesCtrl.renderNotes = async (req, res) => {
     const notes = await Note.find()//Se filtran los archivos por facultad
       //.sort({ createdAt: "desc" })
       .lean();
-    return res.render("notes/all-notes", { notes});
+    return res.render("notes/all-notes", { notes });
   } else {
     const notes = await Note.find({ area: user.rol })//Se filtran los archivos por rol
       //.sort({ createdAt: "desc" })
       .lean();
-    res.render("notes/all-notes", { notes});
+    res.render("notes/all-notes", { notes });
   }
 
 };
