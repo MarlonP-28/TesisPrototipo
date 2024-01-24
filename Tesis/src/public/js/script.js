@@ -262,11 +262,3 @@ function actualizarCodigoCodificacion(areaSelect) {
         document.getElementById("codigoCodificacion").value = codigoBase;
     }
 }
-
-// Evento change para el elemento periodo
-//document.getElementById("periodo").addEventListener("change", function () {
-//    actualizarCodigoCodificacion();
-//});
-
-// Llama a la función inicialmente para establecer el valor inicial
-//actualizarCodigoCodificacion();
