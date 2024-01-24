@@ -39,6 +39,10 @@ const NoteSchema = new Schema(
       type: String,
       required: true,
     },
+    numPaginas: {
+      type: Number,
+      required: false,
+    },
     asunto: {
       type: String,
       required: true,

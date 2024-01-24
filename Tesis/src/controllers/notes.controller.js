@@ -14,7 +14,7 @@ notesCtrl.renderNoteFrom = (req, res) => {
 //Esta función se encarga de crear una nuevo archivo en la base de datos.
 notesCtrl.createNewNotes = async (req, res) => {
 
-  const {carrera, subArea, tipoDocumento, subTipoDocumento, periodo, codigoCodificacion, asunto, observaciones } = req.body;
+  const {carrera, subArea, tipoDocumento, subTipoDocumento, periodo, codigoCodificacion, numPaginas, asunto, observaciones } = req.body;
   const errors = [];
   if (!carrera) {
     errors.push({ text: "Escoja una carrera." });
@@ -45,6 +45,7 @@ notesCtrl.createNewNotes = async (req, res) => {
       tipoDocumento,
       subTipoDocumento,
       periodo,
+      numPaginas,
       asunto,
       observaciones
     });
@@ -64,7 +65,7 @@ notesCtrl.createNewNotes = async (req, res) => {
   const facultad = req.user.facultad;
   const area = req.user.rol;
 
-  const newNote = new Note({ facultad, carrera, area, subArea, tipoDocumento, subTipoDocumento, periodo,codigoCodificacion, pdfArchivo, asunto, observaciones, user });
+  const newNote = new Note({ facultad, carrera, area, subArea, tipoDocumento, subTipoDocumento, periodo,codigoCodificacion, pdfArchivo, numPaginas, asunto, observaciones, user });
   //Guardar en la base de datos
   await newNote.save();
   req.flash("success_msg", "!Archivo creado con exito¡");
