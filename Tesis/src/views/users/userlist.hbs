@@ -6,6 +6,7 @@
   <table id="userTable" class="table">
     <thead>
       <tr class="mt-4">
+        <th>N°</th>
         <th>Nombre</th>
         <th>Facultad</th>
         <th>Rol</th>
@@ -17,6 +18,7 @@
     <tbody>
       {{#each users}}
       <tr>
+        <td>{{@index}}</td>
         <td>{{name}}</td>
         <td>{{facultad}}</td>
         <td>{{rol}}</td>

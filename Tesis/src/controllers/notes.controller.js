@@ -20,13 +20,17 @@ notesCtrl.createNewNotes = async (req, res) => {
 
   var { carrera, subArea, tipoDocumento, subTipoDocumento, periodo, codigoCodificacion, numPaginas, asunto, observaciones } = req.body;
 
-  //lista las notas que tienen la misma facultad, area y periodo
-  const notes = await Note.find({ facultad: facultad, area: area, periodo: periodo }).lean();
-  //cuenta la cantidad de notas que tienen la misma facultad, area y periodo
-  const cantidadNotas = notes.length;
-  console.log(cantidadNotas);
-  //al codigo de codificacion se le agrega la cantidad de notas que tienen la misma facultad, area y periodo
-  codigoCodificacion = codigoCodificacion + "-" + (cantidadNotas + 1);
+  // Obtén la cantidad de notas que tienen la misma facultad, área y periodo
+const notes = await Note.find({ facultad, area, periodo }).lean();
+// Obtiene la cantidad de notas
+let cantidadNotas = notes.length;
+
+// Formatea la cantidad de notas para que tenga siempre cuatro dígitos
+const numeracion = (cantidadNotas + 1).toString().padStart(4, '0');
+
+// Concatena el resultado con el guión y la parte existente de 'codigoCodificacion'
+codigoCodificacion = `${codigoCodificacion}-${numeracion}`;
+
   const archivo = req.files.pdfArchivo;
   const pdfArchivo = archivo.name;
 
