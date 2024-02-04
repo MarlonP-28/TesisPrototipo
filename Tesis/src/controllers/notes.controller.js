@@ -13,22 +13,31 @@ notesCtrl.renderNoteFrom = (req, res) => {
 };
 //Esta función se encarga de crear una nuevo archivo en la base de datos.
 notesCtrl.createNewNotes = async (req, res) => {
+  //se obtiene parametros de usuarios
+  const user = req.user.id;
+  const facultad = req.user.facultad;
+  const area = req.user.rol;
 
-  const { carrera, subArea, tipoDocumento, subTipoDocumento, periodo, codigoCodificacion, numPaginas, asunto, observaciones } = req.body;
+  var { carrera, subArea, tipoDocumento, subTipoDocumento, periodo, codigoCodificacion, numPaginas, asunto, observaciones } = req.body;
 
+  //lista las notas que tienen la misma facultad, area y periodo
+  const notes = await Note.find({ facultad: facultad, area: area, periodo: periodo }).lean();
+  //cuenta la cantidad de notas que tienen la misma facultad, area y periodo
+  const cantidadNotas = notes.length;
+  console.log(cantidadNotas);
+  //al codigo de codificacion se le agrega la cantidad de notas que tienen la misma facultad, area y periodo
+  codigoCodificacion = codigoCodificacion + "-" + (cantidadNotas + 1);
   const archivo = req.files.pdfArchivo;
   const pdfArchivo = archivo.name;
 
-  archivo.mv('src/uploads/' + pdfArchivo, (err) => {
+  archivo.mv('src/uploads/' + codigoCodificacion+".pdf", (err) => {
     if (err) {
       return res.status(500).send(err);
     }
   });
 
-  //se obtiene parametros de usuarios
-  const user = req.user.id;
-  const facultad = req.user.facultad;
-  const area = req.user.rol;
+  
+  
 
   const newNote = new Note({ facultad, carrera, area, subArea, tipoDocumento, subTipoDocumento, periodo, codigoCodificacion, pdfArchivo, numPaginas, asunto, observaciones, user });
   //Guardar en la base de datos
@@ -76,12 +85,12 @@ notesCtrl.deleteNote = async (req, res) => {
 notesCtrl.viewNote = async (req, res) => {
   try {
     const note = await Note.findById(req.params.id);
-    console.log(note.pdfArchivo);
-    if (!note || !note.pdfArchivo) {
+    console.log(note.codigoCodificacion);
+    if (!note || !note.codigoCodificacion) {
       return res.status(404).send('El nombre del archivo no está disponible en la base de datos');
     }
 
-    const pdfPath = path.join(notesDir, note.pdfArchivo);
+    const pdfPath = path.join(notesDir, note.codigoCodificacion)+".pdf";
 
     fs.readFile(pdfPath, (err, data) => {
       if (err) {
@@ -90,7 +99,7 @@ notesCtrl.viewNote = async (req, res) => {
       }
 
       res.setHeader('Content-Type', 'application/pdf');
-      res.setHeader('Content-Disposition', `inline; filename=${note.pdfArchivo}`);
+      res.setHeader('Content-Disposition', `inline; filename=${note.codigoCodificacion}`);
       res.send(data);
     });
   } catch (err) {
