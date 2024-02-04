@@ -243,9 +243,11 @@ function obtenerCodigoPeriodo() {
 }
 
 // Función para generar un número único de 4 dígitos
+/*
 function generarNumeroUnico() {
     return Math.floor(Math.random() * 9000) + 1000;
 }
+*/
 
 // Función para actualizar el campo de codificación
 function actualizarCodigoCodificacion(areaSelect) {
@@ -255,8 +257,9 @@ function actualizarCodigoCodificacion(areaSelect) {
     } else {
         var codigoArea = obtenerCodigoArea(areaSelect);
         var codigoPeriodo = obtenerCodigoPeriodo();
-        var numeroUnico = generarNumeroUnico();
-        var codigoBase = `FIS-${codigoArea}-${codigoPeriodo}-${numeroUnico.toString().padStart(4, '0')}`;
+        //var numeroUnico = generarNumeroUnico();
+        //var codigoBase = `FIS-${codigoArea}-${codigoPeriodo}-${numeroUnico.toString().padStart(4, '0')}`;
+        var codigoBase = `FIS-${codigoArea}-${codigoPeriodo}`;
 
         // Actualizar el valor del campo de codificación
         document.getElementById("codigoCodificacion").value = codigoBase;
