@@ -4,12 +4,13 @@ const User = require("../models/User");
 const fs = require('fs');
 const path = require('path');
 const notesDir = './src/uploads/';
+const auth = require("../helpers/auth");
 
 //Esta funcion se encarga de renderizar un archivo
 notesCtrl.renderNoteFrom = (req, res) => {
   //obtener los datos del usuario que esta logueado
   const user = req.user;
-  res.render("notes/new-notes", { user });
+  res.render("notes/new-notes");
 };
 //Esta función se encarga de crear una nuevo archivo en la base de datos.
 notesCtrl.createNewNotes = async (req, res) => {

@@ -21,7 +21,6 @@ usersCtrl.redirect = (req, res) => {
     res.redirect("/administration")
   } else {
     res.redirect("/notes")
-
   }
 }
 

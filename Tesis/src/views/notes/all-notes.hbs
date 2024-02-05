@@ -21,7 +21,38 @@
                 <th>Acciones</th>
             </tr>
         </thead>
+        
+       {{#if isAdmin}}
+        <tbody>
+            {{#each notes}}
+            <tr>
+                <td>{{@index}}</td>
+                <td>{{facultad}}</td>
+                <td>{{carrera}}</td>
+                <td>{{area}}</td>
+                <td>{{subArea}}</td>
+                <td>{{tipoDocumento}}</td>
+                <td>{{subTipoDocumento}}</td>
+                <td>{{periodo}}</td>
+                <td>{{codigoCodificacion}}</td>
+                <td>{{numPaginas}}</td>
+                <td>{{asunto}}</td>
+                <td>{{observaciones}}</td>
+                <td>
+                    <div class="btn-group" role="group">
 
+                        <a href="/notes/view/{{_id}}" class="btn btn-info btn-sm common-btn" target="_blank">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <span class="ml-2">Visualizar</span>
+                        </a>
+
+                    </div>
+
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+        {{else}}
         <tbody>
             {{#each notes}}
             <tr>
@@ -65,7 +96,6 @@
                             }
                         </script>
 
-
                         <a href="/notes/view/{{_id}}" class="btn btn-info btn-sm common-btn" target="_blank">
                             <i class="fa-solid fa-magnifying-glass"></i>
                             <span class="ml-2">Visualizar</span>
@@ -77,6 +107,7 @@
             </tr>
             {{/each}}
         </tbody>
+        {{/if}}
     </table>
 </div>
 
