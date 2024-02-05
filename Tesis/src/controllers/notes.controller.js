@@ -54,10 +54,11 @@ notesCtrl.renderNotes = async (req, res) => {
   const user = req.user;
   console.log(user);
   if (user.rol === "Admin") {
-    const notes = await Note.find()//Se filtran los archivos por facultad
+    //const notes = await Note.find()//Se filtran los archivos por facultad
       //.sort({ createdAt: "desc" })
-      .lean();
-    return res.render("notes/all-notes", { notes });
+    //  .lean();
+    //return res.render("notes/all-notes", { notes });
+    res.redirect("/administration")
   } else {
     const notes = await Note.find({ area: user.rol })//Se filtran los archivos por rol
       //.sort({ createdAt: "desc" })
