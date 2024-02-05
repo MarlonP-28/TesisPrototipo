@@ -26,7 +26,13 @@ notesCtrl.createNewNotes = async (req, res) => {
   const cantidadNotas = notes.length;
   console.log(cantidadNotas);
   //al codigo de codificacion se le agrega la cantidad de notas que tienen la misma facultad, area y periodo
-  codigoCodificacion = codigoCodificacion + "-" + (cantidadNotas + 1);
+  if (cantidadNotas < 9) {
+    codigoCodificacion = codigoCodificacion + "-000" + (cantidadNotas + 1);
+  }else if (cantidadNotas < 99) {
+    codigoCodificacion = codigoCodificacion + "-00" + (cantidadNotas + 1);
+  }else if (cantidadNotas < 999) {
+    codigoCodificacion = codigoCodificacion + "-0" + (cantidadNotas + 1);
+  }
   const archivo = req.files.pdfArchivo;
   const pdfArchivo = archivo.name;
 
