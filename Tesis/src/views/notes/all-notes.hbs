@@ -95,15 +95,15 @@
 <script type="text/javascript" charset="utf8"
     src="https://cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json"></script>
 
-
 <script src="/js/script.js"></script>
 <script>
-    // Configuración de DataTablesa
+    // Configuración de DataTables
     $(document).ready(function () {
         $('#archiveTable').DataTable({
             language: {
                 url: "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json"
-            }
+            },
+            scrollX: true // Esta opción permite que la barra de desplazamiento horizontal aparezca
         });
     });
 </script>
