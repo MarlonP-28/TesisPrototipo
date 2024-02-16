@@ -62,9 +62,15 @@
 
                 <div class="mb-3">
                     <label for="periodo">Perido/Año:</label>
-                    <select id="periodo" name="periodo">
+                    <select id="periodo" name="periodo" onchange="actualizarCodigoCodificacion('{{note.area}}')">
                         <!-- Las opciones se actualizarán dinámicamente mediante JavaScript -->
                     </select>
+                    <br>
+                </div>
+
+                <div class="mb-3">
+                    <label for="codigoCodificacion">Codificación:</label>
+                    <input type="text" id="codigoCodificacion" name="codigoCodificacion" readonly>
                     <br>
                 </div>
 

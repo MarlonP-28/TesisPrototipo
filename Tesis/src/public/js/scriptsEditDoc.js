@@ -158,11 +158,11 @@ function actualizarSubtipoDocumento(area,subTipoDocumento,periodo) {
         }
         subTipoDocumentoSelect.add(opcion);
     }
-    actualizarPeriodo(periodoSelected)
+    actualizarPeriodo(area,periodoSelected)
     
 }
 
-function actualizarPeriodo(periodo) {
+function actualizarPeriodo(area,periodo) {
     var periodoSelected=periodo;
     console.log(periodoSelected);
     var tipoDocumentoSelect = document.getElementById("tipoDocumento");
@@ -223,8 +223,42 @@ function actualizarPeriodo(periodo) {
         }
         periodoSelect.add(opcion);
     }
+    actualizarCodigoCodificacion(area);
 }
 
 
-// Llamar a actualizarArea al cargar la página para establecer las opciones iniciales
-//actualizarSubArea();
+function obtenerCodigoArea(areaSelect) {
+    var codigoArea = areaSelect.toUpperCase().slice(0, 0);
+
+    // Agregar sufijo según la selección en areaSelect
+    if (areaSelect === "Decanato") {
+        codigoArea += "DC";
+    } else if (areaSelect === "Subdecanato") {
+        codigoArea += "SBD";
+    } else if (areaSelect === "Jefatura de Departamento") {
+        codigoArea += "JDD";
+    }
+    return codigoArea;
+}
+
+function obtenerCodigoPeriodo() {
+    var periodoSelect = document.getElementById("periodo");
+    var codigoPeriodo = periodoSelect.value;
+    return codigoPeriodo;
+}
+
+// Función para actualizar el campo de codificación
+function actualizarCodigoCodificacion(areaSelect) {
+    var carreraSelect = document.getElementById("carrera");
+    if (carreraSelect.value === "") {
+        document.getElementById("codigoCodificacion").value = "";
+    } else {
+        var codigoArea = obtenerCodigoArea(areaSelect);
+        var codigoPeriodo = obtenerCodigoPeriodo();
+       
+        var codigoBase = `FIS-${codigoArea}-${codigoPeriodo}`;
+
+        // Actualizar el valor del campo de codificación
+        document.getElementById("codigoCodificacion").value = codigoBase;
+    }
+}
