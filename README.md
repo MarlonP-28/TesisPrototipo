@@ -2,52 +2,33 @@
 ***
 El presente proyecto corresponde a un prototipo para gestionar los documentos físicos que se encuentran en posesión de la facultad de ingeniería en sistemas de la Escuela Politécnica Nacional.
 
-## Table of Contents
-1. [General Info](#general-info)
-2. [Technologies](#technologies)
-3. [Installation](#installation)
+## Contenidos
+1. [Requisitos](#requisitos)
+2. [Instalación](#instalación)
 4. [Collaboration](#collaboration)
 5. [FAQs](#faqs)
-### General Info
+### Requisitos
 ***
-Write down the general informations of your project. It is worth to always put a project status in the Readme file. This is where you can add it. 
-### Screenshot
-![Image text](https://www.united-internet.de/fileadmin/user_upload/Brands/Downloads/Logo_IONOS_by.jpg)
-## Technologies
+Para la ejecución del proyecto es necesario contar con
+* [NodeJS](https://nodejs.org/en)
+* [MongoDB](https://nodejs.org/en)
+  
+Adicional, se se desea modificar el código fuente del proyecto, es necesario contar con un editor de codigo. Se recomienda Visual Studio Code
+* [Visual Studio Code](https://nodejs.org/en)
+
+## Instalación
 ***
-A list of technologies used within the project:
-* [Technologie name](https://example.com): Version 12.3 
-* [Technologie name](https://example.com): Version 2.34
-* [Library name](https://example.com): Version 1234
-## Installation
-***
-A little intro about the installation. 
+Para ejecutar el proyecto es necesario clonar el repositorio y ejecutar, los comandos necesarios se presentan a continuación:
 ```
-$ git clone https://example.com
-$ cd ../path/to/the/file
-$ npm install
+$ git clone https://github.com/MarlonP-28/TesisPrototipo.git
 $ npm start
 ```
-Side information: To use the application in a special environment use ```lorem ipsum``` to start
+Nota: para ejecutar el segundo comando es necesario encontrase dentro del repositorio
 ## Collaboration
 ***
 Give instructions on how to collaborate with your project.
 > Maybe you want to write a quote in this part. 
 > It should go over several rows?
 > This is how you do it.
-## FAQs
-***
-A list of frequently asked questions
-1. **This is a question in bold**
-Answer of the first question with _italic words_. 
-2. __Second question in bold__ 
-To answer this question we use an unordered list:
-* First point
-* Second Point
-* Third point
-3. **Third question in bold**
-Answer of the third question with *italic words*.
-4. **Fourth question in bold**
-| Headline 1 in the tablehead | Headline 2 in the tablehead | Headline 3 in the tablehead |
-|:--------------|:-------------:|--------------:|
+
 | text-align left | text-align center | text-align right |
