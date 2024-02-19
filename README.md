@@ -2,7 +2,7 @@
 ***
 El presente proyecto corresponde a un prototipo para gestionar los documentos físicos que se encuentran en posesión de la facultad de ingeniería en sistemas de la Escuela Politécnica Nacional.
 
-# Contenidos
+## Contenidos
 1. [Requisitos](#requisitos)
 2. [Instalación](#instalación)
 4. [Importar usuarios](#importar-usuarios)
