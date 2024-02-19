@@ -9,7 +9,7 @@ El presente proyecto corresponde a un prototipo para gestionar los documentos f�
 5. [FAQs](#faqs)
 
 ## Requisitos
-***
+
 Para la ejecución del proyecto es necesario contar con
 * [NodeJS](https://nodejs.org/en)
 * [MongoDB](https://nodejs.org/en)
@@ -18,7 +18,7 @@ Adicional, se se desea modificar el código fuente del proyecto, es necesario co
 * [Visual Studio Code](https://nodejs.org/en)
 
 ## Instalación
-***
+
 Para ejecutar el proyecto es necesario clonar el repositorio y ejecutar, los comandos necesarios se presentan a continuación:
 ```
 $ git clone https://github.com/MarlonP-28/TesisPrototipo.git
@@ -26,12 +26,22 @@ $ npm start
 ```
 Nota: Para ejecutar el segundo comando es necesario encontrarse dentro del repositorio clonado
 ## Importar usuarios
-***
-Para poder iniciar sesión en el sistema de gestión documental es necesario contar con los usuarios del sistema, para esto existen algunos usuarios que han sido previamente creados. Estos se pueden importar en mongoDB, a continuación se muestra un ejemplo.
 
-![Texto alternativo](https://github.com/MarlonP-28/TesisPrototipo/blob/main/CAPTURAS/mongoDB.png)
+Para poder iniciar sesión en el sistema de gestión documental es necesario contar con los usuarios del sistema, para esto existen algunos usuarios que han sido previamente creados. A continuación se presentan los usuarios disponibles que se pueden utilizar en el sistema desarrollado, en caso de requerir mas usuarios estos pueden ser agregados haciendo uso de la cuenta "admin" la cual tiene rol de administrador.
 
-El JSON con los usuarios creados se muestra a continuación, este puede usarse en mongoDB
+|usuario|correo|contraseña|
+|---|---|---|
+|admin|admin@epn.edu.ec|@dminF1$2023|
+|jefatura|jefatura@epn.edu.ec|JefaturaF1$2023|
+|decanato|asistente.denacato@epn.edu.ec|Decanato$2023|
+|subdecanato|subdecanato@epn.edu.ec|Subdec@nato%2023|
+
+Los usuarios previamente creados deben ser importados en mongoDB, a continuación se muestra un ejemplo.
+
+![Usuario en MongoDB](https://github.com/MarlonP-28/TesisPrototipo/blob/main/CAPTURAS/mongoDB.png)
+
+El JSON con los usuarios creados se muestra a continuación:
+
 ```json
 [{
   "_id": {
@@ -144,4 +154,6 @@ El JSON con los usuarios creados se muestra a continuación, este puede usarse e
   "__v": 0
 }]
 ```
-## Importar usuarios
+
+## Funcionamiento
+
