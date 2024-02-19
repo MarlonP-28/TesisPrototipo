@@ -80,19 +80,19 @@
         <div class="mb-3">
           <label class="form-label">Tipo de usuario</label><br>
           {{#ifIn "editor" user.typeuser }}
-          <input type="checkbox" checked class="tipo" id="editor" name="tipo" value="editor">
+          <input type="radio" checked class="tipo" id="editor" name="tipo" value="editor">
           <label for="vehicle1"> Editor</label><br>
           {{else}}
-          <input type="checkbox" class="tipo" id="editor" name="tipo" value="editor">
+          <input type="radio" class="tipo" id="editor" name="tipo" value="editor">
           <label for="vehicle1"> Editor</label><br>
           {{/ifIn}}
 
 
           {{#ifIn "visualizador" user.typeuser }}
-          <input type="checkbox" checked class="tipo" id="visualizador" name="tipo" value="visualizador">
+          <input type="radio" checked class="tipo" id="visualizador" name="tipo" value="visualizador">
           <label for="vehicle2"> Visualizador</label><br>
           {{else}}
-          <input type="checkbox" class="tipo" id="visualizador" name="tipo" value="visualizador">
+          <input type="radio" class="tipo" id="visualizador" name="tipo" value="visualizador">
           <label for="vehicle2"> Visualizador</label><br>
           {{/ifIn}}
 
