@@ -13,18 +13,19 @@ El presente proyecto corresponde a un prototipo para gestionar los documentos f�
 Para la ejecución del proyecto es necesario contar con
 * [NodeJS](https://nodejs.org/en)
 * [MongoDB](https://nodejs.org/en)
+* [Git](https://git-scm.com)
   
 Adicional, se se desea modificar el código fuente del proyecto, es necesario contar con un editor de codigo. Se recomienda Visual Studio Code
 * [Visual Studio Code](https://nodejs.org/en)
 
 ## Instalación
 
-Para ejecutar el proyecto es necesario clonar el repositorio y ejecutar, los comandos necesarios se presentan a continuación:
+Para ejecutar el proyecto es necesario clonar el repositorio haciendo uso del comando `git clone` y ejecutarlo con el comando `npm start`, los comandos necesarios se presentan a continuación:
 ```
 $ git clone https://github.com/MarlonP-28/TesisPrototipo.git
 $ npm start
 ```
-Nota: Para ejecutar el segundo comando es necesario encontrarse dentro del repositorio clonado
+Nota: El comando `npm start` debe ser ejecutado dentro del repositorio clonado.
 ## Importar usuarios
 
 Para poder iniciar sesión en el sistema de gestión documental es necesario contar con los usuarios del sistema, para esto existen algunos usuarios que han sido previamente creados. A continuación se presentan los usuarios disponibles que se pueden utilizar en el sistema desarrollado, en caso de requerir mas usuarios estos pueden ser agregados haciendo uso de la cuenta "admin" la cual tiene rol de administrador.
@@ -38,7 +39,7 @@ Para poder iniciar sesión en el sistema de gestión documental es necesario con
 
 Los usuarios previamente creados deben ser importados en mongoDB, a continuación se muestra un ejemplo.
 
-![Usuario en MongoDB](https://github.com/MarlonP-28/TesisPrototipo/blob/main/CAPTURAS/mongoDB.png)
+![mongoDB](https://github.com/MarlonP-28/TesisPrototipo/assets/43424735/b36c01a8-8eb9-4ce2-a132-025b5c9c1e8e)
 
 El JSON con los usuarios creados se muestra a continuación:
 
@@ -157,3 +158,4 @@ El JSON con los usuarios creados se muestra a continuación:
 
 ## Funcionamiento
 
+A continuación se presenta un ejemplo sobre el funcionamiento del sistema
