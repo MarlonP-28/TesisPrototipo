@@ -6,7 +6,7 @@ El presente proyecto corresponde a un prototipo para gestionar los documentos f�
 1. [Requisitos](#requisitos)
 2. [Instalación](#instalación)
 4. [Importar usuarios](#importar-usuarios)
-5. [FAQs](#faqs)
+5. [Video demostrativo](#video-demostrativo)
 
 ## Requisitos
 
@@ -156,6 +156,9 @@ El JSON con los usuarios creados se muestra a continuación:
 }]
 ```
 
-## Funcionamiento
+## Video demostrativo
 
 A continuación se presenta un ejemplo sobre el funcionamiento del sistema
+
+https://github.com/MarlonP-28/TesisPrototipo/assets/43424735/29dd03c5-811c-42f3-be86-9d52e7eef65d
+
