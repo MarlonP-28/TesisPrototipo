@@ -3,4 +3,5 @@
 # Example .gitignore files: https://github.com/github/gitignore
 /.vscode/
 /tmp/
+capturas/
 ../node_modules
