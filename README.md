@@ -2,12 +2,13 @@
 ***
 El presente proyecto corresponde a un prototipo para gestionar los documentos físicos que se encuentran en posesión de la facultad de ingeniería en sistemas de la Escuela Politécnica Nacional.
 
-## Contenidos
+# Contenidos
 1. [Requisitos](#requisitos)
 2. [Instalación](#instalación)
 4. [Importar usuarios](#importar-usuarios)
 5. [FAQs](#faqs)
-### Requisitos
+
+## 1. Requisitos
 ***
 Para la ejecución del proyecto es necesario contar con
 * [NodeJS](https://nodejs.org/en)
@@ -16,15 +17,15 @@ Para la ejecución del proyecto es necesario contar con
 Adicional, se se desea modificar el código fuente del proyecto, es necesario contar con un editor de codigo. Se recomienda Visual Studio Code
 * [Visual Studio Code](https://nodejs.org/en)
 
-## Instalación
+## 2. Instalación
 ***
 Para ejecutar el proyecto es necesario clonar el repositorio y ejecutar, los comandos necesarios se presentan a continuación:
 ```
 $ git clone https://github.com/MarlonP-28/TesisPrototipo.git
 $ npm start
 ```
-Nota: para ejecutar el segundo comando es necesario encontrase dentro del repositorio
-## Importar usuarios
+Nota: Para ejecutar el segundo comando es necesario encontrarse dentro del repositorio clonado
+## 3. Importar usuarios
 ***
 Para poder iniciar sesión en el sistema de gestión documental es necesario contar con los usuarios del sistema, para esto existen algunos usuarios que han sido previamente creados. Estos se pueden importar en mongoDB, a continuación se muestra un ejemplo.
 
@@ -143,3 +144,4 @@ El JSON con los usuarios creados se muestra a continuación, este puede usarse e
   "__v": 0
 }]
 ```
+## 4. Importar usuarios
