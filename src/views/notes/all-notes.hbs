@@ -82,11 +82,27 @@
                                 <i class="fas fa-edit"></i>
                                 <span class="ml-2">Editar</span>
                             </a>
+                            <!-- DELETE REQUEST -->
+                            <form id="deleteForm" action="/notes/delete/{{_id}}?_method=DELETE" method="POST"
+                                class="d-inline">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="button" class="btn btn-danger btn-sm common-btn"
+                                    onclick="confirmDelete()">
+                                    <i class="fas fa-trash-alt"></i>
+                                    <span class="ml-2">Eliminar</span>
+                                </button>
+                            </form>
 
-                            <a href="/notes/delete/{{_id}}" class="btn btn-danger btn-sm common-btn">
-                                <i class="fa-solid fa-trash-can"></i>
-                                <span class="ml-2">Eliminar</span>
-                            </a>
+                            <!-- Script para mostrar el mensaje de confirmación -->
+                            <script>
+                                function confirmDelete() {
+                                    var result = confirm("¿Está seguro que desea eliminar este archivo?");
+                                    if (result) {
+                                        // Si el usuario hace clic en "Sí", entonces envía el formulario
+                                        document.getElementById("deleteForm").submit();
+                                    }
+                                }
+                            </script>
 
                         </div>
 
