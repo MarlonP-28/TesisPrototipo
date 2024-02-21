@@ -1,5 +1,5 @@
 <div>
-    <h1 class="titulo text-center">Historial de Archivos</h1>
+    <h1 class="titulo text-center">Historial de Documentos</h1>
 </div>
 
 <div class="table-responsive">
@@ -52,8 +52,7 @@
             </tr>
             {{/each}}
         </tbody>
-        {{/if}}
-        <!-- Si el usuario es editor, entonces muestra las opciones de editar,eliminar y visualizar-->
+        {{else}}
         {{#if isEditor}}
         <tbody>
             {{#each notes}}
@@ -94,8 +93,8 @@
                 </td>
             </tr>
             {{/each}}
-
-            {{else}}
+        </tbody>
+        {{else}}
         <tbody>
             {{#each notes}}
             <tr>
@@ -117,15 +116,15 @@
                         <i class="fa-solid fa-magnifying-glass"></i>
                         <span class="ml-2">Visualizar</span>
                     </a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+        {{/if}}
+        {{/if}}
+        <!-- Si el usuario es editor, entonces muestra las opciones de editar,eliminar y visualizar-->
 
-</div>
-
-</td>
-</tr>
-{{/each}}
-</tbody>
-{{/if}}
-</table>
+    </table>
 </div>
 
 {{#if isEditor}}

@@ -35,10 +35,7 @@ const NoteSchema = new Schema(
       required: true,
       unique: true,
     },
-    pdfArchivo: {
-      type: String,
-      required: true,
-    },
+
     numPaginas: {
       type: Number,
       required: false,
@@ -54,7 +51,11 @@ const NoteSchema = new Schema(
     user: {
       type: String,
       required: true,
-    }
+    },
+    estado: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,

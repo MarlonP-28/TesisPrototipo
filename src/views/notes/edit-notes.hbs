@@ -1,4 +1,3 @@
-
 {{#each errors}}
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
     {{text}}
@@ -19,9 +18,12 @@
                 <input type="hidden" name="_method" value="PUT" />
                 <!-- Add the following code for the fields you mentioned -->
 
+                <!--boton oculto que carga los campos de la base de datos-->
+                <a href="#" id="cargarCampos" class="btn btn-primary" onclick="actualizarSubArea('{{note.area}}','{{note.subArea}}','{{note.tipoDocumento}}','{{note.subTipoDocumento}}','{{note.periodo}}')" hidden>Abrir Página Web</a>
+
                 <div class="mb-3">
                     <label for="carrera">Carrera:</label>
-                    <select id="carrera" name="carrera" onchange="actualizarSubArea('{{note.area}}','{{note.subArea}}','{{note.tipoDocumento}}','{{note.subTipoDocumento}}',{{note.periodo}})">
+                    <select id="carrera" name="carrera">
                         {{#if_equal note.carrera "Computación"}}
                         <option value="Computación" selected>Computación</option>
                         <option value="Software">Software</option>
@@ -35,7 +37,8 @@
 
                 <div class="mb-3">
                     <label for="subArea">Subárea:</label>
-                    <select id="subArea" name="subArea" onchange="actualizarTipoDocumento('{{note.area}}','{{note.tipoDocumento}}','{{note.subTipoDocumento}}',{{note.periodo}})">
+                    <select id="subArea" name="subArea"
+                        onchange="actualizarTipoDocumento('{{note.area}}','{{note.tipoDocumento}}','{{note.subTipoDocumento}}','{{note.periodo}}')">
                         <!-- Las opciones se actualizarán dinámicamente mediante JavaScript -->
                     </select>
                     <br>
@@ -43,7 +46,8 @@
 
                 <div class="mb-3">
                     <label for="tipoDocumento">Tipo de Documento:</label>
-                    <select id="tipoDocumento" name="tipoDocumento" onchange="actualizarSubtipoDocumento('{{note.area}}','{{note.subTipoDocumento}}')">
+                    <select id="tipoDocumento" name="tipoDocumento"
+                        onchange="actualizarSubtipoDocumento('{{note.area}}','{{note.subTipoDocumento}}')">
                         <script>
                             console.log("{{note.subTipoDocumento}}");
                         </script>
@@ -54,7 +58,7 @@
 
                 <div class="mb-3">
                     <label for="subTipoDocumento">Subtipo de Documento:</label>
-                    <select id="subTipoDocumento" name="subTipoDocumento" >
+                    <select id="subTipoDocumento" name="subTipoDocumento">
                         <!-- Las opciones se actualizarán dinámicamente mediante JavaScript -->
                     </select>
                     <br>
@@ -97,4 +101,6 @@
         </div>
     </div>
 </div>
-<script src="/js/scriptsEditDoc.js"></script>
+<script src="/js/scriptsEditDoc.js">
+
+</script>

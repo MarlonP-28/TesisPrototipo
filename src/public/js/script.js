@@ -238,7 +238,7 @@ function obtenerCodigoArea(areaSelect) {
 
 function obtenerCodigoPeriodo() {
     var periodoSelect = document.getElementById("periodo");
-    var codigoPeriodo = periodoSelect.value;
+    var codigoPeriodo = periodoSelect.value.slice(0, 4);
     return codigoPeriodo;
 }
 

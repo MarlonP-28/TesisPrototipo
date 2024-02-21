@@ -7,7 +7,7 @@ indexCtrl.renderSignin = (req, res) => {
 indexCtrl.renderNotes = (req, res) => {
   res.render("notes/all-notes");
 };
-//redirige a la pagina historial de archvios
+//redirige a la pagina historial de documentos
 indexCtrl.renderNotes = (req, res) => {
   res.render("notes/all-notes");
 };

@@ -243,7 +243,7 @@ function obtenerCodigoArea(areaSelect) {
 
 function obtenerCodigoPeriodo() {
     var periodoSelect = document.getElementById("periodo");
-    var codigoPeriodo = periodoSelect.value;
+    var codigoPeriodo = periodoSelect.value.slice(0 ,4);
     return codigoPeriodo;
 }
 
@@ -262,3 +262,9 @@ function actualizarCodigoCodificacion(areaSelect) {
         document.getElementById("codigoCodificacion").value = codigoBase;
     }
 }
+
+
+window.addEventListener('load', function() {
+    // Simular un clic en el enlace al cargar la página
+    document.getElementById('cargarCampos').click();
+  });
