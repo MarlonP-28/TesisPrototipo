@@ -71,6 +71,7 @@ app.use((req, res, next) => {
   res.locals.error = req.flash("error");
   res.locals.user = req.user || null;
   res.locals.isAdmin = req.user && req.user.rol === 'Admin';
+  res.locals.isEditor = req.user && req.user.typeuser === 'editor';
   next();
 });
 

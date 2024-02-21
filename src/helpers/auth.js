@@ -13,4 +13,5 @@ helpers.isAdmin = (rol) => {
   return rol === 'Admin';
 };
 
+
 module.exports = helpers;
