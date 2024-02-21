@@ -128,7 +128,7 @@ notesCtrl.updateNote = async (req, res) => {
 };
 //Esta función se encarga de eliminar los archivos. 
 notesCtrl.deleteNote = async (req, res) => {
-  await Note.findByIdAndDelete(req.params.id);
+  await Note.findByIdAndUpdate(req.params.id, {estado: "0"});
   req.flash("success_msg", "!Archivo eliminado con exito¡"); //mensajes que todo esta ok
   res.redirect("/notes");
 };
