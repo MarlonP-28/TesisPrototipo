@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const notesDir = './src/uploads/';
 const auth = require("../helpers/auth");
+const { Console } = require("console");
 
 //Esta funcion se encarga de renderizar un archivo
 notesCtrl.renderNoteFrom = (req, res) => {
@@ -34,7 +35,7 @@ notesCtrl.createNewNotes = async (req, res) => {
   //documentos periodo B
   var auxB = anio + "-B"
   const notesB = await Note.find({ facultad: facultad, area: area, periodo: auxB }).lean();
-  
+
   //cuenta la cantidad de notas que tienen la misma facultad, area y anio
   const cantidadNotas = notesA.length + notesB.length + notesAnio.length;
 
@@ -47,23 +48,30 @@ notesCtrl.createNewNotes = async (req, res) => {
   } else if (cantidadNotas < 999) {
     codigoCodificacion = codigoCodificacion + "-0" + (cantidadNotas + 1);
   }
-  const archivo = req.files.archivoUpload;
+  const noteAux = await Note.find({ codigoCodificacion: codigoCodificacion }).lean();
+  console.log(noteAux);
+
+  if (noteAux.length > 0) {
+    req.flash("error_msg", "Error al renombrar al actualizar archivo, consulte al administrador");
+    res.redirect("/notes");
+
+  } else {
+    //se obtiene el archivo que se subio
+    const archivo = req.files.archivoUpload;
+    archivo.mv('src/uploads/' + codigoCodificacion + ".pdf", (err) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+    });
+
+    const newNote = new Note({ facultad, carrera, area, subArea, tipoDocumento, subTipoDocumento, periodo, codigoCodificacion, numPaginas, asunto, observaciones, user, estado: "1" });
+    //Guardar en la base de datos
+    await newNote.save();
+    req.flash("success_msg", "!Archivo creado con exito¡");
+    res.redirect("/notes"); //direcciona a notas automaticamente
+  }
 
 
-  archivo.mv('src/uploads/' + codigoCodificacion + ".pdf", (err) => {
-    if (err) {
-      return res.status(500).send(err);
-    }
-  });
-
-
-
-
-  const newNote = new Note({ facultad, carrera, area, subArea, tipoDocumento, subTipoDocumento, periodo, codigoCodificacion, numPaginas, asunto, observaciones, user, estado: "1"});
-  //Guardar en la base de datos
-  await newNote.save();
-  req.flash("success_msg", "!Archivo creado con exito¡");
-  res.redirect("/notes"); //direcciona a notas automaticamente
 };
 
 
@@ -90,45 +98,85 @@ notesCtrl.renderEditFrom = async (req, res) => {
   const note = await Note.findById(req.params.id).lean();
   res.render("notes/edit-notes", { note });
 };
+
+
 //Esta función se utiliza para actualizar los archivos existente en la base de datos
 notesCtrl.updateNote = async (req, res) => {
   const user = req.user.id;
   const facultad = req.user.facultad;
   const area = req.user.rol;
-  var {carrera, subArea, tipoDocumento, subTipoDocumento, periodo,codigoCodificacion, asunto, observaciones } = req.body;
-  //se obtiene los primeros 4 caracteres del año
-  var anio = periodo.slice(0, 4);
+  var { carrera, subArea, tipoDocumento, subTipoDocumento, periodo, codigoCodificacion, asunto, observaciones } = req.body;
 
-  //documentos del anio
-  const notesAnio = await Note.find({ facultad: facultad, area: area, periodo: anio }).lean();
+  const noteAux = await Note.findById(req.params.id);
 
-  //documentos periodo A
-  var auxA = anio + "-A"
-  const notesA = await Note.find({ facultad: facultad, area: area, periodo: auxA }).lean();
-
-  //documentos periodo B
-  var auxB = anio + "-B"
-  const notesB = await Note.find({ facultad: facultad, area: area, periodo: auxB }).lean();
-  
-  //cuenta la cantidad de notas que tienen la misma facultad, area y anio
-  const cantidadNotas = notesA.length + notesB.length + notesAnio.length;
-
-  console.log(cantidadNotas);
-  //al codigo de codificacion se le agrega la cantidad de notas que tienen la misma facultad, area y periodo
-  if (cantidadNotas < 9) {
-    codigoCodificacion = codigoCodificacion + "-000" + (cantidadNotas + 1);
-  } else if (cantidadNotas < 99) {
-    codigoCodificacion = codigoCodificacion + "-00" + (cantidadNotas + 1);
-  } else if (cantidadNotas < 999) {
-    codigoCodificacion = codigoCodificacion + "-0" + (cantidadNotas + 1);
+  //se verifica si se la codificacion del archivo ha cambiado
+  if (noteAux.codigoCodificacion.slice(0, -5) === codigoCodificacion) {
+    await Note.findByIdAndUpdate(req.params.id, { carrera, subArea, tipoDocumento, subTipoDocumento, periodo, asunto, observaciones });
+    req.flash("success_msg", "!Archivo actualizado con exito¡");
+    res.redirect("/notes");
   }
-  await Note.findByIdAndUpdate(req.params.id, {carrera, subArea, tipoDocumento, subTipoDocumento, periodo,codigoCodificacion, asunto, observaciones });
-  req.flash("success_msg", "!Archivo actualizado con exito¡");
-  res.redirect("/notes");
+
+  else {
+    console.log(noteAux.codigoCodificacion);
+    //se obtiene los primeros 4 caracteres del año
+    var anio = periodo.slice(0, 4);
+
+    //documentos del anio
+    const notesAnio = await Note.find({ facultad: facultad, area: area, periodo: anio }).lean();
+
+    //documentos periodo A
+    var auxA = anio + "-A"
+    const notesA = await Note.find({ facultad: facultad, area: area, periodo: auxA }).lean();
+
+    //documentos periodo B
+    var auxB = anio + "-B"
+    const notesB = await Note.find({ facultad: facultad, area: area, periodo: auxB }).lean();
+
+    //cuenta la cantidad de notas que tienen la misma facultad, area y anio
+    const cantidadNotas = notesA.length + notesB.length + notesAnio.length;
+
+    //console.log(cantidadNotas);
+
+    //al codigo de codificacion se le agrega la cantidad de notas que tienen la misma facultad, area y periodo
+    if (cantidadNotas < 9) {
+      codigoCodificacion = codigoCodificacion + "-000" + (cantidadNotas + 1);
+    } else if (cantidadNotas < 99) {
+      codigoCodificacion = codigoCodificacion + "-00" + (cantidadNotas + 1);
+    } else if (cantidadNotas < 999) {
+      codigoCodificacion = codigoCodificacion + "-0" + (cantidadNotas + 1);
+    }
+
+    const noteAux1 = await Note.find({ codigoCodificacion: codigoCodificacion }).lean();
+    console.log(noteAux);
+
+    if (noteAux1.length > 0) {
+      req.flash("error_msg", "Error al renombrar al actualizar archivo, consulte al administrador");
+      res.redirect("/notes");
+
+    } else {
+      //Funcion que cambia el nombre del archivo almacenado en el servidor
+      try {
+        fs.rename(path.join(notesDir, noteAux.codigoCodificacion) + ".pdf", path.join(notesDir, codigoCodificacion) + ".pdf", (err) => {
+          if (err) {
+            console.error('Error al renombrar el archivo:', err);
+          }
+        });
+        await Note.findByIdAndUpdate(req.params.id, { carrera, subArea, tipoDocumento, subTipoDocumento, periodo, codigoCodificacion, asunto, observaciones });
+        req.flash("success_msg", "!Archivo actualizado con exito¡");
+        res.redirect("/notes");
+      } catch (err) {
+        console.error('Error al renombrar al actualizar archivo, consulte al administrador', err);
+      }
+
+    }
+  }
 };
+
+
+
 //Esta función se encarga de eliminar los archivos. 
 notesCtrl.deleteNote = async (req, res) => {
-  await Note.findByIdAndUpdate(req.params.id, {estado: "0"});
+  await Note.findByIdAndUpdate(req.params.id, { estado: "0" });
   req.flash("success_msg", "!Archivo eliminado con exito¡"); //mensajes que todo esta ok
   res.redirect("/notes");
 };

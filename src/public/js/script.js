@@ -1,5 +1,3 @@
-const e = require("connect-flash");
-
 function actualizarSubArea(areaSelect) {
     var carreraSelect = document.getElementById("carrera");
     var subAreaSelect = document.getElementById("subArea");
@@ -42,6 +40,7 @@ function actualizarTipoDocumento(areaSelect) {
     // Limpiar opciones anteriores
 
     tipoDocumentoSelect.innerHTML = "";
+    
     //Decanato
     if (areaSelect === "Decanato" && subAreaSelect.value === "Secretaria de Decanato") {
         var opcionesTipoDocumento = ["Consejo de Facultad", "Solicitud de Estudiantes", "Procesos Electorales", "Inventario FIS"];
@@ -49,12 +48,14 @@ function actualizarTipoDocumento(areaSelect) {
         var opcionesTipoDocumento = ["Designación de Revisores Calificadores", "Expedientes de Grado", "Pensum", "Comisiones"];
 
     }
+
     //Subdecanato
     else if (areaSelect === "Subdecanato" && subAreaSelect.value === "Secretaría de Subdecanato") {
         var opcionesTipoDocumento = ["Memorandos", "Oficios Enviados", "Certificados", "Actas","Formularios recibidos","Control docente", "Notas", "Solicitudes"];
     } else if (areaSelect === "Subdecanato" && subAreaSelect.value === "Coordinaciones de Carrera") {
         var opcionesTipoDocumento = ["Memorando"];
     } 
+
     //Jefatura de Departamento
     else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "Secretaría de Departamento") {
         var opcionesTipoDocumento = ["Memorando", "Informe"];
@@ -71,6 +72,7 @@ function actualizarTipoDocumento(areaSelect) {
     } else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "Laboratorios de Investigación") {
         var opcionesTipoDocumento = ["Informe", "Memorando", "Contrataciones", "Solicitudes"];
     }
+
     console.log(opcionesTipoDocumento);
     // Crear y agregar opciones al select de tipoDocumento
     if (subAreaSelect.value === "") {
@@ -292,3 +294,18 @@ function actualizarCodigoCodificacion(areaSelect) {
         document.getElementById("codigoCodificacion").value = codigoBase;
     }
 }
+
+//mensaje de alerta si el archivo no es un pdf
+document.getElementById('archivoUpload').onchange = function () {
+    var fileInput = document.getElementById('archivoUpload');
+    var filePath = fileInput.value;
+    var allowedExtensions = /(\.pdf)$/i;
+
+    // Verifica si la extensión del archivo coincide con ".pdf"
+    if (!allowedExtensions.exec(filePath)) {
+        // Muestra el mensaje de error si la extensión no coincide
+        alert('El archivo debe ser un PDF.');
+        // Limpia el campo de entrada de archivo para que el usuario pueda seleccionar un nuevo archivo
+        fileInput.value = '';
+    }
+};
