@@ -199,7 +199,7 @@ notesCtrl.viewNote = async (req, res) => {
       }
 
       res.setHeader('Content-Type', 'application/pdf');
-      res.setHeader('Content-Disposition', `inline; filename=${note.codigoCodificacion}`);
+      res.setHeader('Content-Disposition', `inline; filename=${note.codigoCodificacion}.pdf`);
       res.send(data);
     });
   } catch (err) {
