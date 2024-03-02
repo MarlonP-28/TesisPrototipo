@@ -16,7 +16,6 @@ usersCtrl.signIn = passport.authenticate("local", {
 });
 
 usersCtrl.redirect = (req, res) => {
-  console.log(" redirect isAdmin: ", auth.isAdmin(req.user.rol))
   if (auth.isAdmin(req.user.rol)) {
     res.redirect("/administration")
   } else {
@@ -25,7 +24,6 @@ usersCtrl.redirect = (req, res) => {
 }
 
 usersCtrl.enlistUsers = async (req, res) => {
-  console.log(" enlistUsers isAdmin: ", auth.isAdmin(req.user.rol))
   if (auth.isAdmin(req.user.rol)) {
     const users = await User.find().lean();
     res.render("users/userlist", { users });
@@ -35,7 +33,6 @@ usersCtrl.enlistUsers = async (req, res) => {
 }
 
 usersCtrl.deletUser = async (req, res) => {
-  console.log(" deletUser isAdmin: ", auth.isAdmin(req.user.rol))
   if (auth.isAdmin(req.user.rol)) {
     await User.findByIdAndDelete(req.params.id);
     req.flash("success_msg", "!Usuario eliminado con exito¡"); 
@@ -65,7 +62,6 @@ usersCtrl.logOut = (req, res) => {
 };
 
 usersCtrl.updateView = async (req, res) => {
-  console.log(" updateView isAdmin: ", auth.isAdmin(req.user.rol))
   if (auth.isAdmin(req.user.rol)) {
     const user = await User.findById(req.params.id).lean();
     res.render("users/editusers", { user })
@@ -75,7 +71,6 @@ usersCtrl.updateView = async (req, res) => {
 };
 
 usersCtrl.addView = async (req, res) => {
-  console.log(" addView isAdmin: ", auth.isAdmin(req.user.rol))
   if (auth.isAdmin(req.user.rol)) {
     res.render("users/createusers")
   } else {
@@ -84,7 +79,6 @@ usersCtrl.addView = async (req, res) => {
 };
 
 usersCtrl.updateUser = async (req, res) => {
-  console.log(" updateUser isAdmin: ", auth.isAdmin(req.user.rol))
   if (auth.isAdmin(req.user.rol)) {
     const errors = [];
     var { name, facultad, email, rol, password, confirm_password, tipo, estado } = req.body;
@@ -104,7 +98,7 @@ usersCtrl.updateUser = async (req, res) => {
         //Devuelve los errores establecidos
         errors,
         name,
-        faculdad,
+        facultad,
         email,
         rol,
         password,
@@ -147,11 +141,10 @@ usersCtrl.updateUser = async (req, res) => {
 };
 
 usersCtrl.addUser = async (req, res) => {
-  console.log(" addUser isAdmin: ", auth.isAdmin(req.user.rol))
   if (auth.isAdmin(req.user.rol)) {
     const errors = [];
     const { name, facultad, email, rol, password, confirm_password, tipo, estado } = req.body;
-
+    
     if (password != confirm_password) {
       errors.push({ text: "Las contraseñas no coinciden" });
     }
@@ -161,7 +154,9 @@ usersCtrl.addUser = async (req, res) => {
     }
 
     if (errors.length > 0) {
-      res.render("users/userlist", {
+      console.log("NAME:", name)
+      console.log("rol:", rol)
+      res.render("users/createusers", {
         //Devuelve los errores establecidos
         errors,
         name,
@@ -169,14 +164,15 @@ usersCtrl.addUser = async (req, res) => {
         email,
         rol,
         password,
-        confirm_password,
+        estado,
+        tipo
       });
     } else {
       const emailUser = await User.findOne({ email: email });
 
       if (emailUser) {
         req.flash("error_msg", "El correo ingresado ya esta en uso");
-        res.redirect("/administration");
+        res.redirect("/administration/add");
       } else {
         const newUser = new User({
           "name": name,
@@ -194,7 +190,7 @@ usersCtrl.addUser = async (req, res) => {
       }
     }
   } else {
-    res.redirect("/notes")
+    res.redirect("/administration");
   }
 };
 

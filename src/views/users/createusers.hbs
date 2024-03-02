@@ -1,4 +1,6 @@
-<div class="col-md-4 mx-auto">
+
+
+<div class="container col-md-4 mx-auto">
   <div class="card">
     <div class="card-header bg-dark text-center">
       <h3 class="text-white">Agregar usuario</h3>
@@ -8,21 +10,21 @@
       <form method="post" action="/administration/add">
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Nombre</label>
-          <input class="form-control" name="name" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+          <input class="form-control" name="name" id="nombre" aria-describedby="emailHelp"  value="{{name}}" required >
         </div>
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label">Email</label>
-          <input type="email" class="form-control" name="email" id="exampleInputPassword1" required>
+          <input type="email" class="form-control" name="email" id="email" value="{{email}}" required>
         </div>
 
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-          <input type="password" class="form-control" name="password" id="exampleInputPassword1" required>
+          <input type="password" class="form-control" name="password" id="password" required>
         </div>
 
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label">Confirmar contraseña</label>
-          <input type="password" class="form-control" name="confirm_password" id="exampleInputPassword1" required>
+          <input type="password" class="form-control" name="confirm_password" id="confirm_password" required>
         </div>
 
         <div class="mb-3">
@@ -32,29 +34,37 @@
           </select>
         </div>
 
+        
+
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label">Rol</label>
-          <select class="form-select" aria-label="Default select example" name="rol">
-            <option value="Admin">Administrador</option>
-            <option value="Decanato">Decanato</option>
-            <option value="Subdecanato">Subdecanato</option>
-            <option value="Jefatura de Departamento">Jefatura de Departamento</option>
+          <select class="form-select" aria-label="Default select example" name="rol" required>
+              <option selected disabled value="">Seleccionar...</option>
+              <option value="Admin" {{#if_equal rol "Admin" }} selected {{/if_equal}}>Administrador</option>
+              <option value="Decanato" {{#if_equal rol "Decanato"}} selected {{/if_equal}}>Decanato</option>
+              <option value="Subdecanato" {{#if_equal rol "Subdecanato"}} selected {{/if_equal}}>Subdecanato</option>
+              <option value="Jefatura de Departamento" {{#if_equal rol "Jefatura de Departamento"}}selected{{/if_equal}}>Jefatura de Departamento</option>
           </select>
         </div>
+
         <div class="mb-3">
           <label class="form-label">Tipo de usuario</label><br>
-          <input type="radio" id="editor" name="tipo" value="editor">
+          <input type="radio" id="editor" name="tipo" value="editor" {{#if_equal tipo "editor" }} checked {{/if_equal}}>
           <label for="vehicle1"> Editor</label><br>
-          <input type="radio" id="visualizador" name="tipo" value="visualizador">
+          <input type="radio" id="visualizador" name="tipo" value="visualizador" {{#if_equal tipo "visualizador" }} checked {{/if_equal}}>
           <label for="vehicle2"> Visualizador</label><br>
         </div>
+
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label">Estado</label>
-          <select class="form-select" aria-label="Default select example" name="estado">
-            <option value="1">Activo</option>
-            <option value="0">Inactivo</option>
+          <select class="form-select" aria-label="Default select example" name="estado" required>
+            <option selected disabled value="">Seleccionar...</option>
+            <option value="1" {{#if_equal estado "1" }} selected {{/if_equal}} >Activo</option>
+            <option value="0" {{#if_equal estado "0" }} selected {{/if_equal}}>Inactivo</option>
           </select>
         </div>
+
+
         <div class="d-flex justify-content-between mb-3">
           <a class="btn btn-primary" href="/administration" role="button"> <i class="fas fa-times"></i> Cancelar</a>
           <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Guardar</button>
