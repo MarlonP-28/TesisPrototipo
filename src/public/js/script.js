@@ -1,3 +1,5 @@
+const e = require("connect-flash");
+
 function actualizarSubArea(areaSelect) {
     var carreraSelect = document.getElementById("carrera");
     var subAreaSelect = document.getElementById("subArea");
@@ -9,9 +11,9 @@ function actualizarSubArea(areaSelect) {
     if (areaSelect === "Decanato") {
         var opcionesSubArea = ["Secretaria de Decanato", "Secretaria de Titulación"];
     } else if (areaSelect === "Subdecanato") {
-        var opcionesSubArea = ["a", "b"]; // Aquí se debe manejar los diferentes cargos de subdecanato
+        var opcionesSubArea = ["Secretaría de Subdecanato", "Coordinaciones de Carrera"]; // Aquí se debe manejar los diferentes cargos de subdecanato
     } else if (areaSelect === "Jefatura de Departamento") {
-        var opcionesSubArea = ["c", "d"]; // Aquí se debe manejar los diferentes cargos de jefatura
+        var opcionesSubArea = ["Secretaría de Departamento", "Maestrías profesionalizantes","Maestrías de Investigación","Comité Doctoral", "Doctorado",  "Secretaría de Doctorado"]; // Aquí se debe manejar los diferentes cargos de jefatura
     }
 
     // Crear y agregar opciones al seleccionar subArea
@@ -48,19 +50,27 @@ function actualizarTipoDocumento(areaSelect) {
 
     }
     //Subdecanato
-    else if (areaSelect === "Subdecanato" && subAreaSelect.value === "a") {
-        var opcionesTipoDocumento = ["opciónA1", "opciónB1", "opciónC1"];
-    } else if (areaSelect === "Subdecanato" && subAreaSelect.value === "b") {
-        var opcionesTipoDocumento = ["opciónA2", "opciónB2", "opciónC2"];
-
-    }
+    else if (areaSelect === "Subdecanato" && subAreaSelect.value === "Secretaría de Subdecanato") {
+        var opcionesTipoDocumento = ["Memorandos", "Oficios Enviados", "Certificados", "Actas","Formularios recibidos","Control docente", "Notas", "Solicitudes"];
+    } else if (areaSelect === "Subdecanato" && subAreaSelect.value === "Coordinaciones de Carrera") {
+        var opcionesTipoDocumento = ["Memorando"];
+    } 
     //Jefatura de Departamento
-    else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "c") {
-        var opcionesTipoDocumento = ["opciónA3", "opciónB3", "opciónC3"];
-    } else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "d") {
-        var opcionesTipoDocumento = ["opciónA4", "opciónB4", "opciónC4"];
+    else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "Secretaría de Departamento") {
+        var opcionesTipoDocumento = ["Memorando", "Informe"];
+    } else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "Maestrías profesionalizantes") {
+        var opcionesTipoDocumento = ["Solicitudes", "Informe", "Memorando", "Reporte", "Exámenes"];
+    } else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "Maestrías de Investigación") {
+        var opcionesTipoDocumento = ["Informe", "Memorando", "Reporte", "Exámenes"];
+    } else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "Comité Doctoral") {
+        var opcionesTipoDocumento = ["Acta", "Convocatoria", "Curriculum Vitae", "Resolución"];
+    } else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "Doctorado") {
+        var opcionesTipoDocumento = ["Rúbrica", "Solicitud"];
+    } else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "Secretaría de Doctorado") {
+        var opcionesTipoDocumento = ["Memorando", "Oficios"];
+    } else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "Laboratorios de Investigación") {
+        var opcionesTipoDocumento = ["Informe", "Memorando", "Contrataciones", "Solicitudes"];
     }
-
     console.log(opcionesTipoDocumento);
     // Crear y agregar opciones al select de tipoDocumento
     if (subAreaSelect.value === "") {
@@ -112,34 +122,73 @@ function actualizarSubtipoDocumento(areaSelect) {
     }
 
     //opciones subdecanato
-    else if (areaSelect === "Subdecanato" && subAreaSelect.value === "a" && tipoDocumentoSelect.value === "opciónA1") {
-        var opcionesSubTipoDocumento = ["opciónA1.1", "opciónA1.2", "opciónA1.3"];
-    } else if (areaSelect === "Subdecanato" && subAreaSelect.value === "a" && tipoDocumentoSelect.value === "opciónB1") {
-        var opcionesSubTipoDocumento = ["opciónB1.1", "opciónB1.2", "opciónB1.3"];
-    } else if (areaSelect === "Subdecanato" && subAreaSelect.value === "a" && tipoDocumentoSelect.value === "opciónC1") {
-        var opcionesSubTipoDocumento = ["opciónC1.1", "opciónC1.2", "opciónC1.3"];
-    } else if (areaSelect === "Subdecanato" && subAreaSelect.value === "b" && tipoDocumentoSelect.value === "opciónA2") {
-        var opcionesSubTipoDocumento = ["opciónA2.1", "opciónA2.2", "opciónA2.3"];
-    } else if (areaSelect === "Subdecanato" && subAreaSelect.value === "b" && tipoDocumentoSelect.value === "opciónB2") {
-        var opcionesSubTipoDocumento = ["opciónB2.1", "opciónB2.2", "opciónB2.3"];
-    } else if (areaSelect === "Subdecanato" && subAreaSelect.value === "b" && tipoDocumentoSelect.value === "opciónC2") {
-        var opcionesSubTipoDocumento = ["opciónC2.1", "opciónC2.2", "opciónC2.3"];
+    else if (areaSelect === "Subdecanato" && subAreaSelect.value === "Secretaría de Subdecanato" && tipoDocumentoSelect.value === "Memorandos") {
+        var opcionesSubTipoDocumento = ["Memorandos Recibidos", "Memorandos Enviados", "Memorandos de Designación", "Memorandos de Rectificación de Notas", "Memorandos de Solicitudes"];
+    } else if (areaSelect === "Subdecanato" && subAreaSelect.value === "Secretaría de Subdecanato" && tipoDocumentoSelect.value === "Oficios Enviados") {
+        var opcionesSubTipoDocumento = ["Oficios de Solicitud de Prácticas Profesionales"];
+    } else if (areaSelect === "Subdecanato" && subAreaSelect.value === "Secretaría de Subdecanato" && tipoDocumentoSelect.value === "Certificados") {
+        var opcionesSubTipoDocumento = ["Matriculas Legalizada", "Horarios", "Unidad de Titulación", "Trabajo de Integración Curricular", "No Impedimento", "Sanciones", "No Tener Tercera Matrícula", "Duración Docente"];
+    }else if (areaSelect === "Subdecanato" && subAreaSelect.value === "Secretaría de Subdecanato" && tipoDocumentoSelect.value === "Actas") {
+        var opcionesSubTipoDocumento = ["Actas de las coordinaciones de carreras y subdecanato", "Actas de reuniones con diferentes dependencias", "Actas de reuniones internas del subdecanato"];
+    }else if (areaSelect === "Subdecanato" && subAreaSelect.value === "Secretaría de Subdecanato" && tipoDocumentoSelect.value === "Formularios recibidos") {
+        var opcionesSubTipoDocumento = ["Formularios de prórroga de unidad de titulación", "Reinscripciones", "Extensión de matrícula", "Extensión de créditos", "Restitución de estudiante regular", "Inscripción de asignaturas en otras unidades", "Registro de notas atrasadas", "Recalificación de notas", "Rectificación de notas"];
+    }else if (areaSelect === "Subdecanato" && subAreaSelect.value === "Secretaría de Subdecanato" && tipoDocumentoSelect.value === "Control docente") {
+        var opcionesSubTipoDocumento = ["Registro de Asistencia a Clases"];
+    }else if (areaSelect === "Subdecanato" && subAreaSelect.value === "Secretaría de Subdecanato" && tipoDocumentoSelect.value === "Notas") {
+        var opcionesSubTipoDocumento = ["Registro de notas ingresadas en el sistema"];
+    }else if (areaSelect === "Subdecanato" && subAreaSelect.value === "Secretaría de Subdecanato" && tipoDocumentoSelect.value === "Solicitudes") {
+        var opcionesSubTipoDocumento = ["Cambios de Carrera", "Cambios de Universidad"];
+    }else if (areaSelect === "Subdecanato" && subAreaSelect.value === "Coordinaciones de Carrera" && tipoDocumentoSelect.value === "Memorando") {
+        var opcionesSubTipoDocumento = ["Memorando enviador", "Memorando recibido"];
     }
     //opciones jefatura
-    else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "c" && tipoDocumentoSelect.value === "opciónA3") {
-        var opcionesSubTipoDocumento = ["opciónA3.1", "opciónA3.2", "opciónA3.3"];
-    } else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "c" && tipoDocumentoSelect.value === "opciónB3") {
-        var opcionesSubTipoDocumento = ["opciónB3.1", "opciónB3.2", "opciónB3.3"];
-    } else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "c" && tipoDocumentoSelect.value === "opciónC3") {
-        var opcionesSubTipoDocumento = ["opciónC3.1", "opciónC3.2", "opciónC3.3"];
-    } else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "d" && tipoDocumentoSelect.value === "opciónA4") {
-        var opcionesSubTipoDocumento = ["opciónA4.1", "opciónA4.2", "opciónA4.3"];
-    } else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "d" && tipoDocumentoSelect.value === "opciónB4") {
-        var opcionesSubTipoDocumento = ["opciónB4.1", "opciónB4.2", "opciónB4.3"];
-    } else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "d" && tipoDocumentoSelect.value === "opciónC4") {
-        var opcionesSubTipoDocumento = ["opciónC4.1", "opciónC4.2", "opciónC4.3"];
+    else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "Secretaría de Departamento" && tipoDocumentoSelect.value === "Memorando") {
+        var opcionesSubTipoDocumento = ["Memorando enviado", "Memorando recibido"];
+    }else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "Secretaría de Departamento" && tipoDocumentoSelect.value === "Informe") {
+        var opcionesSubTipoDocumento = ["Informe técnico"];
+    }else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "Maestrías profesionalizantes" && tipoDocumentoSelect.value === "Solicitudes") {
+        var opcionesSubTipoDocumento = ["Documentos de postulación de becas"];
+    }else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "Maestrías profesionalizantes" && tipoDocumentoSelect.value === "Informe") {
+        var opcionesSubTipoDocumento = ["Concesión de Becas", "Renoación de Becas"];
+    }else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "Maestrías profesionalizantes" && tipoDocumentoSelect.value === "Memorando") {
+        var opcionesSubTipoDocumento = ["Memorando enviado", "Memorando recibido"];
+    }else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "Maestrías profesionalizantes" && tipoDocumentoSelect.value === "Reporte") {
+        var opcionesSubTipoDocumento = ["Planificación académica"];
+    }else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "Maestrías profesionalizantes" && tipoDocumentoSelect.value === "Exámenes") {
+        var opcionesSubTipoDocumento = ["Exámenes complexivos"];
+    }else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "Maestrías de Investigación" && tipoDocumentoSelect.value === "Informe") {
+        var opcionesSubTipoDocumento = ["Renovación de becas"];
+    } else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "Maestrías de Investigación" && tipoDocumentoSelect.value === "Memorando") {
+        var opcionesSubTipoDocumento = ["Memorando enviado", "Memorando recibido"];
+    } else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "Maestrías de Investigación" && tipoDocumentoSelect.value === "Reporte") {
+        var opcionesSubTipoDocumento = ["Planificación académica"];
+    } else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "Maestrías de Investigación" && tipoDocumentoSelect.value === "Exámenes") {
+        var opcionesSubTipoDocumento = ["Exámenes complexivos"];
+    } else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "Comité Doctoral" && tipoDocumentoSelect.value === "Acta") {
+        var opcionesSubTipoDocumento = ["Actas de desión del comité doctoral"];
+    } else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "Comité Doctoral" && tipoDocumentoSelect.value === "Convocatoria") {
+        var opcionesSubTipoDocumento = ["Convocatoria de sesion comité doctoral"];
+    } else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "Comité Doctoral" && tipoDocumentoSelect.value === "Curriculum Vitae") {
+        var opcionesSubTipoDocumento = ["Curriculum vitae de los miembros del comité doctoral"];
+    } else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "Comité Doctoral" && tipoDocumentoSelect.value === "Resolución") {
+        var opcionesSubTipoDocumento = ["Resoluciones especificas"];
+    } else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "Doctorado" && tipoDocumentoSelect.value === "Rúbrica") {
+        var opcionesSubTipoDocumento = ["Evaluación del estado de arte", "Evaluación de seminario 1", "Evaluación de seminario 2", "Evaluación de tesis doctoral"];
+    } else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "Doctorado" && tipoDocumentoSelect.value === "Solicitud") {
+        var opcionesSubTipoDocumento = ["Solicitud para apoyo económico para artículo científico", "Solicitud para matrícula"];
+    } else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "Secretaría de Doctorado" && tipoDocumentoSelect.value === "Memorando") {
+        var opcionesSubTipoDocumento = ["Memorando enviado", "Memorando recibido"];
+    } else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "Secretaría de Doctorado" && tipoDocumentoSelect.value === "Oficios") {
+        var opcionesSubTipoDocumento = ["Oficios enviados", "Oficios recibidos"];
+    } else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "Laboratorios de Investigación" && tipoDocumentoSelect.value === "Informe") {
+        var opcionesSubTipoDocumento = ["Informe de actividades"];
+    } else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "Laboratorios de Investigación" && tipoDocumentoSelect.value === "Memorando") {
+        var opcionesSubTipoDocumento = ["Memorando enviado", "Memorando recibido"];
+    } else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "Laboratorios de Investigación" && tipoDocumentoSelect.value === "Contrataciones") {
+        var opcionesSubTipoDocumento = ["Pedidos de contratación"];
+    } else if (areaSelect === "Jefatura de Departamento" && subAreaSelect.value === "Laboratorios de Investigación" && tipoDocumentoSelect.value === "Solicitudes") {
+        var opcionesSubTipoDocumento = ["Pedidos de materiales", "Pedidos de insumos"];
     }
-
     // Crear y agregar opciones al select de SubTipoDocumento
     if (tipoDocumentoSelect.value === "") {
         subTipoDocumentoSelect.innerHTML = "";
@@ -159,6 +208,7 @@ function actualizarPeriodo(areaSelect) {
 
     var tipoDocumentoSelect = document.getElementById("tipoDocumento");
     var periodoSelect = document.getElementById("periodo");
+    var subAreaSelect = document.getElementById("subArea");
     var codigoCodificacionInput = document.getElementById("codigoCodificacion");
 
     // Limpiar opciones anteriores
@@ -186,26 +236,11 @@ function actualizarPeriodo(areaSelect) {
     }
 
     //periodos para decanato y jefatura de departament
-    else if (tipoDocumentoSelect.value === "opciónA1") {
+    else if (subAreaSelect.value === "Secretaría de Subdecanato" || subAreaSelect.value === "Coordinaciones de Carrera") {
         var opcionesPerido = ["2018-A", "2018-B", "2019-A", "2019-B", "2020-A", "2020-B", "2021-A", "2021-B", "2022-A", "2022-B", "2023-A"];
-    } else if (tipoDocumentoSelect.value === "opciónB1") {
-        var opcionesPerido = ["2018", "2019", "2020", "2021", "2022", "2023"];
-    } else if (tipoDocumentoSelect.value === "opciónC1") {
-        var opcionesPerido = ["2018", "2019", "2020", "2021", "2022", "2023"];
-    } else if (tipoDocumentoSelect.value === "opciónA2") {
+    } else if (subAreaSelect.value === "Secretaría de Departamento" || subAreaSelect.value === "Maestrías profesionalizantes" || subAreaSelect.value === "Maestrías de Investigación" || subAreaSelect.value === "Comité Doctoral" || subAreaSelect.value === "Doctorado" || subAreaSelect.value === "Secretaría de Doctorado" || subAreaSelect.value === "Laboratorios de Investigación") {
         var opcionesPerido = ["2018-A", "2018-B", "2019-A", "2019-B", "2020-A", "2020-B", "2021-A", "2021-B", "2022-A", "2022-B", "2023-A"];
-    } else if (tipoDocumentoSelect.value === "opciónB2") {
-        var opcionesPerido = ["2018", "2019", "2020", "2021", "2022", "2023"];
-    } else if (tipoDocumentoSelect.value === "opciónC2") {
-        var opcionesPerido = ["2018", "2019", "2020", "2021", "2022", "2023"];
-    } else if (tipoDocumentoSelect.value === "opciónA3") {
-        var opcionesPerido = ["2018-A", "2018-B", "2019-A", "2019-B", "2020-A", "2020-B", "2021-A", "2021-B", "2022-A", "2022-B", "2023-A"];
-    } else if (tipoDocumentoSelect.value === "opciónB3") {
-        var opcionesPerido = ["2018", "2019", "2020", "2021", "2022", "2023"];
-    } else if (tipoDocumentoSelect.value === "opciónC3") {
-        var opcionesPerido = ["2018", "2019", "2020", "2021", "2022", "2023"];
     }
-
 
     // Crear y agregar opciones al select de subTipoDocumento
     if (tipoDocumentoSelect.value === "") {
