@@ -13,6 +13,7 @@ notesCtrl.renderNoteFrom = (req, res) => {
   const user = req.user;
   res.render("notes/new-notes");
 };
+
 //Esta función se encarga de crear una nuevo archivo en la base de datos.
 notesCtrl.createNewNotes = async (req, res) => {
   //se obtiene parametros de usuarios
@@ -52,7 +53,7 @@ notesCtrl.createNewNotes = async (req, res) => {
   console.log(noteAux);
 
   if (noteAux.length > 0) {
-    req.flash("error_msg", "Error al renombrar al actualizar archivo, consulte al administrador");
+    req.flash("error_msg", "Error al crear archivo, consulte al administrador");
     res.redirect("/notes");
 
   } else {
@@ -150,7 +151,7 @@ notesCtrl.updateNote = async (req, res) => {
     console.log(noteAux);
 
     if (noteAux1.length > 0) {
-      req.flash("error_msg", "Error al renombrar al actualizar archivo, consulte al administrador");
+      req.flash("error_msg", "Error al actualizar archivo, consulte al administrador");
       res.redirect("/notes");
 
     } else {
@@ -165,7 +166,7 @@ notesCtrl.updateNote = async (req, res) => {
         req.flash("success_msg", "!Archivo actualizado con exito¡");
         res.redirect("/notes");
       } catch (err) {
-        console.error('Error al renombrar al actualizar archivo, consulte al administrador', err);
+        console.error('Error al actualizar archivo, consulte al administrador', err);
       }
 
     }
@@ -203,8 +204,8 @@ notesCtrl.viewNote = async (req, res) => {
       res.send(data);
     });
   } catch (err) {
-    console.error('Error al buscar la nota:', err);
-    res.status(500).send('Error al buscar la nota');
+    console.error('Error al buscar el documento:', err);
+    res.status(500).send('Error al buscar documento');
   }
 }
 
